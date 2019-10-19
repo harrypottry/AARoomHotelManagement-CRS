@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.wechat.persistence.MemberInvoiceMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.wechat.bean.MemberInvoice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="member_id" property="member_id" jdbcType="VARCHAR" />
+    <result column="invoice_rise" property="invoice_rise" jdbcType="VARCHAR" />
+    <result column="company_name" property="company_name" jdbcType="VARCHAR" />
+    <result column="company_number" property="company_number" jdbcType="INTEGER" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="creater_id" jdbcType="INTEGER" />
+    <result column="updater_id" property="updater_id" jdbcType="INTEGER" />
+    <result column="is_active" property="is_active" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, invoice_rise, company_name, company_number, create_time, update_time, 
+    creater_id, updater_id, is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.aaroom.wechat.bean.MemberInvoice" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_invoice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_invoice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.wechat.bean.MemberInvoice" >
+    insert into member_invoice (id, member_id, invoice_rise, 
+      company_name, company_number, create_time, 
+      update_time, creater_id, updater_id, 
+      is_active)
+    values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=VARCHAR}, #{invoiceRise,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, #{updaterId,jdbcType=INTEGER}, 
+      #{isActive,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.wechat.bean.MemberInvoice" >
+    insert into member_invoice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="member_id != null" >
+        member_id,
+      </if>
+      <if test="invoice_rise != null" >
+        invoice_rise,
+      </if>
+      <if test="company_name != null" >
+        company_name,
+      </if>
+      <if test="company_number != null" >
+        company_number,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+      <if test="order_no != null" >
+        order_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="member_id != null" >
+        #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice_rise != null" >
+        #{invoice_rise,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null" >
+        #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_number != null" >
+        #{company_number,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="order_no != null" >
+        #{order_no,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.wechat.bean.MemberInvoice" >
+    update member_invoice
+    <set >
+      <if test="member_id != null" >
+        member_id = #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice_rise != null" >
+        invoice_rise = #{invoice_rise,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null" >
+        company_name = #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_number != null" >
+        company_number = #{company_number,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="order_no != null" >
+        order_no = #{order_no,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKeyParams">
+    update member_invoice
+    <set >
+      <if test="member_id != null" >
+        member_id = #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice_rise != null" >
+        invoice_rise = #{invoice_rise,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null" >
+        company_name = #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_number != null" >
+        company_number = #{company_number,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="updaterId != null" >
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="order_no != null" >
+        order_no = #{order_no,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.wechat.bean.MemberInvoice" >
+    update member_invoice
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      invoice_rise = #{invoiceRise,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_number = #{companyNumber,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAllMemberInvoice" parameterType="string" resultType="com.aaroom.wechat.bean.MemberInvoice">
+    select * from member_invoice where member_id = #{member_id}
+  </select>
+  <select id="getMemberInvoiceListByParams" resultType="java.util.Map">
+    SELECT
+    mi.id,
+    mi.company_name,
+    mi.company_number,
+    mi.invoice_rise,
+    mi.is_active,
+    IFNULL(ao.channel_order_no,"")
+    channel_order_no,
+    IFNULL(m.`name`,"")
+    `name`,
+    IFNULL(m.phone_num,"")
+    phone_num,
+    IFNULL(sb.shop_name,"")
+    shop_name,
+    IFNULL(sb.tel,"")
+    tel,
+    IFNULL(ao.`status`,"")
+    `status`
+    FROM
+    member_invoice mi
+    LEFT JOIN order_invoice oi ON mi.id = oi.invoice_id
+    LEFT JOIN member m ON m.id = mi.member_id
+    LEFT JOIN aa_order ao ON ao.channel_order_no = oi.channel_order_no
+    LEFT JOIN shop_base sb ON sb.smhotel_code = ao.hotel_code
+    WHERE
+    1 = 1
+    and ao.`status` = "已支付" or ao.`status` = "已转入住"
+    <if test="is_active != null" >
+      and mi.is_active = #{is_active,jdbcType=TINYINT}
+    </if>
+    <if test="begin_time!='' and begin_time!=null">
+      and mi.create_time>=#{begin_time}
+    </if>
+    <if test="end_time!='' and end_time!=null">
+      and mi.create_time&lt;=#{end_time}
+    </if>
+    <if test="province!='' and province!=null">
+      and sb.province = #{province}
+    </if>
+    <if test="city!='' and city!=null">
+      and sb.city = #{city}
+    </if>
+    <if test="hotel_id!='' and hotel_id!=null">
+      and sb.smhotel_code = #{hotel_id}
+    </if>
+    order by mi.create_time desc
+  </select>
+</mapper>

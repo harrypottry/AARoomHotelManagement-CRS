@@ -1,0 +1,1308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.DayReportMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.DayReport" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="classID" property="classid" jdbcType="VARCHAR" />
+    <result column="staffID" property="staffid" jdbcType="VARCHAR" />
+    <result column="atime" property="atime" jdbcType="VARCHAR" />
+    <result column="saleCount" property="salecount" jdbcType="DOUBLE" />
+    <result column="overnightCount" property="overnightcount" jdbcType="DOUBLE" />
+    <result column="overnightFee" property="overnightfee" jdbcType="DOUBLE" />
+    <result column="clockCount" property="clockcount" jdbcType="DOUBLE" />
+    <result column="clockAmount" property="clockamount" jdbcType="DOUBLE" />
+    <result column="ownUseCount" property="ownusecount" jdbcType="DOUBLE" />
+    <result column="dayCount" property="daycount" jdbcType="DOUBLE" />
+    <result column="dayAmount" property="dayamount" jdbcType="DOUBLE" />
+    <result column="canUseCount" property="canusecount" jdbcType="DOUBLE" />
+    <result column="occupancyRate" property="occupancyrate" jdbcType="DOUBLE" />
+    <result column="roomFeeAmount" property="roomfeeamount" jdbcType="DOUBLE" />
+    <result column="avgRoomPrice" property="avgroomprice" jdbcType="DOUBLE" />
+    <result column="goodsSale" property="goodssale" jdbcType="DOUBLE" />
+    <result column="goldCardCount" property="goldcardcount" jdbcType="DOUBLE" />
+    <result column="goldCardAmount" property="goldcardamount" jdbcType="DOUBLE" />
+    <result column="silverCardCount" property="silvercardcount" jdbcType="DOUBLE" />
+    <result column="silverCardAmount" property="silvercardamount" jdbcType="DOUBLE" />
+    <result column="todayVIPCount" property="todayvipcount" jdbcType="DOUBLE" />
+    <result column="todayVIPPercentage" property="todayvippercentage" jdbcType="DOUBLE" />
+    <result column="todayVIPRoomFee" property="todayviproomfee" jdbcType="DOUBLE" />
+    <result column="todayVIPAvgRoomPrice" property="todayvipavgroomprice" jdbcType="DOUBLE" />
+    <result column="yesterdayVIPCount" property="yesterdayvipcount" jdbcType="DOUBLE" />
+    <result column="yesterdayVIPPercentage" property="yesterdayvippercentage" jdbcType="DOUBLE" />
+    <result column="yesterdayVIPRoomFee" property="yesterdayviproomfee" jdbcType="DOUBLE" />
+    <result column="yesterdayVIPAvgRoomPrice" property="yesterdayvipavgroomprice" jdbcType="DOUBLE" />
+    <result column="agreementCount" property="agreementcount" jdbcType="DOUBLE" />
+    <result column="agreementPercentage" property="agreementpercentage" jdbcType="DOUBLE" />
+    <result column="agreementRoomFee" property="agreementroomfee" jdbcType="DOUBLE" />
+    <result column="agreementAvgRoomPrice" property="agreementavgroomprice" jdbcType="DOUBLE" />
+    <result column="HQCount" property="hqcount" jdbcType="DOUBLE" />
+    <result column="HQPercentage" property="hqpercentage" jdbcType="DOUBLE" />
+    <result column="HQRoomFee" property="hqroomfee" jdbcType="DOUBLE" />
+    <result column="HQAvgRoomPrice" property="hqavgroomprice" jdbcType="DOUBLE" />
+    <result column="meiTuanCount" property="meituancount" jdbcType="DOUBLE" />
+    <result column="meiTuanPercentage" property="meituanpercentage" jdbcType="DOUBLE" />
+    <result column="meiTuanRoomFee" property="meituanroomfee" jdbcType="DOUBLE" />
+    <result column="meiTuanAvgRoomPrice" property="meituanavgroomprice" jdbcType="DOUBLE" />
+    <result column="xieChengCount" property="xiechengcount" jdbcType="DOUBLE" />
+    <result column="xieChengPercentage" property="xiechengpercentage" jdbcType="DOUBLE" />
+    <result column="xieChengRoomFee" property="xiechengroomfee" jdbcType="DOUBLE" />
+    <result column="xieChengAvgRoomPrice" property="xiechengavgroomprice" jdbcType="DOUBLE" />
+    <result column="todayTotalDeposit" property="todaytotaldeposit" jdbcType="DOUBLE" />
+    <result column="expectBack" property="expectback" jdbcType="DOUBLE" />
+    <result column="todayOut" property="todayout" jdbcType="DOUBLE" />
+    <result column="pevPar" property="pevpar" jdbcType="DOUBLE" />
+    <result column="repairCount" property="repaircount" jdbcType="DOUBLE" />
+    <result column="freeCount" property="freecount" jdbcType="DOUBLE" />
+    <result column="totalAmount" property="totalamount" jdbcType="DOUBLE" />
+    <result column="walkingCount" property="walkingcount" jdbcType="DOUBLE" />
+    <result column="walkingPercentage" property="walkingpercentage" jdbcType="DOUBLE" />
+    <result column="walkingRoomFee" property="walkingroomfee" jdbcType="DOUBLE" />
+    <result column="walkingAvgRoomPrice" property="walkingavgroomprice" jdbcType="DOUBLE" />
+    <result column="CRSCount" property="crscount" jdbcType="DOUBLE" />
+    <result column="CRSPercentage" property="crspercentage" jdbcType="DOUBLE" />
+    <result column="CRSRoomFee" property="crsroomfee" jdbcType="DOUBLE" />
+    <result column="CRSAvgRoomPrice" property="crsavgroomprice" jdbcType="DOUBLE" />
+    <result column="handRoomFee" property="handroomfee" jdbcType="DOUBLE" />
+    <result column="todayReceived" property="todayreceived" jdbcType="DOUBLE" />
+    <result column="todayExpend" property="todayexpend" jdbcType="DOUBLE" />
+    <result column="otherFee" property="otherfee" jdbcType="DOUBLE" />
+    <result column="startBookDeposit" property="startbookdeposit" jdbcType="DOUBLE" />
+    <result column="endBookDeposit" property="endbookdeposit" jdbcType="DOUBLE" />
+    <result column="startNoPay" property="startnopay" jdbcType="DOUBLE" />
+    <result column="endNoPay" property="endnopay" jdbcType="DOUBLE" />
+    <result column="noPayGet" property="nopayget" jdbcType="DOUBLE" />
+    <result column="noPayOut" property="nopayout" jdbcType="DOUBLE" />
+    <result column="startBalance" property="startbalance" jdbcType="DOUBLE" />
+    <result column="endBalance" property="endbalance" jdbcType="DOUBLE" />
+    <result column="xianJin" property="xianjin" jdbcType="DOUBLE" />
+    <result column="yinHangKa" property="yinhangka" jdbcType="DOUBLE" />
+    <result column="yuShouQuan" property="yushouquan" jdbcType="DOUBLE" />
+    <result column="yuShouQuanOK" property="yushouquanok" jdbcType="DOUBLE" />
+    <result column="zhiPiao" property="zhipiao" jdbcType="DOUBLE" />
+    <result column="huiKuan" property="huikuan" jdbcType="DOUBLE" />
+    <result column="diYongQuan" property="diyongquan" jdbcType="DOUBLE" />
+    <result column="chuZhiKa" property="chuzhika" jdbcType="DOUBLE" />
+    <result column="shangLvKa" property="shanglvka" jdbcType="DOUBLE" />
+    <result column="guaZhang" property="guazhang" jdbcType="DOUBLE" />
+    <result column="wangFu" property="wangfu" jdbcType="DOUBLE" />
+    <result column="jiFen" property="jifen" jdbcType="DOUBLE" />
+    <result column="dianZiQuan" property="dianziquan" jdbcType="DOUBLE" />
+    <result column="guaFangZhang" property="guafangzhang" jdbcType="DOUBLE" />
+    <result column="mianDan" property="miandan" jdbcType="DOUBLE" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="fuwuFee" property="fuwufee" jdbcType="DOUBLE" />
+    <result column="zhiFuBao" property="zhifubao" jdbcType="DOUBLE" />
+    <result column="weiXin" property="weixin" jdbcType="DOUBLE" />
+    <result column="agencyCount" property="agencycount" jdbcType="DOUBLE" />
+    <result column="agencyPercentage" property="agencypercentage" jdbcType="DOUBLE" />
+    <result column="agencyRoomFee" property="agencyroomfee" jdbcType="DOUBLE" />
+    <result column="agencyAvgRoomPrice" property="agencyavgroomprice" jdbcType="DOUBLE" />
+    <result column="agreemt_pay_money" property="agreemtPayMoney" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shopID, classID, staffID, atime, saleCount, overnightCount, overnightFee, clockCount, 
+    clockAmount, ownUseCount, dayCount, dayAmount, canUseCount, occupancyRate, roomFeeAmount, 
+    avgRoomPrice, goodsSale, goldCardCount, goldCardAmount, silverCardCount, silverCardAmount, 
+    todayVIPCount, todayVIPPercentage, todayVIPRoomFee, todayVIPAvgRoomPrice, yesterdayVIPCount, 
+    yesterdayVIPPercentage, yesterdayVIPRoomFee, yesterdayVIPAvgRoomPrice, agreementCount, 
+    agreementPercentage, agreementRoomFee, agreementAvgRoomPrice, HQCount, HQPercentage, 
+    HQRoomFee, HQAvgRoomPrice, meiTuanCount, meiTuanPercentage, meiTuanRoomFee, meiTuanAvgRoomPrice, 
+    xieChengCount, xieChengPercentage, xieChengRoomFee, xieChengAvgRoomPrice, todayTotalDeposit, 
+    expectBack, todayOut, pevPar, repairCount, freeCount, totalAmount, walkingCount, 
+    walkingPercentage, walkingRoomFee, walkingAvgRoomPrice, CRSCount, CRSPercentage, 
+    CRSRoomFee, CRSAvgRoomPrice, handRoomFee, todayReceived, todayExpend, otherFee, startBookDeposit, 
+    endBookDeposit, startNoPay, endNoPay, noPayGet, noPayOut, startBalance, endBalance, 
+    xianJin, yinHangKa, yuShouQuan, yuShouQuanOK, zhiPiao, huiKuan, diYongQuan, chuZhiKa, 
+    shangLvKa, guaZhang, wangFu, jiFen, dianZiQuan, guaFangZhang, mianDan, createtime, 
+    flag, customer_id, fuwuFee, zhiFuBao, weiXin, agencyCount, agencyPercentage, agencyRoomFee, 
+    agencyAvgRoomPrice, agreemt_pay_money
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dayreport
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dayreport
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.DayReport" >
+    insert into dayreport (id, shopID, classID, 
+      staffID, atime, saleCount, 
+      overnightCount, overnightFee, clockCount, 
+      clockAmount, ownUseCount, dayCount, 
+      dayAmount, canUseCount, occupancyRate, 
+      roomFeeAmount, avgRoomPrice, goodsSale, 
+      goldCardCount, goldCardAmount, silverCardCount, 
+      silverCardAmount, todayVIPCount, todayVIPPercentage, 
+      todayVIPRoomFee, todayVIPAvgRoomPrice, yesterdayVIPCount, 
+      yesterdayVIPPercentage, yesterdayVIPRoomFee, 
+      yesterdayVIPAvgRoomPrice, agreementCount, 
+      agreementPercentage, agreementRoomFee, agreementAvgRoomPrice, 
+      HQCount, HQPercentage, HQRoomFee, 
+      HQAvgRoomPrice, meiTuanCount, meiTuanPercentage, 
+      meiTuanRoomFee, meiTuanAvgRoomPrice, xieChengCount, 
+      xieChengPercentage, xieChengRoomFee, xieChengAvgRoomPrice, 
+      todayTotalDeposit, expectBack, todayOut, 
+      pevPar, repairCount, freeCount, 
+      totalAmount, walkingCount, walkingPercentage, 
+      walkingRoomFee, walkingAvgRoomPrice, CRSCount, 
+      CRSPercentage, CRSRoomFee, CRSAvgRoomPrice, 
+      handRoomFee, todayReceived, todayExpend, 
+      otherFee, startBookDeposit, endBookDeposit, 
+      startNoPay, endNoPay, noPayGet, 
+      noPayOut, startBalance, endBalance, 
+      xianJin, yinHangKa, yuShouQuan, 
+      yuShouQuanOK, zhiPiao, huiKuan, 
+      diYongQuan, chuZhiKa, shangLvKa, 
+      guaZhang, wangFu, jiFen, 
+      dianZiQuan, guaFangZhang, mianDan, 
+      createtime, flag, customer_id, 
+      fuwuFee, zhiFuBao, weiXin, 
+      agencyCount, agencyPercentage, agencyRoomFee, 
+      agencyAvgRoomPrice, agreemt_pay_money)
+    values (#{id,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{classid,jdbcType=VARCHAR}, 
+      #{staffid,jdbcType=VARCHAR}, #{atime,jdbcType=DATE}, #{salecount,jdbcType=DOUBLE}, 
+      #{overnightcount,jdbcType=DOUBLE}, #{overnightfee,jdbcType=DOUBLE}, #{clockcount,jdbcType=DOUBLE}, 
+      #{clockamount,jdbcType=DOUBLE}, #{ownusecount,jdbcType=DOUBLE}, #{daycount,jdbcType=DOUBLE}, 
+      #{dayamount,jdbcType=DOUBLE}, #{canusecount,jdbcType=DOUBLE}, #{occupancyrate,jdbcType=DOUBLE}, 
+      #{roomfeeamount,jdbcType=DOUBLE}, #{avgroomprice,jdbcType=DOUBLE}, #{goodssale,jdbcType=DOUBLE}, 
+      #{goldcardcount,jdbcType=DOUBLE}, #{goldcardamount,jdbcType=DOUBLE}, #{silvercardcount,jdbcType=DOUBLE}, 
+      #{silvercardamount,jdbcType=DOUBLE}, #{todayvipcount,jdbcType=DOUBLE}, #{todayvippercentage,jdbcType=DOUBLE}, 
+      #{todayviproomfee,jdbcType=DOUBLE}, #{todayvipavgroomprice,jdbcType=DOUBLE}, #{yesterdayvipcount,jdbcType=DOUBLE}, 
+      #{yesterdayvippercentage,jdbcType=DOUBLE}, #{yesterdayviproomfee,jdbcType=DOUBLE}, 
+      #{yesterdayvipavgroomprice,jdbcType=DOUBLE}, #{agreementcount,jdbcType=DOUBLE}, 
+      #{agreementpercentage,jdbcType=DOUBLE}, #{agreementroomfee,jdbcType=DOUBLE}, #{agreementavgroomprice,jdbcType=DOUBLE}, 
+      #{hqcount,jdbcType=DOUBLE}, #{hqpercentage,jdbcType=DOUBLE}, #{hqroomfee,jdbcType=DOUBLE}, 
+      #{hqavgroomprice,jdbcType=DOUBLE}, #{meituancount,jdbcType=DOUBLE}, #{meituanpercentage,jdbcType=DOUBLE}, 
+      #{meituanroomfee,jdbcType=DOUBLE}, #{meituanavgroomprice,jdbcType=DOUBLE}, #{xiechengcount,jdbcType=DOUBLE}, 
+      #{xiechengpercentage,jdbcType=DOUBLE}, #{xiechengroomfee,jdbcType=DOUBLE}, #{xiechengavgroomprice,jdbcType=DOUBLE}, 
+      #{todaytotaldeposit,jdbcType=DOUBLE}, #{expectback,jdbcType=DOUBLE}, #{todayout,jdbcType=DOUBLE}, 
+      #{pevpar,jdbcType=DOUBLE}, #{repaircount,jdbcType=DOUBLE}, #{freecount,jdbcType=DOUBLE}, 
+      #{totalamount,jdbcType=DOUBLE}, #{walkingcount,jdbcType=DOUBLE}, #{walkingpercentage,jdbcType=DOUBLE}, 
+      #{walkingroomfee,jdbcType=DOUBLE}, #{walkingavgroomprice,jdbcType=DOUBLE}, #{crscount,jdbcType=DOUBLE}, 
+      #{crspercentage,jdbcType=DOUBLE}, #{crsroomfee,jdbcType=DOUBLE}, #{crsavgroomprice,jdbcType=DOUBLE}, 
+      #{handroomfee,jdbcType=DOUBLE}, #{todayreceived,jdbcType=DOUBLE}, #{todayexpend,jdbcType=DOUBLE}, 
+      #{otherfee,jdbcType=DOUBLE}, #{startbookdeposit,jdbcType=DOUBLE}, #{endbookdeposit,jdbcType=DOUBLE}, 
+      #{startnopay,jdbcType=DOUBLE}, #{endnopay,jdbcType=DOUBLE}, #{nopayget,jdbcType=DOUBLE}, 
+      #{nopayout,jdbcType=DOUBLE}, #{startbalance,jdbcType=DOUBLE}, #{endbalance,jdbcType=DOUBLE}, 
+      #{xianjin,jdbcType=DOUBLE}, #{yinhangka,jdbcType=DOUBLE}, #{yushouquan,jdbcType=DOUBLE}, 
+      #{yushouquanok,jdbcType=DOUBLE}, #{zhipiao,jdbcType=DOUBLE}, #{huikuan,jdbcType=DOUBLE}, 
+      #{diyongquan,jdbcType=DOUBLE}, #{chuzhika,jdbcType=DOUBLE}, #{shanglvka,jdbcType=DOUBLE}, 
+      #{guazhang,jdbcType=DOUBLE}, #{wangfu,jdbcType=DOUBLE}, #{jifen,jdbcType=DOUBLE}, 
+      #{dianziquan,jdbcType=DOUBLE}, #{guafangzhang,jdbcType=DOUBLE}, #{miandan,jdbcType=DOUBLE}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, #{customerId,jdbcType=VARCHAR}, 
+      #{fuwufee,jdbcType=DOUBLE}, #{zhifubao,jdbcType=DOUBLE}, #{weixin,jdbcType=DOUBLE}, 
+      #{agencycount,jdbcType=DOUBLE}, #{agencypercentage,jdbcType=DOUBLE}, #{agencyroomfee,jdbcType=DOUBLE}, 
+      #{agencyavgroomprice,jdbcType=DOUBLE}, #{agreemtPayMoney,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.DayReport" >
+    insert into dayreport
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="classid != null" >
+        classID,
+      </if>
+      <if test="staffid != null" >
+        staffID,
+      </if>
+      <if test="atime != null" >
+        atime,
+      </if>
+      <if test="salecount != null" >
+        saleCount,
+      </if>
+      <if test="overnightcount != null" >
+        overnightCount,
+      </if>
+      <if test="overnightfee != null" >
+        overnightFee,
+      </if>
+      <if test="clockcount != null" >
+        clockCount,
+      </if>
+      <if test="clockamount != null" >
+        clockAmount,
+      </if>
+      <if test="ownusecount != null" >
+        ownUseCount,
+      </if>
+      <if test="daycount != null" >
+        dayCount,
+      </if>
+      <if test="dayamount != null" >
+        dayAmount,
+      </if>
+      <if test="canusecount != null" >
+        canUseCount,
+      </if>
+      <if test="occupancyrate != null" >
+        occupancyRate,
+      </if>
+      <if test="roomfeeamount != null" >
+        roomFeeAmount,
+      </if>
+      <if test="avgroomprice != null" >
+        avgRoomPrice,
+      </if>
+      <if test="goodssale != null" >
+        goodsSale,
+      </if>
+      <if test="goldcardcount != null" >
+        goldCardCount,
+      </if>
+      <if test="goldcardamount != null" >
+        goldCardAmount,
+      </if>
+      <if test="silvercardcount != null" >
+        silverCardCount,
+      </if>
+      <if test="silvercardamount != null" >
+        silverCardAmount,
+      </if>
+      <if test="todayvipcount != null" >
+        todayVIPCount,
+      </if>
+      <if test="todayvippercentage != null" >
+        todayVIPPercentage,
+      </if>
+      <if test="todayviproomfee != null" >
+        todayVIPRoomFee,
+      </if>
+      <if test="todayvipavgroomprice != null" >
+        todayVIPAvgRoomPrice,
+      </if>
+      <if test="yesterdayvipcount != null" >
+        yesterdayVIPCount,
+      </if>
+      <if test="yesterdayvippercentage != null" >
+        yesterdayVIPPercentage,
+      </if>
+      <if test="yesterdayviproomfee != null" >
+        yesterdayVIPRoomFee,
+      </if>
+      <if test="yesterdayvipavgroomprice != null" >
+        yesterdayVIPAvgRoomPrice,
+      </if>
+      <if test="agreementcount != null" >
+        agreementCount,
+      </if>
+      <if test="agreementpercentage != null" >
+        agreementPercentage,
+      </if>
+      <if test="agreementroomfee != null" >
+        agreementRoomFee,
+      </if>
+      <if test="agreementavgroomprice != null" >
+        agreementAvgRoomPrice,
+      </if>
+      <if test="hqcount != null" >
+        HQCount,
+      </if>
+      <if test="hqpercentage != null" >
+        HQPercentage,
+      </if>
+      <if test="hqroomfee != null" >
+        HQRoomFee,
+      </if>
+      <if test="hqavgroomprice != null" >
+        HQAvgRoomPrice,
+      </if>
+      <if test="meituancount != null" >
+        meiTuanCount,
+      </if>
+      <if test="meituanpercentage != null" >
+        meiTuanPercentage,
+      </if>
+      <if test="meituanroomfee != null" >
+        meiTuanRoomFee,
+      </if>
+      <if test="meituanavgroomprice != null" >
+        meiTuanAvgRoomPrice,
+      </if>
+      <if test="xiechengcount != null" >
+        xieChengCount,
+      </if>
+      <if test="xiechengpercentage != null" >
+        xieChengPercentage,
+      </if>
+      <if test="xiechengroomfee != null" >
+        xieChengRoomFee,
+      </if>
+      <if test="xiechengavgroomprice != null" >
+        xieChengAvgRoomPrice,
+      </if>
+      <if test="todaytotaldeposit != null" >
+        todayTotalDeposit,
+      </if>
+      <if test="expectback != null" >
+        expectBack,
+      </if>
+      <if test="todayout != null" >
+        todayOut,
+      </if>
+      <if test="pevpar != null" >
+        pevPar,
+      </if>
+      <if test="repaircount != null" >
+        repairCount,
+      </if>
+      <if test="freecount != null" >
+        freeCount,
+      </if>
+      <if test="totalamount != null" >
+        totalAmount,
+      </if>
+      <if test="walkingcount != null" >
+        walkingCount,
+      </if>
+      <if test="walkingpercentage != null" >
+        walkingPercentage,
+      </if>
+      <if test="walkingroomfee != null" >
+        walkingRoomFee,
+      </if>
+      <if test="walkingavgroomprice != null" >
+        walkingAvgRoomPrice,
+      </if>
+      <if test="crscount != null" >
+        CRSCount,
+      </if>
+      <if test="crspercentage != null" >
+        CRSPercentage,
+      </if>
+      <if test="crsroomfee != null" >
+        CRSRoomFee,
+      </if>
+      <if test="crsavgroomprice != null" >
+        CRSAvgRoomPrice,
+      </if>
+      <if test="handroomfee != null" >
+        handRoomFee,
+      </if>
+      <if test="todayreceived != null" >
+        todayReceived,
+      </if>
+      <if test="todayexpend != null" >
+        todayExpend,
+      </if>
+      <if test="otherfee != null" >
+        otherFee,
+      </if>
+      <if test="startbookdeposit != null" >
+        startBookDeposit,
+      </if>
+      <if test="endbookdeposit != null" >
+        endBookDeposit,
+      </if>
+      <if test="startnopay != null" >
+        startNoPay,
+      </if>
+      <if test="endnopay != null" >
+        endNoPay,
+      </if>
+      <if test="nopayget != null" >
+        noPayGet,
+      </if>
+      <if test="nopayout != null" >
+        noPayOut,
+      </if>
+      <if test="startbalance != null" >
+        startBalance,
+      </if>
+      <if test="endbalance != null" >
+        endBalance,
+      </if>
+      <if test="xianjin != null" >
+        xianJin,
+      </if>
+      <if test="yinhangka != null" >
+        yinHangKa,
+      </if>
+      <if test="yushouquan != null" >
+        yuShouQuan,
+      </if>
+      <if test="yushouquanok != null" >
+        yuShouQuanOK,
+      </if>
+      <if test="zhipiao != null" >
+        zhiPiao,
+      </if>
+      <if test="huikuan != null" >
+        huiKuan,
+      </if>
+      <if test="diyongquan != null" >
+        diYongQuan,
+      </if>
+      <if test="chuzhika != null" >
+        chuZhiKa,
+      </if>
+      <if test="shanglvka != null" >
+        shangLvKa,
+      </if>
+      <if test="guazhang != null" >
+        guaZhang,
+      </if>
+      <if test="wangfu != null" >
+        wangFu,
+      </if>
+      <if test="jifen != null" >
+        jiFen,
+      </if>
+      <if test="dianziquan != null" >
+        dianZiQuan,
+      </if>
+      <if test="guafangzhang != null" >
+        guaFangZhang,
+      </if>
+      <if test="miandan != null" >
+        mianDan,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="fuwufee != null" >
+        fuwuFee,
+      </if>
+      <if test="zhifubao != null" >
+        zhiFuBao,
+      </if>
+      <if test="weixin != null" >
+        weiXin,
+      </if>
+      <if test="agencycount != null" >
+        agencyCount,
+      </if>
+      <if test="agencypercentage != null" >
+        agencyPercentage,
+      </if>
+      <if test="agencyroomfee != null" >
+        agencyRoomFee,
+      </if>
+      <if test="agencyavgroomprice != null" >
+        agencyAvgRoomPrice,
+      </if>
+      <if test="agreemtPayMoney != null" >
+        agreemt_pay_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        #{atime,jdbcType=DATE},
+      </if>
+      <if test="salecount != null" >
+        #{salecount,jdbcType=DOUBLE},
+      </if>
+      <if test="overnightcount != null" >
+        #{overnightcount,jdbcType=DOUBLE},
+      </if>
+      <if test="overnightfee != null" >
+        #{overnightfee,jdbcType=DOUBLE},
+      </if>
+      <if test="clockcount != null" >
+        #{clockcount,jdbcType=DOUBLE},
+      </if>
+      <if test="clockamount != null" >
+        #{clockamount,jdbcType=DOUBLE},
+      </if>
+      <if test="ownusecount != null" >
+        #{ownusecount,jdbcType=DOUBLE},
+      </if>
+      <if test="daycount != null" >
+        #{daycount,jdbcType=DOUBLE},
+      </if>
+      <if test="dayamount != null" >
+        #{dayamount,jdbcType=DOUBLE},
+      </if>
+      <if test="canusecount != null" >
+        #{canusecount,jdbcType=DOUBLE},
+      </if>
+      <if test="occupancyrate != null" >
+        #{occupancyrate,jdbcType=DOUBLE},
+      </if>
+      <if test="roomfeeamount != null" >
+        #{roomfeeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="avgroomprice != null" >
+        #{avgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodssale != null" >
+        #{goodssale,jdbcType=DOUBLE},
+      </if>
+      <if test="goldcardcount != null" >
+        #{goldcardcount,jdbcType=DOUBLE},
+      </if>
+      <if test="goldcardamount != null" >
+        #{goldcardamount,jdbcType=DOUBLE},
+      </if>
+      <if test="silvercardcount != null" >
+        #{silvercardcount,jdbcType=DOUBLE},
+      </if>
+      <if test="silvercardamount != null" >
+        #{silvercardamount,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvipcount != null" >
+        #{todayvipcount,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvippercentage != null" >
+        #{todayvippercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="todayviproomfee != null" >
+        #{todayviproomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvipavgroomprice != null" >
+        #{todayvipavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvipcount != null" >
+        #{yesterdayvipcount,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvippercentage != null" >
+        #{yesterdayvippercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayviproomfee != null" >
+        #{yesterdayviproomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvipavgroomprice != null" >
+        #{yesterdayvipavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementcount != null" >
+        #{agreementcount,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementpercentage != null" >
+        #{agreementpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementroomfee != null" >
+        #{agreementroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementavgroomprice != null" >
+        #{agreementavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="hqcount != null" >
+        #{hqcount,jdbcType=DOUBLE},
+      </if>
+      <if test="hqpercentage != null" >
+        #{hqpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="hqroomfee != null" >
+        #{hqroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="hqavgroomprice != null" >
+        #{hqavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="meituancount != null" >
+        #{meituancount,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanpercentage != null" >
+        #{meituanpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanroomfee != null" >
+        #{meituanroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanavgroomprice != null" >
+        #{meituanavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengcount != null" >
+        #{xiechengcount,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengpercentage != null" >
+        #{xiechengpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengroomfee != null" >
+        #{xiechengroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengavgroomprice != null" >
+        #{xiechengavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="todaytotaldeposit != null" >
+        #{todaytotaldeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="expectback != null" >
+        #{expectback,jdbcType=DOUBLE},
+      </if>
+      <if test="todayout != null" >
+        #{todayout,jdbcType=DOUBLE},
+      </if>
+      <if test="pevpar != null" >
+        #{pevpar,jdbcType=DOUBLE},
+      </if>
+      <if test="repaircount != null" >
+        #{repaircount,jdbcType=DOUBLE},
+      </if>
+      <if test="freecount != null" >
+        #{freecount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalamount != null" >
+        #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingcount != null" >
+        #{walkingcount,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingpercentage != null" >
+        #{walkingpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingroomfee != null" >
+        #{walkingroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingavgroomprice != null" >
+        #{walkingavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="crscount != null" >
+        #{crscount,jdbcType=DOUBLE},
+      </if>
+      <if test="crspercentage != null" >
+        #{crspercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="crsroomfee != null" >
+        #{crsroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="crsavgroomprice != null" >
+        #{crsavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="handroomfee != null" >
+        #{handroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="todayreceived != null" >
+        #{todayreceived,jdbcType=DOUBLE},
+      </if>
+      <if test="todayexpend != null" >
+        #{todayexpend,jdbcType=DOUBLE},
+      </if>
+      <if test="otherfee != null" >
+        #{otherfee,jdbcType=DOUBLE},
+      </if>
+      <if test="startbookdeposit != null" >
+        #{startbookdeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="endbookdeposit != null" >
+        #{endbookdeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="startnopay != null" >
+        #{startnopay,jdbcType=DOUBLE},
+      </if>
+      <if test="endnopay != null" >
+        #{endnopay,jdbcType=DOUBLE},
+      </if>
+      <if test="nopayget != null" >
+        #{nopayget,jdbcType=DOUBLE},
+      </if>
+      <if test="nopayout != null" >
+        #{nopayout,jdbcType=DOUBLE},
+      </if>
+      <if test="startbalance != null" >
+        #{startbalance,jdbcType=DOUBLE},
+      </if>
+      <if test="endbalance != null" >
+        #{endbalance,jdbcType=DOUBLE},
+      </if>
+      <if test="xianjin != null" >
+        #{xianjin,jdbcType=DOUBLE},
+      </if>
+      <if test="yinhangka != null" >
+        #{yinhangka,jdbcType=DOUBLE},
+      </if>
+      <if test="yushouquan != null" >
+        #{yushouquan,jdbcType=DOUBLE},
+      </if>
+      <if test="yushouquanok != null" >
+        #{yushouquanok,jdbcType=DOUBLE},
+      </if>
+      <if test="zhipiao != null" >
+        #{zhipiao,jdbcType=DOUBLE},
+      </if>
+      <if test="huikuan != null" >
+        #{huikuan,jdbcType=DOUBLE},
+      </if>
+      <if test="diyongquan != null" >
+        #{diyongquan,jdbcType=DOUBLE},
+      </if>
+      <if test="chuzhika != null" >
+        #{chuzhika,jdbcType=DOUBLE},
+      </if>
+      <if test="shanglvka != null" >
+        #{shanglvka,jdbcType=DOUBLE},
+      </if>
+      <if test="guazhang != null" >
+        #{guazhang,jdbcType=DOUBLE},
+      </if>
+      <if test="wangfu != null" >
+        #{wangfu,jdbcType=DOUBLE},
+      </if>
+      <if test="jifen != null" >
+        #{jifen,jdbcType=DOUBLE},
+      </if>
+      <if test="dianziquan != null" >
+        #{dianziquan,jdbcType=DOUBLE},
+      </if>
+      <if test="guafangzhang != null" >
+        #{guafangzhang,jdbcType=DOUBLE},
+      </if>
+      <if test="miandan != null" >
+        #{miandan,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="fuwufee != null" >
+        #{fuwufee,jdbcType=DOUBLE},
+      </if>
+      <if test="zhifubao != null" >
+        #{zhifubao,jdbcType=DOUBLE},
+      </if>
+      <if test="weixin != null" >
+        #{weixin,jdbcType=DOUBLE},
+      </if>
+      <if test="agencycount != null" >
+        #{agencycount,jdbcType=DOUBLE},
+      </if>
+      <if test="agencypercentage != null" >
+        #{agencypercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="agencyroomfee != null" >
+        #{agencyroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="agencyavgroomprice != null" >
+        #{agencyavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="agreemtPayMoney != null" >
+        #{agreemtPayMoney,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.DayReport" >
+    update dayreport
+    <set >
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        classID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffID = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        atime = #{atime,jdbcType=DATE},
+      </if>
+      <if test="salecount != null" >
+        saleCount = #{salecount,jdbcType=DOUBLE},
+      </if>
+      <if test="overnightcount != null" >
+        overnightCount = #{overnightcount,jdbcType=DOUBLE},
+      </if>
+      <if test="overnightfee != null" >
+        overnightFee = #{overnightfee,jdbcType=DOUBLE},
+      </if>
+      <if test="clockcount != null" >
+        clockCount = #{clockcount,jdbcType=DOUBLE},
+      </if>
+      <if test="clockamount != null" >
+        clockAmount = #{clockamount,jdbcType=DOUBLE},
+      </if>
+      <if test="ownusecount != null" >
+        ownUseCount = #{ownusecount,jdbcType=DOUBLE},
+      </if>
+      <if test="daycount != null" >
+        dayCount = #{daycount,jdbcType=DOUBLE},
+      </if>
+      <if test="dayamount != null" >
+        dayAmount = #{dayamount,jdbcType=DOUBLE},
+      </if>
+      <if test="canusecount != null" >
+        canUseCount = #{canusecount,jdbcType=DOUBLE},
+      </if>
+      <if test="occupancyrate != null" >
+        occupancyRate = #{occupancyrate,jdbcType=DOUBLE},
+      </if>
+      <if test="roomfeeamount != null" >
+        roomFeeAmount = #{roomfeeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="avgroomprice != null" >
+        avgRoomPrice = #{avgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="goodssale != null" >
+        goodsSale = #{goodssale,jdbcType=DOUBLE},
+      </if>
+      <if test="goldcardcount != null" >
+        goldCardCount = #{goldcardcount,jdbcType=DOUBLE},
+      </if>
+      <if test="goldcardamount != null" >
+        goldCardAmount = #{goldcardamount,jdbcType=DOUBLE},
+      </if>
+      <if test="silvercardcount != null" >
+        silverCardCount = #{silvercardcount,jdbcType=DOUBLE},
+      </if>
+      <if test="silvercardamount != null" >
+        silverCardAmount = #{silvercardamount,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvipcount != null" >
+        todayVIPCount = #{todayvipcount,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvippercentage != null" >
+        todayVIPPercentage = #{todayvippercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="todayviproomfee != null" >
+        todayVIPRoomFee = #{todayviproomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="todayvipavgroomprice != null" >
+        todayVIPAvgRoomPrice = #{todayvipavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvipcount != null" >
+        yesterdayVIPCount = #{yesterdayvipcount,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvippercentage != null" >
+        yesterdayVIPPercentage = #{yesterdayvippercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayviproomfee != null" >
+        yesterdayVIPRoomFee = #{yesterdayviproomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="yesterdayvipavgroomprice != null" >
+        yesterdayVIPAvgRoomPrice = #{yesterdayvipavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementcount != null" >
+        agreementCount = #{agreementcount,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementpercentage != null" >
+        agreementPercentage = #{agreementpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementroomfee != null" >
+        agreementRoomFee = #{agreementroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="agreementavgroomprice != null" >
+        agreementAvgRoomPrice = #{agreementavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="hqcount != null" >
+        HQCount = #{hqcount,jdbcType=DOUBLE},
+      </if>
+      <if test="hqpercentage != null" >
+        HQPercentage = #{hqpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="hqroomfee != null" >
+        HQRoomFee = #{hqroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="hqavgroomprice != null" >
+        HQAvgRoomPrice = #{hqavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="meituancount != null" >
+        meiTuanCount = #{meituancount,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanpercentage != null" >
+        meiTuanPercentage = #{meituanpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanroomfee != null" >
+        meiTuanRoomFee = #{meituanroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="meituanavgroomprice != null" >
+        meiTuanAvgRoomPrice = #{meituanavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengcount != null" >
+        xieChengCount = #{xiechengcount,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengpercentage != null" >
+        xieChengPercentage = #{xiechengpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengroomfee != null" >
+        xieChengRoomFee = #{xiechengroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="xiechengavgroomprice != null" >
+        xieChengAvgRoomPrice = #{xiechengavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="todaytotaldeposit != null" >
+        todayTotalDeposit = #{todaytotaldeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="expectback != null" >
+        expectBack = #{expectback,jdbcType=DOUBLE},
+      </if>
+      <if test="todayout != null" >
+        todayOut = #{todayout,jdbcType=DOUBLE},
+      </if>
+      <if test="pevpar != null" >
+        pevPar = #{pevpar,jdbcType=DOUBLE},
+      </if>
+      <if test="repaircount != null" >
+        repairCount = #{repaircount,jdbcType=DOUBLE},
+      </if>
+      <if test="freecount != null" >
+        freeCount = #{freecount,jdbcType=DOUBLE},
+      </if>
+      <if test="totalamount != null" >
+        totalAmount = #{totalamount,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingcount != null" >
+        walkingCount = #{walkingcount,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingpercentage != null" >
+        walkingPercentage = #{walkingpercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingroomfee != null" >
+        walkingRoomFee = #{walkingroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="walkingavgroomprice != null" >
+        walkingAvgRoomPrice = #{walkingavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="crscount != null" >
+        CRSCount = #{crscount,jdbcType=DOUBLE},
+      </if>
+      <if test="crspercentage != null" >
+        CRSPercentage = #{crspercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="crsroomfee != null" >
+        CRSRoomFee = #{crsroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="crsavgroomprice != null" >
+        CRSAvgRoomPrice = #{crsavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="handroomfee != null" >
+        handRoomFee = #{handroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="todayreceived != null" >
+        todayReceived = #{todayreceived,jdbcType=DOUBLE},
+      </if>
+      <if test="todayexpend != null" >
+        todayExpend = #{todayexpend,jdbcType=DOUBLE},
+      </if>
+      <if test="otherfee != null" >
+        otherFee = #{otherfee,jdbcType=DOUBLE},
+      </if>
+      <if test="startbookdeposit != null" >
+        startBookDeposit = #{startbookdeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="endbookdeposit != null" >
+        endBookDeposit = #{endbookdeposit,jdbcType=DOUBLE},
+      </if>
+      <if test="startnopay != null" >
+        startNoPay = #{startnopay,jdbcType=DOUBLE},
+      </if>
+      <if test="endnopay != null" >
+        endNoPay = #{endnopay,jdbcType=DOUBLE},
+      </if>
+      <if test="nopayget != null" >
+        noPayGet = #{nopayget,jdbcType=DOUBLE},
+      </if>
+      <if test="nopayout != null" >
+        noPayOut = #{nopayout,jdbcType=DOUBLE},
+      </if>
+      <if test="startbalance != null" >
+        startBalance = #{startbalance,jdbcType=DOUBLE},
+      </if>
+      <if test="endbalance != null" >
+        endBalance = #{endbalance,jdbcType=DOUBLE},
+      </if>
+      <if test="xianjin != null" >
+        xianJin = #{xianjin,jdbcType=DOUBLE},
+      </if>
+      <if test="yinhangka != null" >
+        yinHangKa = #{yinhangka,jdbcType=DOUBLE},
+      </if>
+      <if test="yushouquan != null" >
+        yuShouQuan = #{yushouquan,jdbcType=DOUBLE},
+      </if>
+      <if test="yushouquanok != null" >
+        yuShouQuanOK = #{yushouquanok,jdbcType=DOUBLE},
+      </if>
+      <if test="zhipiao != null" >
+        zhiPiao = #{zhipiao,jdbcType=DOUBLE},
+      </if>
+      <if test="huikuan != null" >
+        huiKuan = #{huikuan,jdbcType=DOUBLE},
+      </if>
+      <if test="diyongquan != null" >
+        diYongQuan = #{diyongquan,jdbcType=DOUBLE},
+      </if>
+      <if test="chuzhika != null" >
+        chuZhiKa = #{chuzhika,jdbcType=DOUBLE},
+      </if>
+      <if test="shanglvka != null" >
+        shangLvKa = #{shanglvka,jdbcType=DOUBLE},
+      </if>
+      <if test="guazhang != null" >
+        guaZhang = #{guazhang,jdbcType=DOUBLE},
+      </if>
+      <if test="wangfu != null" >
+        wangFu = #{wangfu,jdbcType=DOUBLE},
+      </if>
+      <if test="jifen != null" >
+        jiFen = #{jifen,jdbcType=DOUBLE},
+      </if>
+      <if test="dianziquan != null" >
+        dianZiQuan = #{dianziquan,jdbcType=DOUBLE},
+      </if>
+      <if test="guafangzhang != null" >
+        guaFangZhang = #{guafangzhang,jdbcType=DOUBLE},
+      </if>
+      <if test="miandan != null" >
+        mianDan = #{miandan,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="fuwufee != null" >
+        fuwuFee = #{fuwufee,jdbcType=DOUBLE},
+      </if>
+      <if test="zhifubao != null" >
+        zhiFuBao = #{zhifubao,jdbcType=DOUBLE},
+      </if>
+      <if test="weixin != null" >
+        weiXin = #{weixin,jdbcType=DOUBLE},
+      </if>
+      <if test="agencycount != null" >
+        agencyCount = #{agencycount,jdbcType=DOUBLE},
+      </if>
+      <if test="agencypercentage != null" >
+        agencyPercentage = #{agencypercentage,jdbcType=DOUBLE},
+      </if>
+      <if test="agencyroomfee != null" >
+        agencyRoomFee = #{agencyroomfee,jdbcType=DOUBLE},
+      </if>
+      <if test="agencyavgroomprice != null" >
+        agencyAvgRoomPrice = #{agencyavgroomprice,jdbcType=DOUBLE},
+      </if>
+      <if test="agreemtPayMoney != null" >
+        agreemt_pay_money = #{agreemtPayMoney,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.DayReport" >
+    update dayreport
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      classID = #{classid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      atime = #{atime,jdbcType=DATE},
+      saleCount = #{salecount,jdbcType=DOUBLE},
+      overnightCount = #{overnightcount,jdbcType=DOUBLE},
+      overnightFee = #{overnightfee,jdbcType=DOUBLE},
+      clockCount = #{clockcount,jdbcType=DOUBLE},
+      clockAmount = #{clockamount,jdbcType=DOUBLE},
+      ownUseCount = #{ownusecount,jdbcType=DOUBLE},
+      dayCount = #{daycount,jdbcType=DOUBLE},
+      dayAmount = #{dayamount,jdbcType=DOUBLE},
+      canUseCount = #{canusecount,jdbcType=DOUBLE},
+      occupancyRate = #{occupancyrate,jdbcType=DOUBLE},
+      roomFeeAmount = #{roomfeeamount,jdbcType=DOUBLE},
+      avgRoomPrice = #{avgroomprice,jdbcType=DOUBLE},
+      goodsSale = #{goodssale,jdbcType=DOUBLE},
+      goldCardCount = #{goldcardcount,jdbcType=DOUBLE},
+      goldCardAmount = #{goldcardamount,jdbcType=DOUBLE},
+      silverCardCount = #{silvercardcount,jdbcType=DOUBLE},
+      silverCardAmount = #{silvercardamount,jdbcType=DOUBLE},
+      todayVIPCount = #{todayvipcount,jdbcType=DOUBLE},
+      todayVIPPercentage = #{todayvippercentage,jdbcType=DOUBLE},
+      todayVIPRoomFee = #{todayviproomfee,jdbcType=DOUBLE},
+      todayVIPAvgRoomPrice = #{todayvipavgroomprice,jdbcType=DOUBLE},
+      yesterdayVIPCount = #{yesterdayvipcount,jdbcType=DOUBLE},
+      yesterdayVIPPercentage = #{yesterdayvippercentage,jdbcType=DOUBLE},
+      yesterdayVIPRoomFee = #{yesterdayviproomfee,jdbcType=DOUBLE},
+      yesterdayVIPAvgRoomPrice = #{yesterdayvipavgroomprice,jdbcType=DOUBLE},
+      agreementCount = #{agreementcount,jdbcType=DOUBLE},
+      agreementPercentage = #{agreementpercentage,jdbcType=DOUBLE},
+      agreementRoomFee = #{agreementroomfee,jdbcType=DOUBLE},
+      agreementAvgRoomPrice = #{agreementavgroomprice,jdbcType=DOUBLE},
+      HQCount = #{hqcount,jdbcType=DOUBLE},
+      HQPercentage = #{hqpercentage,jdbcType=DOUBLE},
+      HQRoomFee = #{hqroomfee,jdbcType=DOUBLE},
+      HQAvgRoomPrice = #{hqavgroomprice,jdbcType=DOUBLE},
+      meiTuanCount = #{meituancount,jdbcType=DOUBLE},
+      meiTuanPercentage = #{meituanpercentage,jdbcType=DOUBLE},
+      meiTuanRoomFee = #{meituanroomfee,jdbcType=DOUBLE},
+      meiTuanAvgRoomPrice = #{meituanavgroomprice,jdbcType=DOUBLE},
+      xieChengCount = #{xiechengcount,jdbcType=DOUBLE},
+      xieChengPercentage = #{xiechengpercentage,jdbcType=DOUBLE},
+      xieChengRoomFee = #{xiechengroomfee,jdbcType=DOUBLE},
+      xieChengAvgRoomPrice = #{xiechengavgroomprice,jdbcType=DOUBLE},
+      todayTotalDeposit = #{todaytotaldeposit,jdbcType=DOUBLE},
+      expectBack = #{expectback,jdbcType=DOUBLE},
+      todayOut = #{todayout,jdbcType=DOUBLE},
+      pevPar = #{pevpar,jdbcType=DOUBLE},
+      repairCount = #{repaircount,jdbcType=DOUBLE},
+      freeCount = #{freecount,jdbcType=DOUBLE},
+      totalAmount = #{totalamount,jdbcType=DOUBLE},
+      walkingCount = #{walkingcount,jdbcType=DOUBLE},
+      walkingPercentage = #{walkingpercentage,jdbcType=DOUBLE},
+      walkingRoomFee = #{walkingroomfee,jdbcType=DOUBLE},
+      walkingAvgRoomPrice = #{walkingavgroomprice,jdbcType=DOUBLE},
+      CRSCount = #{crscount,jdbcType=DOUBLE},
+      CRSPercentage = #{crspercentage,jdbcType=DOUBLE},
+      CRSRoomFee = #{crsroomfee,jdbcType=DOUBLE},
+      CRSAvgRoomPrice = #{crsavgroomprice,jdbcType=DOUBLE},
+      handRoomFee = #{handroomfee,jdbcType=DOUBLE},
+      todayReceived = #{todayreceived,jdbcType=DOUBLE},
+      todayExpend = #{todayexpend,jdbcType=DOUBLE},
+      otherFee = #{otherfee,jdbcType=DOUBLE},
+      startBookDeposit = #{startbookdeposit,jdbcType=DOUBLE},
+      endBookDeposit = #{endbookdeposit,jdbcType=DOUBLE},
+      startNoPay = #{startnopay,jdbcType=DOUBLE},
+      endNoPay = #{endnopay,jdbcType=DOUBLE},
+      noPayGet = #{nopayget,jdbcType=DOUBLE},
+      noPayOut = #{nopayout,jdbcType=DOUBLE},
+      startBalance = #{startbalance,jdbcType=DOUBLE},
+      endBalance = #{endbalance,jdbcType=DOUBLE},
+      xianJin = #{xianjin,jdbcType=DOUBLE},
+      yinHangKa = #{yinhangka,jdbcType=DOUBLE},
+      yuShouQuan = #{yushouquan,jdbcType=DOUBLE},
+      yuShouQuanOK = #{yushouquanok,jdbcType=DOUBLE},
+      zhiPiao = #{zhipiao,jdbcType=DOUBLE},
+      huiKuan = #{huikuan,jdbcType=DOUBLE},
+      diYongQuan = #{diyongquan,jdbcType=DOUBLE},
+      chuZhiKa = #{chuzhika,jdbcType=DOUBLE},
+      shangLvKa = #{shanglvka,jdbcType=DOUBLE},
+      guaZhang = #{guazhang,jdbcType=DOUBLE},
+      wangFu = #{wangfu,jdbcType=DOUBLE},
+      jiFen = #{jifen,jdbcType=DOUBLE},
+      dianZiQuan = #{dianziquan,jdbcType=DOUBLE},
+      guaFangZhang = #{guafangzhang,jdbcType=DOUBLE},
+      mianDan = #{miandan,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      flag = #{flag,jdbcType=INTEGER},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      fuwuFee = #{fuwufee,jdbcType=DOUBLE},
+      zhiFuBao = #{zhifubao,jdbcType=DOUBLE},
+      weiXin = #{weixin,jdbcType=DOUBLE},
+      agencyCount = #{agencycount,jdbcType=DOUBLE},
+      agencyPercentage = #{agencypercentage,jdbcType=DOUBLE},
+      agencyRoomFee = #{agencyroomfee,jdbcType=DOUBLE},
+      agencyAvgRoomPrice = #{agencyavgroomprice,jdbcType=DOUBLE},
+      agreemt_pay_money = #{agreemtPayMoney,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 营业分析报表单日 -->
+  <select id="getBusnessAnalysisReportDay" resultType="HashMap">
+	     select  dt.canUseCount+dt.repairCount totalcount,dt.canUseCount,dt.ownUseCount,dt.freeCount,dt.repairCount,dt.overnightCount,dt.dayCount,
+        dt.clockCount,dt.saleCount,dt.occupancyRate,dt.avgRoomPrice,dt.pevPar,dt.overnightFee,
+        dt.dayAmount,dt.clockAmount,dt.handRoomFee,dt.roomFeeAmount,dt.silverCardCount,dt.silverCardAmount,
+        dt.goldCardCount,dt.goldCardAmount,dt.goodsSale,dt.fuwuFee,dt.totalAmount,
+        dt.startBalance,dt.todayReceived,dt.startNoPay,dt.startBookDeposit,
+        dt.endBalance,dt.todayExpend,dt.endNoPay,dt.endBookDeposit,
+
+        dt.todayVIPCount,dt.todayVIPPercentage,dt.todayVIPRoomFee,dt.todayVIPAvgRoomPrice,
+        dt.walkingCount,dt.walkingPercentage,dt.walkingRoomFee,dt.walkingAvgRoomPrice,
+        dt.agreementCount,dt.agreementPercentage,dt.agreementRoomFee,dt.agreementAvgRoomPrice,
+        dt.agencyCount,dt.agencyPercentage,dt.agencyRoomFee,dt.agencyAvgRoomPrice,
+        dt.CRSCount,dt.CRSPercentage,dt.CRSRoomFee,dt.CRSAvgRoomPrice,
+
+        dt.todayVIPCount+dt.walkingCount+dt.agreementCount+dt.agencyCount+dt.CRSCount totaljianye,
+				dt.todayVIPPercentage+dt.walkingPercentage+dt.agreementPercentage+dt.agencyPercentage+dt.CRSPercentage totalpercentage,
+        (dt.todayVIPRoomFee+dt.walkingRoomFee+dt.agreementRoomFee+dt.agencyRoomFee+dt.CRSRoomFee)/(dt.todayVIPCount+dt.walkingCount+dt.agreementCount+dt.agencyCount+dt.CRSCount) totalAvgRoom,
+				dt.todayVIPRoomFee+dt.walkingRoomFee+dt.agreementRoomFee+dt.agencyRoomFee+dt.CRSRoomFee totalRoomFee,
+
+        dt.xianJin,dt.yinHangKa,dt.yuShouQuan,dt.yuShouQuanOK,dt.zhiPiao,
+        dt.huiKuan,dt.diYongQuan,dt.chuZhiKa,dt.shangLvKa,dt.guaZhang,dt.wangFu,
+        dt.jiFen,dt.dianZiQuan,dt.guaFangZhang,dt.mianDan,dt.zhiFuBao,
+        dt.xianJin+dt.yinHangKa+dt.yuShouQuan+dt.yuShouQuanOK+dt.zhiPiao+
+        dt.huiKuan+dt.diYongQuan+dt.chuZhiKa+dt.shangLvKa+dt.guaZhang+dt.wangFu+
+        dt.jiFen+dt.dianZiQuan+dt.guaFangZhang+dt.mianDan+dt.zhiFuBao paymoneyTotal
+		from dayreport dt
+		where dt.shopID = #{shopID} and dt.atime = #{atime}
+	</select>
+  <!-- 营业分析报表前一周-->
+  <select id="getBusnessAnalysisReportOneWeek" resultMap="reportMap">
+	    select  dt.atime,dt.roomFeeAmount
+		from dayreport dt
+		where dt.shopID = #{shopID}
+		and  DATEDIFF(dt.atime,#{oneweek})>=0 <![CDATA[      and DATEDIFF(dt.atime,#{real_time})<=0  ]]>
+        GROUP BY dt.atime
+  </select>
+  <!-- 营业分析报表前二周-->
+  <select id="getBusnessAnalysisReportTwoWeek" resultMap="reportMap">
+	    select  dt.atime,dt.roomFeeAmount
+		from dayreport dt
+		where dt.shopID = #{shopID}
+		and  DATEDIFF(dt.atime,#{twoweek})>=0 <![CDATA[      and DATEDIFF(dt.atime,#{real_time})<=0  ]]>
+        GROUP BY dt.atime
+  </select>
+  <!-- 营业分析报表前一月-->
+  <select id="getBusnessAnalysisReportOneMonth" resultMap="reportMap">
+	    select  dt.atime,dt.roomFeeAmount
+		from dayreport dt
+		where dt.shopID = #{shopID}
+		and  DATEDIFF(dt.atime,#{onemonth})>=0 <![CDATA[      and DATEDIFF(dt.atime,#{real_time})<=0  ]]>
+        GROUP BY dt.atime
+  </select>
+  <!--自定义报表-->
+  <select id="getBusnessAnalysisReportDiy" resultMap="reportMap">
+	    select  dt.atime,dt.roomFeeAmount
+		from dayreport dt
+		where dt.shopID = #{shopID}
+		and  DATEDIFF(dt.atime,#{starttime})>=0 <![CDATA[      and DATEDIFF(dt.atime,#{endtime})<=0  ]]>
+        GROUP BY dt.atime
+  </select>
+  <!--映射实体字段-->
+ <resultMap id="reportMap" type="java.util.Map">
+   <result column="atime" property="atime" jdbcType="VARCHAR"></result>
+   <result column="roomFeeAmount" property="roomfeeamount" jdbcType="DOUBLE"></result>
+ </resultMap>
+  <!-- 营业分析报表本月 -->
+  <select id="getBusnessAnalysisReportThisM" resultType="HashMap">
+	     select  sum(dt.canUseCount)+sum(dt.repairCount) totalcount,sum(dt.canUseCount) canUseCount,sum(dt.ownUseCount) ownUseCount,
+       			sum(dt.freeCount) freeCount,sum(dt.repairCount) repairCount,sum(dt.overnightCount) overnightCount,sum(dt.dayCount) dayCount,
+				sum(dt.clockCount) clockCount,sum(dt.saleCount) saleCount,
+
+				sum(dt.saleCount)/(sum(dt.canUseCount)+sum(dt.repairCount)) occupancyRate,sum(dt.roomFeeAmount)/sum(dt.saleCount) avgRoomPrice,sum(dt.roomFeeAmount)/(sum(dt.canUseCount)+sum(dt.repairCount)) pevPar,
+				sum(dt.overnightFee) overnightFee,sum(dt.dayAmount) dayAmount,sum(dt.clockAmount) clockAmount,sum(dt.handRoomFee) handRoomFee,sum(dt.roomFeeAmount) roomFeeAmount,
+        		sum(dt.silverCardCount) silverCardCount,sum(dt.silverCardAmount) silverCardAmount,sum(dt.goldCardCount) goldCardCount,sum(dt.goldCardAmount) goldCardAmount,
+        		sum(dt.goodsSale) goodsSale,sum(dt.fuwuFee) fuwuFee,sum(dt.totalAmount) totalAmount,sum(dt.startBalance) startBalance,sum(dt.todayReceived) todayReceived,
+        		sum(dt.startNoPay) startNoPay,sum(dt.startBookDeposit) startBookDeposit,sum(dt.endBalance) endBalance,sum(dt.todayExpend) todayExpend,
+        		sum(dt.endNoPay) endNoPay,sum(dt.endBookDeposit) endBookDeposit,
+
+				sum(dt.todayVIPCount) todayVIPCount,sum(dt.todayVIPCount)/sum(dt.saleCount) todayVIPPercentage,sum(dt.todayVIPRoomFee) todayVIPRoomFee,sum(dt.todayVIPRoomFee)/sum(dt.todayVIPCount) todayVIPAvgRoomPrice,
+				sum(dt.walkingCount) walkingCount,sum(dt.walkingCount)/sum(dt.saleCount) walkingPercentage,sum(dt.walkingRoomFee) walkingRoomFee,sum(dt.walkingRoomFee)/sum(dt.walkingCount) walkingAvgRoomPrice,
+				sum(dt.agreementCount) agreementCount,sum(dt.agreementCount)/sum(dt.saleCount) agreementPercentage,sum(dt.agreementRoomFee) agreementRoomFee,sum(dt.agreementRoomFee)/sum(dt.agreementCount) agreementAvgRoomPrice,
+				sum(IFNULL(dt.agencyCount,0)) agencyCount,
+        		if(sum(IFNULL(dt.saleCount,0)) = 0,0,sum(IFNULL(dt.agencyCount,0))/sum(IFNULL(dt.saleCount,0))) agencyPercentage,sum(IFNULL(dt.agencyRoomFee,0)) agencyRoomFee,
+        		if(sum(IFNULL(dt.agencyCount,0)) = 0,0,sum(IFNULL(dt.agencyRoomFee,0))/sum(IFNULL(dt.agencyCount,0))) agencyAvgRoomPrice,
+				sum(IFNULL(dt.CRSCount,0)) CRSCount,sum(IFNULL(dt.CRSCount,0))/sum(IFNULL(dt.saleCount,0)) CRSPercentage,sum(IFNULL(dt.CRSRoomFee,0)) CRSRoomFee,
+        		if(sum(IFNULL(dt.CRSCount,0)) = 0,0,sum(IFNULL(dt.CRSRoomFee,0))/sum(IFNULL(dt.CRSCount,0))) CRSAvgRoomPrice,
+
+				sum(IFNULL(dt.todayVIPCount,0))+sum(IFNULL(dt.walkingCount,0))+sum(IFNULL(dt.agreementCount,0))+sum(IFNULL(dt.agencyCount,0))+sum(IFNULL(dt.CRSCount,0)) totaljianye,
+				(sum(IFNULL(dt.todayVIPCount,0))+sum(IFNULL(dt.walkingCount,0))+sum(IFNULL(dt.agreementCount,0))+sum(IFNULL(dt.agencyCount,0))+sum(IFNULL(dt.CRSCount,0)))/sum(IFNULL(dt.saleCount,0)) totalpercentage,
+				(sum(IFNULL(dt.todayVIPRoomFee,0))+sum(IFNULL(dt.walkingRoomFee,0))+sum(IFNULL(dt.agreementRoomFee,0))+sum(IFNULL(dt.agencyRoomFee,0))+sum(IFNULL(dt.CRSRoomFee,0)))/(sum(IFNULL(dt.todayVIPCount,0))+sum(IFNULL(dt.walkingCount,0))+sum(IFNULL(dt.agreementCount,0))+sum(IFNULL(dt.agencyCount,0))+sum(IFNULL(dt.CRSCount,0))) totalAvgRoom,
+				sum(IFNULL(dt.todayVIPRoomFee,0))+sum(IFNULL(dt.walkingRoomFee,0))+sum(IFNULL(dt.agreementRoomFee,0))+sum(IFNULL(dt.agencyRoomFee,0))+sum(IFNULL(dt.CRSRoomFee,0)) totalRoomFee,
+
+				sum(IFNULL(dt.xianJin,0)) xianJin,sum(IFNULL(dt.yinHangKa,0)) yinHangKa,sum(IFNULL(dt.yuShouQuan,0)) yuShouQuan,sum(IFNULL(dt.yuShouQuanOK,0)) yuShouQuanOK,sum(IFNULL(dt.zhiPiao,0)) zhiPiao,
+				sum(IFNULL(dt.huiKuan,0)) huiKuan,sum(IFNULL(dt.diYongQuan,0)) diYongQuan,sum(IFNULL(dt.chuZhiKa,0)) chuZhiKa,sum(IFNULL(dt.shangLvKa,0)) shangLvKa,sum(IFNULL(dt.guaZhang,0)) guaZhang,sum(IFNULL(dt.wangFu,0)) wangFu,
+				sum(IFNULL(dt.jiFen,0)) jiFen,sum(IFNULL(dt.dianZiQuan,0)) dianZiQuan,sum(IFNULL(dt.guaFangZhang,0)) guaFangZhang,sum(IFNULL(dt.mianDan,0)) mianDan,sum(IFNULL(dt.zhiFuBao,0)) zhiFuBao,
+        		sum(IFNULL(dt.xianJin,0))+sum(IFNULL(dt.yinHangKa,0))+sum(IFNULL(dt.yuShouQuan,0))+sum(IFNULL(dt.yuShouQuanOK,0))+sum(IFNULL(dt.zhiPiao,0))+sum(
+        		IFNULL(dt.huiKuan,0))+sum(IFNULL(dt.diYongQuan,0))+sum(IFNULL(dt.chuZhiKa,0))+sum(IFNULL(dt.shangLvKa,0))+sum(IFNULL(dt.guaZhang,0))+sum(IFNULL(dt.wangFu,0))+sum(
+        		IFNULL(dt.jiFen,0))+sum(IFNULL(dt.dianZiQuan,0))+sum(IFNULL(dt.guaFangZhang,0))+sum(IFNULL(dt.mianDan,0))+sum(IFNULL(dt.zhiFuBao,0)) paymoneyTotal
+		from dayreport dt
+		where dt.shopID = #{SM_HotelId}  and DATEDIFF(dt.atime,#{thismonthAtimeStart})>=0 <![CDATA[      and DATEDIFF(dt.atime,#{thismonthAtimeEnd})<=0  ]]>
+  </select>
+</mapper>

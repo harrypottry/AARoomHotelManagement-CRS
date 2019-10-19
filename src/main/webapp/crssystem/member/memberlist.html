@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>会员列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--会员列表-->
+            <div class="card">
+                <ul class="card-body nav" id="distpicker">
+                    <li>
+                        <b>创建时间：</b>
+                        <input type="text" class="form-control beginTime" data-name="beginTime" readonly>
+                        <input type="text" class="form-control endTime" data-name="endTime" readonly>
+                    </li>
+                    <li>
+                        <b>省份：</b>
+                        <select class="form-control" data-name="province" id="province"></select>
+                    </li>
+                    <li>
+                        <b>城市：</b>
+                        <select class="form-control" data-name="city" id="city"></select>
+                        <select style="display:none"></select>
+                    </li>
+                    <li>
+                        <b>会员类型：</b>
+                        <select class="form-control" data-name="vipType">
+                            <option value="0">全部</option>
+                            <option value="v1">A会员</option>
+                            <option value="v2">A-Plus会员</option>
+                            <option value="v3">A-Pro会员</option>
+                        </select>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control" data-name="param" style="width:14.5rem" placeholder="请输入手机号/姓名/运营店长">
+                    </li>
+                    <li>
+                        <span class="btn btn-danger" onclick="request()">查询</span>
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>等级</th>
+                        <th>卡号</th>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>注册时间</th>
+                        <th>开通方式</th>
+                        <th>购买升级时间</th>
+                        <th>升级金额</th>
+                        <th>开通门店</th>
+                        <th>省份</th>
+                        <th>城市</th>
+                        <th>运营店长</th>
+                        <th>当前积分</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>                
+            </table>
+        </section>
+    </div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap-datepicker.js"></script><!--时间选择-->
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/distpicker.js"></script><!--省市县-->
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#distpicker").distpicker({autoSelect: false});//省市
+        request();//页面信息
+    });
+    $(document).on("click","span.getbtn",function(){//点击操作内按钮
+        sessionStorage.setItem('memberId',$(this).attr('data-id'));
+        location.href ='integral.html';//本页打开
+        // window.open('integral.html');//新窗口
+    });
+    function request(datas,pageCount){//获取页面信息
+        datas={};
+        $('.form-control').each(function(name){
+            name=$(this).attr('data-name');
+            datas[name]=$(this).val();
+        });
+        $('#table').dataTable({
+            scrollY:window.innerHeight-350,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:true,
+            aLengthMenu:[20],
+            filter:false,
+            serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                datas.pageNo=(data.start / data.length)+1;//当前页码
+                datas.pageSize='20';//每页条数
+                $.ajax({
+                    type:"GET",
+                    url:'/console/api/getMemberList',
+                    cache: false,//禁用缓存
+                    data:datas,//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        pageCount=result.data.pageCount;//总页码
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.data.count;//返回数据全部记录
+                        returnData.recordsFiltered = result.data.count;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.data.dataList;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'cardLevel'},
+                {data:'cardNum'},
+                {data:'name'},
+                {data:'phoneNum'},
+                {data:'regDate'},
+                {data:'openMode'},
+                {data:'promoteDate'},
+                {data:'promotePrice'},
+                {data:'hotelName'},
+                {data:'province'},
+                {data:'city'},
+                {data:'hotelOwern'},
+                {data:'intrgralAll'},
+                {data:'id'}
+            ],
+            columnDefs:[
+                {
+                    "render": function (value,type,row){
+                        row.name=row.name||'';row.cardNum=row.cardNum||'';
+                        return '<span class="getbtn" data-id='+value+'/'+row.name+'/'+row.cardNum+'>查看积分流水</span>';
+                    },
+                    "targets":-1 //操作列
+                }
+            ],
+            language:tablelang,
+            fnDrawCallback: function(table) {
+                if(pageCount>7){//页码大于7出现页码跳转方式
+                    $('#table_paginate .pagination').append('<li class="jump">跳至&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0);" class="page-link" data-dt-id="#table">GO</a></li>');
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>门店详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+    <style>
+        .col-md-1{min-width:7.5rem!important;margin-top:0.5rem;}
+        .items{min-width:7.4rem;text-align:left;margin-right:0;}
+        /*.images>span{width:175px;height:130px;}*/
+        /*.modal .modal-body{overflow-y: scroll}*/
+        /*@media screen and (min-width:991px){*/
+            /*!*自定义滚动条样式*!*/
+            /*.modal .modal-body::-webkit-scrollbar{width:5px;height:8px}*/
+            /*!*定义滚动条轨道 内阴影+圆角*!*/
+            /*.modal .modal-body::-webkit-scrollbar-track{-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius:10px;}*/
+            /*!*定义滑块 内阴影+圆角*!*/
+            /*.modal .modal-body::-webkit-scrollbar-thumb{border-radius: 10px; -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);}*/
+        /*}*/
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--门店详情-->
+            <div class="condition row" style="display:inline-block">
+                <span class="col-6"></span>
+            </div>
+            <p class="pleft"><span span class="rise">门店列表>><span></span></span></p>
+            <!--<p class="pleft">-->
+                <!--<span class="btn btn-danger" onclick="modal('.modal')" style="border-radius:4px;">图片库</span>-->
+                <!--<span style="display:inline-block;margin-left:10px;vertical-align:middle;color:#777;">已上传图片148张</span>-->
+            <!--</p>-->
+            <p class="pleft"><b>在线渠道：</b></p>
+            <p class="pleft"><span class="getbtn">AA小程序</span>
+                <!--<span class="getbtn">AA酒店助手</span><span class="getbtn">AA连锁酒店APP</span><span class="getbtn">AA连锁酒店官方网站</span>-->
+            </p>
+            <p class="pleft">
+                <span style="margin-left:10px;color:#777;">备注：点击进入相应的渠道，编辑酒店图文详情</span>
+            </p>
+            <div class="card redact">
+                <div class="card-footer">酒店基础信息</div>
+                <div class="card-body">
+                    <div class="row shopBase">
+                        <div class="col-md-1">门店信息</div>
+                        <div class="col-md-5">
+                            <p><span class="items">门店名称</span><input type="text" class="form-control" data-name="shop_name" disabled></p>
+                            <p>
+                                <span class="items">酒店地址</span><span id="distpicker"><select class="form-control site" id="province1"></select>&nbsp;<select class="form-control site" id="city1"></select>&nbsp;<select class="form-control site" id="district1"></select></span>
+                            </p>
+                            <p><span class="items">详细地址</span><input type="text" class="form-control" data-name="address_detail"></p>
+                            <p><span class="items">所在商业区</span><input type="text" class="form-control" data-name="business_square"></p>
+                            <p><span class="items">门店电话</span><input type="text" class="form-control" data-name="tel"></p>
+                            <p><span class="items">门店传真</span><input type="text" class="form-control" data-name="fax"></p>
+                            <p><span class="items">业主姓名</span><input type="text" class="form-control" data-name="boss_name"></p>
+                            <p><span class="items">拓展BD</span><input type="text" class="form-control" data-name="bd_name"></p>
+                            <p><span class="items">运营店长姓名</span><input type="text" class="form-control" data-name="master_name"></p>
+                            <p><span class="items">PMS开启状态</span><select class="form-control" data-name="pms_status">
+                                <option value="0">开启</option><option value="1">关闭</option></select></p>
+                        </div>
+                        <div class="col-md-5">
+                            <p><span class="items">门店ID</span><input type="text" class="form-control" data-name="smhotel_code" disabled></p>
+                            <p><span class="items">邮政编码</span><input type="text" class="form-control" data-name="postal_code"></p>
+                            <p><span class="items">预计开业时间</span><input type="text" class="form-control beginTime" data-name="online_time" readonly=""></p>
+                            <p><span class="items">最近装修时间</span><input type="text" class="form-control beginTime" data-name="decorate_time" readonly=""></p>
+                            <p><span class="items">客房总数</span><input type="text" class="form-control" data-name="room_num"></p>
+                            <p><span class="items">酒店建筑体描述</span><select class="form-control" data-name="building_detail">
+                                <option value="独栋">独栋</option><option value="综合">综合</option></select></p>
+                            <p><span class="items">所属品牌</span><input type="text" class="form-control" data-name="hotel_brand" disabled></p>
+                            <p><span class="items">是否可接待外宾</span><select class="form-control" data-name="hasforeign">
+                                <option value="是">是</option><option value="否">否</option></select></p>
+                            <p><span class="items">门店状态</span><select class="form-control" data-name="shop_status"><option value="运营">运营</option>
+                                <option value="筹建">筹建</option></select></p>
+                        </div>
+                    </div>
+                    <div class="row shopContactsList">
+                        <div class="col-md-1">联系人信息</div>
+                        <div class="col-md-5">
+                            <p><span class="items">姓名</span><input type="text" class="form-control" data-name="contacts_name"></p>
+                            <p><span class="items">手机</span><input type="text" class="form-control" data-name="contacts_tel"></p>
+                            <p><span class="items">qq</span><input type="text" class="form-control" data-name="contacts_qq"></p>
+                        </div>
+                        <div class="col-md-5">
+                            <p><span class="items">邮箱</span><input type="text" class="form-control" data-name="contacts_email"></p>
+                            <p><span class="items">职位</span><select class="form-control" data-name="contacts_job"><option value="1">业主</option>
+                                <option value="2">店长</option><option value="3">其他</option></select></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">渠道合作</div>
+                        <div class="col-md-10">
+                            <label><input name="cooperation" type="checkbox"><a>携程</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>去哪儿</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>手机APP</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>美团</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>酒店管家</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>百度推广</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>艺龙</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>同程</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>拉手</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>有间房APP</a></label>
+                            <label><input name="cooperation" type="checkbox"><a>微信</a></label>
+                            <!--<label style="width:16rem"><input name="cooperation" type="checkbox"><a>其他请填写</a><input type="text" class="form-control" style="margin-left:8px;"></label>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1">可用支付方式</div>
+                        <div class="col-md-10">
+                            <label><input name="pay" type="checkbox"><a>微信</a></label>
+                            <label><input name="pay" type="checkbox"><a>支付宝</a></label>
+                            <label><input name="pay" type="checkbox"><a>银联</a></label>
+                            <label><input name="pay" type="checkbox"><a>visa</a></label>
+                            <label><input name="pay" type="checkbox"><a>mastercard</a></label>
+                        </div>
+                    </div>
+                    <div class="row shopWifiList">
+                        <div class="col-md-1">WiFi</div>
+                        <div class="col-md-10" style="margin-top:0.5rem;">
+                            <p class="row">
+                                <span class="col-md-3">WiFi名称</span>
+                                <span class="col-md-3">WiFi密码</span>
+                                <span class="col-md-3"><span class="btn btn-danger btn-sm add">添加</span></span>
+                            </p>
+                            <div></div>
+                        </div>
+                        <p class="row addpre">
+                            <span class="col-md-3"><input type="text" class="form-control wifi_name"></span>
+                            <span class="col-md-3"><input type="text" class="form-control wifi_password"><span class="delpre" title="删除"></span></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-footer">酒店综合信息</div>
+                <div class="card-body">
+                    <div class="row shopBase">
+                        <div class="col-md-1">酒店简介</div>
+                        <div class="col-md-10">
+                            <p><textarea class="form-control" data-name="shop_detail" rows="3" style="width:100%;margin-top:0.5rem;"></textarea></p>
+                        </div>
+                    </div>
+                    <div class="row traffic" style="margin-bottom:0">
+                        <div class="col-md-1">地理位置/交通</div>
+                        <div class="col-md-10" style="margin-top:0.5rem;">
+                            <p class="row">
+                                <span class="col-md-3">主要交通场站名称</span>
+                                <span class="col-md-3">距离酒店公里数</span>
+                                <span class="col-md-3">如何到达酒店</span>
+                                <span class="col-md-3"><span class="btn btn-danger btn-sm add">添加</span></span>
+                            </p>
+                            <div></div>
+                        </div>
+                        <p class="row addpre">
+                            <span class="col-md-3"><input type="text" class="form-control traffic_name" placeholder="XX 机场/火车站"></span>
+                            <span class="col-md-3"><input type="text" class="form-control traffic_kilometer" placeholder="XX 公里"></span>
+                            <span class="col-md-6"><input class="form-control traffic_comment" style="width:85%;"><span class="delpre" title="删除"></span></span>
+                        </p>
+                    </div>
+                    <div class="row" style="margin-top:0">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" style="margin-top:0.5rem;">
+                            <p style="color:#999;">例：可由 XX 机场乘坐机场巴士 XX 线至 XX 地后，换乘出租车约5分钟即达酒店；<br>由 XX 机场乘坐机场快轨至XX站，换乘地铁 X 号线至 X 站由 X 出口出站，向西步行约5分钟即达酒店。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row landmark">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10" style="margin-top:0.5rem;">
+                            <p class="row">
+                                <span class="col-md-3">主要参考地标</span>
+                                <span class="col-md-3">距离酒店公里数</span>
+                                <span class="col-md-3">如何到达酒店</span>
+                                <span class="col-md-3"><span class="btn btn-danger btn-sm add">添加</span></span>
+                            </p>
+                            <div></div>
+                        </div>
+                        <p class="row addpre">
+                            <span class="col-md-3"><input type="text" class="form-control traffic_name" placeholder="XX 机场/火车站"></span>
+                            <span class="col-md-3"><input type="text" class="form-control traffic_kilometer" placeholder="XX 公里"></span>
+                            <span class="col-md-6"><input class="form-control traffic_comment" style="width:85%;"><span class="delpre" title="删除"></span></span>
+                        </p>
+                    </div>
+                    <div class="row shopBase">
+                        <div class="col-md-1">旅游指南</div>
+                        <div class="col-md-10">
+                            <p><textarea class="form-control" data-name="travel_guide" rows="3" style="width:100%;margin-top:0.5rem;"></textarea></p>
+                        </div>
+                    </div>
+                    <div class="row shopBase">
+                        <div class="col-md-1">温馨提示</div>
+                        <div class="col-md-10">
+                            <p><textarea class="form-control" data-name="warm_prompt" rows="3" style="width:100%;margin-top:0.5rem;"></textarea></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-md-1">酒店服务及设施</div>
+                        <div class="col-md-10">
+                            <label><input name="serve" type="checkbox"><a>商务中心</a></label>
+                            <label><input name="serve" type="checkbox"><a>洗衣服务</a></label>
+                            <label><input name="serve" type="checkbox"><a>送餐服务</a></label>
+                            <label><input name="serve" type="checkbox"><a>POS刷卡</a></label>
+                            <label><input name="serve" type="checkbox"><a>积分兑换</a></label>
+                            <label><input name="serve" type="checkbox"><a>旅游服务</a></label>
+                            <label><input name="serve" type="checkbox"><a>ATM取款机</a></label>
+                            <label><input name="serve" type="checkbox"><a>前台贵重物品保险柜</a></label>
+                            <label><input name="serve" type="checkbox"><a>免费停车</a></label>
+                            <label><input name="serve" type="checkbox"><a>市话</a></label>
+                            <label><input name="serve" type="checkbox"><a>热水淋浴</a></label>
+                            <label><input name="serve" type="checkbox"><a>星级床垫</a></label>
+                            <label><input name="serve" type="checkbox"><a>会议服务</a></label>
+                            <label><input name="serve" type="checkbox"><a>SPA</a></label>
+                            <label><input name="serve" type="checkbox"><a>液晶电视</a></label>
+                            <label><input name="serve" type="checkbox"><a>宽带</a></label>
+                            <label><input name="serve" type="checkbox"><a>在线支付</a></label>
+                            <label><input name="serve" type="checkbox"><a>免费打车</a></label>
+                            <label><input name="serve" type="checkbox"><a>WiFi</a></label>
+                            <label><input name="serve" type="checkbox"><a>棋牌麻将</a></label>
+                            <label><input name="serve" type="checkbox"><a>叫醒服务</a></label>
+                            <label><input name="serve" type="checkbox"><a>提供发票</a></label>
+                            <!--<label style="width:16rem"><input name="serve" type="checkbox"><a>其他请填写</a><input type="text" class="form-control" style="margin-left:8px;"></label>-->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">                            
+                            <span class="btn btn-danger" onclick="submit()">提交</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<!--&lt;!&ndash;图片库&ndash;&gt;-->
+<!--<div class="modal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<span>-->
+                    <!--<span style="font-size:18px;font-weight:700;">图片库</span>-->
+                    <!--<span style="display:inline-block;margin-left:10px;vertical-align:middle;color:#777;">已上传图片148张</span>-->
+                <!--</span>-->
+                <!--<button type="button" class="btn btn-tool" onclick="modal('.modal')" style="float:right;">×</button>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<div class="images"><span style='background:url("../../import/img/add.png") no-repeat 53px 31px;'><input class="import-btn" type="file" accept="image/*"></span></div>-->
+                <!--<div class="images"><span><span class="delimg" title="删除照片"></span><img src="../../import/img/pass.png"></span></div>-->
+                <!--&lt;!&ndash;<div class="images"><span><span class="upimg">上传图片</span><input class="import-btn" type="file" accept="image/*"></span></div>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="warn">
+    <div></div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap-datepicker.js"></script><!--时间选择-->
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/distpicker.js"></script><!--省市县-->
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    var hoteldetails={},hotel_code=sessionStorage.getItem('hotel_code');
+    $(document).ready(function(){
+        // $('.modal .modal-body').height(window.innerHeight/3*2);        
+        request();//页面信息
+    });
+    // 在线渠道：AA小程序、AA酒店助手、AA连锁酒店APP、AA连锁酒店官方网站
+    $('.getbtn').click(function(){
+        location.href ='detailsimg.html';//本页打开
+    });
+    // 添加地理位置/交通、WIFI
+    $('.btn-danger.add').click(function(){        
+        $(this).parents('.col-md-10').find('div').append($(this).parents('.col-md-10').next('p.addpre').clone().attr('class','row'));
+    });
+    //删除地理位置/交通、WIFI
+    $(document).on("click",".delpre",function(){
+        $(this).parents('p.row').remove();
+    });
+    function request(){
+        $.ajax({
+            url :"/console/api/getShopBaseDetailByShopId",
+            data:{hotel_id:hotel_code},
+            type: "POST",
+            success:function(result){
+                $('.condition>.col-6').html(result.shopBase.shop_name);
+                $('.pleft>.rise>span').html(result.shopBase.shop_name);
+                showpage(result);
+            }
+        })
+    }
+    function submit(){//点击提交
+        hoteldetails.shopBase.province=$('#province1').val();// 省市县
+        hoteldetails.shopBase.city=$('#city1').val();
+        hoteldetails.shopBase.area=$('#district1').val();
+        $('.shopBase>div>p>.form-control').each(function(name){// 门店信息
+            name=$(this).attr('data-name');
+            hoteldetails.shopBase[name]=$(this).val();
+        });
+        if(JSON.stringify(hoteldetails.shopContactsList)==='[]'){//联系人信息--原本无数据
+            hoteldetails.shopContactsList[0]={};
+        }
+        $('.shopContactsList>div>p>.form-control').each(function () {//联系人信息
+            hoteldetails.shopContactsList[0][$(this).attr('data-name')]=$(this).val();
+        });
+        hoteldetails.channel=[];
+        $('input[name="cooperation"]').each(function(index){//渠道合作name="cooperation"由0开始
+            if($(this)[0].checked){
+                hoteldetails.channel.push(index);
+            }
+        });
+        hoteldetails.pay_method=[];
+        $('input[name="pay"]').each(function(index){//可用支付方式name="pay"由0开始
+            if($(this)[0].checked){
+                hoteldetails.pay_method.push(index);
+            }
+        });
+        hoteldetails.shopWifiList=[];
+        $('.shopWifiList>.col-md-10>div>p').each(function(index,arr){//WIFI
+            arr={shop_id:hotel_code};
+            arr['wifi_name']=$(this).find('.wifi_name').val();
+            arr['wifi_password']=$(this).find('.wifi_password').val();
+            if(arr.wifi_name&&arr.wifi_password){
+                hoteldetails.shopWifiList.push(arr);
+            }
+        });
+        // 地理位置/交通
+        hoteldetails.shopTrafficList=[];
+        $('.traffic>.col-md-10>div>p').each(function(index,arr){//主要交通场站名称traffic
+            arr={shop_id:hotel_code,type:'0'};
+            arr['traffic_name']=$(this).find('.traffic_name').val();
+            arr['traffic_kilometer']=$(this).find('.traffic_kilometer').val();
+            arr['traffic_comment']=$(this).find('.traffic_comment').val();
+            if(arr.traffic_name&&arr.traffic_kilometer){
+                hoteldetails.shopTrafficList.push(arr);
+            }
+        });
+        $('.landmark>.col-md-10>div>p').each(function(index,arr){//主要参考地标landmark
+            arr={shop_id:hotel_code,type:'1'};
+            arr['traffic_name']=$(this).find('.traffic_name').val();
+            arr['traffic_kilometer']=$(this).find('.traffic_kilometer').val();
+            arr['traffic_comment']=$(this).find('.traffic_comment').val();
+            if(arr.traffic_name&&arr.traffic_kilometer){
+                hoteldetails.shopTrafficList.push(arr);
+            }
+        });
+        hoteldetails.shop_service=[];
+        $('input[name="serve"]').each(function(index){//酒店服务及设施name="serve"由0开始
+            if($(this)[0].checked){
+                hoteldetails.shop_service.push(index);
+            }
+        });
+        $.ajax({
+            url :"/console/api/insertOrUpdateShopBase",
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(hoteldetails),
+            type: "POST",
+            success:function(data){
+                console.log(data);
+                if(data.errorDesc=='success'){
+                    warn('提交成功！');
+                    showpage(data.data);
+                }else{
+                    warn('提交失败，请重新操作！');
+                }
+
+            }
+        })
+    }
+    function showpage(result){
+        hoteldetails=result;
+        if(JSON.stringify(result.shopBase)!='{}'){//shopBase门店信息
+            $("#distpicker").distpicker({province:result.shopBase.province,city:result.shopBase.city,district:result.shopBase.area});//省市县
+            $('.shopBase>div>p>.form-control').each(function(name){
+                name=$(this).attr('data-name');
+                if(name){
+                    $(this).val(result.shopBase[name]);
+                }
+            })
+        }
+        if(JSON.stringify(result.shopContactsList)!='[]'){//shopContactsList联系人信息
+            $('.shopContactsList>div>p>.form-control').each(function () {
+                $(this).val(result.shopContactsList[0][$(this).attr('data-name')]);
+            })
+        }
+        if(JSON.stringify(result.channel)!='[]'){//channel渠道合作name="cooperation"由0开始
+            for(var i of result.channel){
+                $('input[name="cooperation"]')[i].checked=true;
+            }
+        }
+        if(JSON.stringify(result.pay_method)!='[]'){//pay_method可用支付方式name="pay"由0开始
+            for(var i of result.pay_method){
+                $('input[name="pay"]')[i].checked=true;
+            }
+        }
+        if(JSON.stringify(result.shopWifiList)!='[]'){//shopWifiList WIFI
+            var $p='';
+            for(var i of result.shopWifiList){
+                $p+='<p class="row"><span class="col-md-3"><input type="text" class="form-control wifi_name" value='+i.wifi_name+'></span><span class="col-md-3"><input type="text" class="form-control wifi_password" value='+i.wifi_password+'><span class="delpre" title="删除"></span></span></p>';
+            }
+            $('.shopWifiList>.col-md-10>div').html($p);
+
+        }
+        if(JSON.stringify(result.shopTrafficList)!='[]'){//shopTrafficList 地理位置/交通
+            var $traffic='',$landmark='';
+            for(var i of result.shopTrafficList){
+                var $divp='<p class="row"><span class="col-md-3"><input type="text" class="form-control traffic_name" placeholder="XX 机场/火车站" value='+i.traffic_name+'></span><span class="col-md-3"><input type="text" class="form-control traffic_kilometer" placeholder="XX 公里" value='+i.traffic_kilometer+'></span><span class="col-md-6"><input class="form-control traffic_comment" style="width:85%;" value='+i.traffic_comment+'><span class="delpre" title="删除"></span></span></p>';
+                if(i.type=='0'){//主要交通场站名称traffic
+                    $traffic+=$divp;
+                }
+                if(i.type=='1'){//主要参考地标landmark
+                    $landmark+=$divp;
+                }
+            }
+            $('.traffic>.col-md-10>div').html($traffic);
+            $('.landmark>.col-md-10>div').html($landmark);
+        }
+        if(JSON.stringify(result.shop_service)!='[]'){//shop_service酒店服务及设施name="serve"由0开始
+            for(var i of result.shop_service){
+                $('input[name="serve"]')[i].checked=true;
+            }
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>酒店列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+    <style>
+        #detas>td{min-width:3rem}
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content">
+            <div class="card"><!--酒店列表-->
+                <ul class="card-body nav" id="distpicker">
+                    <li>
+                        <b>创建时间：</b>
+                        <input type="text" class="form-control beginTime" readonly data-name="begin_time">
+                        <input type="text" class="form-control endTime" readonly data-name="end_time">
+                    </li>
+                    <li>
+                        <b>省份：</b>
+                        <select class="form-control" data-name="province" id="province"></select>
+                    </li>
+                    <li>
+                        <b>城市：</b>
+                        <select class="form-control" data-name="city" id="city"></select>
+                        <select style="display:none"></select>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control" style="width:14.5rem" placeholder="请输入酒店、BD名称" data-name="hotel_bd">
+                    </li>
+                    <li>
+                        <span class="btn btn-danger" onclick="request()">查询</span>
+                    </li>
+                </ul>
+            </div>
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>省份</th>
+                    <th>城市</th>
+                    <th>门店名称</th>
+                    <th>业主姓名</th>
+                    <th>门店地址</th>
+                    <th>拓展BD</th>
+                    <th>上线时间</th>
+                    <th>门店状态</th>
+                    <th>PMS状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
+</div>
+<!--房型-->
+<div class="modal roomtypemodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <b style="font-size:18px;">房型列表</b>
+                <button type="button" class="btn btn-tool" onclick="modal('.roomtypemodal')" style="float:right;">×</button>
+            </div>
+            <table class="table table-striped" id="roomtype" style="width:100%">
+                <thead>
+                <tr>
+                    <th rowspan="2" style="vertical-align:middle">房型代码</th>
+                    <th rowspan="2" style="vertical-align:middle">房型名称</th>
+                    <th rowspan="2" style="vertical-align:middle">床型名称</th>
+                    <!--<th rowspan="2" style="vertical-align:middle">床数</th>-->
+                    <th rowspan="2" style="vertical-align:middle">窗户</th>
+                    <th rowspan="2" style="vertical-align:middle">面积</th>
+                    <th rowspan="2" style="vertical-align:middle">可居住人数</th>
+                    <th rowspan="2" style="vertical-align:middle">酒店层数</th>
+                    <!--<th rowspan="2" style="vertical-align:middle">今日剩余间数</th>-->
+                    <th colspan="30">房价</th>
+                </tr>
+                <tr style="border-top: 1px solid #E5E5E5;" id="detas">
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash;关闭酒店&ndash;&gt;-->
+<!--<div class="modal shutmodal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<b style="font-size:18px;">关闭酒店</b>-->
+                <!--<button type="button" class="btn btn-tool" onclick="modal('.shutmodal')" style="float:right;">×</button>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<p><span class="items">酒店名称：</span><span>AA连锁酒店（上海嘉定区安亭地铁站店）</span></p>-->
+                <!--<p><span class="items">酒店品牌：</span><span>AAROOM</span></p>-->
+                <!--<p><span class="items">执行时间：</span><input type="text" class="form-control beginTime" value="" readonly></p>-->
+                <!--<p><span class="items">立即执行：</span><input name="execute" type="checkbox" style="vertical-align:middle;"></p>-->
+                <!--<p><span class="items" style="vertical-align:top;">备注：</span><textarea class="form-control" rows="3" style="width:60%;"></textarea></p>-->
+            <!--</div>-->
+            <!--<div class="modal-footer modal-footertwo">-->
+                <!--<span class="btn btn-danger getadjust">确定</span>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap-datepicker.js"></script><!--时间选择-->
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/distpicker.js"></script><!--省市县-->
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#distpicker").distpicker({autoSelect: false});//省市
+        dates();//日期集合
+        request();//页面信息
+    });
+    $(document).on("click","span.getbtn",function(btn){//点击操作内按钮
+        btn=$(this).attr('data-btn');
+        if(btn=='details'){//查看详情
+            location.href ='details.html';//本页打开
+            sessionStorage.setItem('hotel_code',$(this).attr('data-id'));
+        }
+        if(btn=='roomtype'){//房型
+            $('.roomtypemodal').fadeToggle(200);
+            roomtype($(this).attr('data-id'));//酒店房型
+        }
+        // if(btn=='shut'){//关闭
+        //     $('.shutmodal').fadeToggle(200);
+        // }
+    });
+    function dates($ths,startDate,endDate){//日期集合
+        $ths='<td>今天</td><td>明天</td><td>后天</td>';
+        startDate = new Date();
+        endDate = new Date();
+        startDate.setDate(startDate.getDate() + 3);
+        endDate.setDate(endDate.getDate()+14);
+        while((endDate.getTime() - startDate.getTime()) >= 0) {
+            var month = startDate.getMonth() + 1;
+            var day = startDate.getDate();
+            $ths+='<td>'+month + '-'+ day+'</td>';
+            startDate.setDate(startDate.getDate() + 1);
+        }
+        $('#detas').html($ths);
+    }
+    function request(datas,pageCount){//获取页面信息
+        datas={};
+        $('#distpicker .form-control').each(function(name){
+            name=$(this).attr('data-name');
+            datas[name]=$(this).val();
+        });
+        $('#table').dataTable({
+            scrollY:window.innerHeight-350,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:true,
+            aLengthMenu:[20],
+            filter:false,
+            serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                datas.pageIndex=(data.start / data.length)+1;//当前页码
+                datas.pageSize='20';//每页条数
+                $.ajax({
+                    type:"POST",
+                    url:'/console/api/getShopBaseByHotelId',
+                    cache: false,//禁用缓存
+                    data:datas,//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        pageCount=result.pageCount;//总页码
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.count;//返回数据全部记录
+                        returnData.recordsFiltered = result.count;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.dataList;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'province'},
+                {data:'city'},
+                {data:'shop_name'},
+                {data:'boss_name'},
+                {data:'address_detail'},
+                {data:'bd_name'},
+                {data:'online_time'},
+                {data:'shop_status'},
+                {data:'pms_status'},
+                {data:'smhotel_code'}
+            ],
+            columnDefs:[
+                {
+                    "render": function (value){
+                        if(value){
+                            var PMSstatus=['开启','关闭'];
+                            value=PMSstatus[value];
+                        }
+                        return value;
+                    },
+                    "targets":-2 //操作列
+                },
+                {
+                    "render": function (value){
+                        return '<span class="getbtn" data-id='+value+' data-btn="details">查看详情</span><span class="getbtn" data-id='+value+' data-btn="roomtype">房型</span>';
+                        // return '<span class="getbtn" data-id='+value+' data-btn="details">查看详情</span><span class="getbtn" data-btn="roomtype">房型</span><span class="getbtn" data-btn="shut">关闭</span>';
+                    },
+                    "targets":-1 //操作列
+                }
+            ],
+            language:tablelang,
+            fnDrawCallback: function(table) {
+                if(pageCount>7){//页码大于7出现页码跳转方式
+                    $('#table_paginate .pagination').append('<li class="jump">跳至&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0);" class="page-link" data-dt-id="#table">GO</a></li>');
+                }
+            }
+        });
+    }
+    function roomtype(id){
+        console.log(id);
+        $('#roomtype').dataTable({
+            scrollY:window.innerHeight-350,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:false,
+            // aLengthMenu:[20],
+            filter:false,
+            // serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                $.ajax({
+                    type:"POST",
+                    url:'/console/api/room_type_list',
+                    cache: false,//禁用缓存
+                    data:{hotel_id:id},//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.length;//返回数据全部记录
+                        returnData.recordsFiltered = result.length;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'room_type_code'},
+                {data:'room_type_name'},
+                {data:'bed_type'},
+                {data:'has_window'},
+                {data:'building_area'},
+                {data:'guest_number'},
+                {data:'floor_range'},
+                // {data:'room_type_name'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'},
+                {data:'room_type_prices'}
+            ],
+            columnDefs:[
+                {"render": function (value){
+                    if(value){
+                        var win=['','有窗','无窗'];
+                        value=win[value];
+                    }
+                    return value;
+                    },
+                    "targets":3 //窗户列
+                },
+                {"render": function (value){return value=price(value[0].Wprc,value[0].Yprc);},
+                    "targets":-15 //操作列
+                },
+                {"render": function (value){return value=price(value[1].Wprc,value[1].Yprc);},
+                    "targets":-14 //操作列
+                },
+                {"render": function (value){return value=price(value[2].Wprc,value[2].Yprc);},
+                    "targets":-13 //操作列
+                },
+                {"render": function (value){return value=price(value[3].Wprc,value[3].Yprc);},
+                    "targets":-12 //操作列
+                },
+                {"render": function (value){return value=price(value[4].Wprc,value[4].Yprc);},
+                    "targets":-11 //操作列
+                },
+                {"render": function (value){return value=price(value[5].Wprc,value[5].Yprc);},
+                    "targets":-10 //操作列
+                },
+                {"render": function (value){return value=price(value[6].Wprc,value[6].Yprc);},
+                    "targets":-9 //操作列
+                },
+                {"render": function (value){return value=price(value[7].Wprc,value[7].Yprc);},
+                    "targets":-8 //操作列
+                },
+                {"render": function (value){return value=price(value[8].Wprc,value[8].Yprc);},
+                    "targets":-7 //操作列
+                },
+                {"render": function (value){return value=price(value[9].Wprc,value[9].Yprc);},
+                    "targets":-6 //操作列
+                },
+                {"render": function (value){return value=price(value[10].Wprc,value[10].Yprc);},
+                    "targets":-5 //操作列
+                },
+                {"render": function (value){return value=price(value[11].Wprc,value[11].Yprc);},
+                    "targets":-4 //操作列
+                },
+                {"render": function (value){return value=price(value[12].Wprc,value[12].Yprc);},
+                    "targets":-3 //操作列
+                },
+                {"render": function (value){return value=price(value[13].Wprc,value[13].Yprc);},
+                    "targets":-2 //操作列
+                },
+                {"render": function (value){return value=price(value[14].Wprc,value[14].Yprc);},
+                    "targets":-1 //操作列
+                }
+            ],
+            language:tablelang
+        });
+    }
+    // 房型中价格确定
+    function price(Wprc,Yprc){
+        if(Wprc==Yprc){//价格相同为特价房
+            return Wprc
+        }else{//价格不同
+            return Math.floor(Number(Wprc)/0.92);
+        }
+    }
+
+</script>
+</body>
+</html>

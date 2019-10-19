@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+    <style>
+        div>.items:last-child{vertical-align:text-bottom;margin-bottom:16px;min-width:8rem;}
+        .table{display:inline-block;width:auto;border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;}
+        .table tr th{background:#F7F7F7;}
+        .table tr th,.table tr td{border-right:1px solid #E5E5E5;padding:8px 1.5rem;min-width:125px;}
+        .card-body{display:none}
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--订单详情-->
+            <div class="condition row">
+                <span class="col-6">订单详情</span>
+            </div>
+            <div class="card">
+                <div class="card-body" id="reservation"><!--预定单详情reservation-->
+                    <p><span class="items">预定单号：</span><span data-name="channel_order_no"></span></p>
+                    <p><span class="items">订单状态：</span><span data-name="book_status_desc"></span></p>
+                    <p><span class="items">酒店名称：</span><span data-name="hotel_name"></span></p>
+                    <p><span class="items">客源类型：</span><span data-name="channel_name"></span></p>
+                    <p><span class="items">会员卡号：</span><span data-name="member" data-member="member_card_num"></span></p>
+                    <p><span class="items">入住客人：</span><span data-name="customer_name"></span></p>
+                    <p><span class="items">手机号码：</span><span data-name="customer_phone"></span></p>
+                    <!--<p><span class="items">最后修改时间：</span><span data-name="">111111</span></p>-->
+                    <div><span class="items" style="vertical-align:top;">预定房型明细：</span>
+                        <table class="table">
+                            <thead><tr><th>房型</th><th>间数</th><th>原价（每间）</th><th>实付价</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!--<div><span class="items" style="vertical-align:top;">支付押金明细：</span>-->
+                        <!--<table class="table">-->
+                            <!--<thead><tr><th>支付方式</th><th>收/支</th><th>金额</th><th>操作时间</th></tr></thead>-->
+                            <!--<tbody><tr><td>网上支付</td><td>1</td><td>¥100</td><td>2019-12-13 12:33:31</td></tr></tbody>-->
+                        <!--</table>-->
+                    <!--</div>-->
+                    <p><span class="items">房价总计：</span>￥<span data-name="price_total"></span>元</p>
+                    <p><span class="items">最晚到店时间：</span><span data-name="arrival"></span></p>
+                    <p><span class="items">担保方式：</span><span data-name="guarantee_desc"></span></p>
+                    <!--<p><span class="items">支付押金：</span><span>111111</span></p>-->
+                    <p><span class="items">联系人：</span><span data-name="contact_name"></span></p>
+                    <p><span class="items">操作员：</span><span data-name="hotel_name"></span></p>
+                    <p><span class="items">操作时间：</span><span data-name="order_time"></span></p>
+                    <p><span class="items">备注：</span><span data-name="remark"></span></p>
+                </div>
+                <div class="card-body" id="reside"><!--入住单详情reside-->
+                    <p><span class="items">入住单号：</span><span data-name="order_no"></span></p>
+                    <p><span class="items">订单状态：</span><span data-name="book_status_desc"></span></p>
+                    <p><span class="items">酒店名称：</span><span data-name="hotel_name"></span></p>
+                    <p><span class="items">入住客人：</span><span data-name="customer_name"></span></p>
+                    <!--<p><span class="items">入住人数：</span><span data-name="customer_num"></span></p>-->
+                    <!--<p><span class="items">证件类型：</span><span>身份证</span></p>-->
+                    <!--<p><span class="items">证件号码：</span><span>622723199878678978</span></p>-->
+                    <p><span class="items">手机号码：</span><span data-name="customer_phone"></span></p>
+                    <!--<p><span class="items">客人类型：</span><span>11111</span></p>-->
+                    <p><span class="items">会员等级：</span><span data-name="member" data-member="member_level_name"></span></p>
+                    <p><span class="items">会员卡号：</span><span data-name="member" data-member="member_card_num"></span></p>
+                    <!--<p><span class="items">消耗积分：</span><span>11111</span></p>-->
+                    <p><span class="items">预定来源：</span><span data-name="channel_name"></span></p>
+                    <p><span class="items">入离日期：</span><span class="staend"></span></p>
+                    <p><span class="items">入住天数：</span><span data-name="price_list.length">1</span></p>
+                    <p><span class="items">房间类型：</span><span>全天房</span></p>
+                    <p><span class="items">房型名称：</span><span data-name="room_type_name"></span></p>
+                    <!--<p><span class="items">房型号码：</span><span>8205</span></p>-->
+                    <div><span class="items" style="vertical-align:top;">房价明细：</span>
+                        <table class="table">
+                            <thead><tr><th>日期</th><th>房型</th><th>间数</th><th>单价</th><th>合计</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                        <!--<span class="items">房价总计：¥347</span>-->
+                    </div>
+                    <p><span class="items">房价总计：</span>￥<span data-name="price_total"></span>元</p>
+                    <!--<div><span class="items" style="vertical-align:top;">支付押金明细：</span>-->
+                        <!--<table class="table">-->
+                            <!--<thead><tr><th>日期</th><th>结账类型</th><th>金额</th><th>操作员</th><th>操作时间</th></tr></thead>-->
+                            <!--<tbody>-->
+                            <!--<tr><td>2019-12-13</td><td>房款</td><td class="rise">+¥347</td><td>胡xx</td><td>12:33:31</td></tr>-->
+                            <!--<tr><td>2019-12-13</td><td>押金</td><td class="fall">-¥100</td><td>胡xx</td><td>12:33:31</td></tr>-->
+                            <!--<tr><td>2019-12-13</td><td>积分抵扣</td><td class="fall">-¥20</td><td>胡xx</td><td>12:33:31</td></tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                        <!--<span class="items">结账总计：¥227</span>-->
+                    <!--</div>-->
+                    <p><span class="items">备注：</span><span data-name="remark"></span></p>
+                </div>
+                <div class="card-body" id="refund"><!--退款单详情refund-->
+                    <p><span class="items">退款单号：</span><span data-name="channel_order_no"></span></p>
+                    <p><span class="items">状态：</span><span data-name="book_status_desc"></span></p>
+                    <p><span class="items">客人姓名：</span><span data-name="customer_name"></span></p>
+                    <p><span class="items">确认人：</span><span data-name="hotel_name"></span></p>
+                    <p><span class="items">订单金额：</span>￥<span data-name="price_total"></span>元</p>
+                    <p><span class="items">退款金额：</span>￥<span data-name="price_total"></span>元</p>
+                    <p><span class="items">支付来源：</span><span>微信</span></p>
+                    <p><span class="items">退款原因：</span><span data-name="remark"></span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    var Id;
+    $(document).ready(function(){
+        request();//页面信息
+    });
+    function request() {
+        $.ajax({
+            url :"/console/api/getOrderInfo",
+            data:{channel_order_no:sessionStorage.getItem('channel_order_no')},
+            type: "GET",
+            success:function(result){
+                if(result.error_msg=='success'){
+                    if(result.entity.book_status_desc=='接收预订'||result.entity.book_status_desc=='已支付'){//已支付、预订单
+                        Id='#reservation';
+                        var $str='';
+                        for(var i of result.entity.price_list){
+                            $str+='<tr><td>'+result.entity.room_type_name+'</td><td>'+result.entity.room_num+'</td><td>￥'+i.befor_price+'</td><td>￥'+i.price+'</td></tr>';
+                        }
+                        $(Id+'>div>table>tbody').html($str);
+                        // $(Id+'>div>table>tbody').html('<tr><td>'+result.entity.room_type_name+'</td><td>'+result.entity.room_num+'</td><td>￥'+result.entity.befor_price+'</td><td>￥'+result.entity.price+'</td></tr>');
+                    }
+                    if(result.entity.book_status_desc=='已转入住'){//已转入住
+                        Id='#reside';
+                        $(Id+'>p>span.staend').html(result.entity.start+'至'+result.entity.end);
+                        var $str='';
+                        for(var i of result.entity.price_list){
+                            $str+='<tr><td>'+i.start+'</td><td>'+result.entity.room_type_name+'</td><td>'+result.entity.room_num+'</td><td>￥'+i.befor_price+'</td><td>￥'+i.price+'</td></tr>';
+                        }
+                        $(Id+'>div>table>tbody').html($str);
+                    }
+                    if(result.entity.book_status_desc=='取消'){//退款单
+                        Id='#refund';
+                    }
+                    $(Id).show();
+                    $(Id+'>p>span:last-child').each(function(name){
+                        name=$(this).attr('data-name');
+                        if(name){
+                            if(name=='member'){
+                                $(this).html(result.entity[name][$(this).attr('data-member')]);
+                            }else{
+                                $(this).html(result.entity[name]);
+                            }
+                        }
+                    });
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

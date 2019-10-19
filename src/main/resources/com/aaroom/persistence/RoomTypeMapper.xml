@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.persistence.RoomTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.beans.RoomType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="creater_id" jdbcType="INTEGER" />
+    <result column="updater_id" property="updater_id" jdbcType="INTEGER" />
+    <result column="is_active" property="is_active" jdbcType="TINYINT" />
+    <result column="hotel_id" property="hotel_id" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `desc`, create_time, update_time, creater_id, updater_id, is_active,hotel_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from room_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+ <!-- <select id="getRoomTypeById" resultType="com.aaroom.beans.RoomType" parameterType="java.lang.Integer" >
+    select
+    *
+    from room_type
+    where id = #{id}
+  </select>-->
+  <select id="getRoomTypeByEmpId" parameterType="Integer" resultType="com.aaroom.beans.RoomType">
+    select * from room_type
+    where id = #{id}
+  </select>
+  <select id="getRoomTypeById" resultType="com.aaroom.beans.RoomType" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from room_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from room_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.beans.RoomType" >
+    insert into room_type (id, desc, create_time, 
+      update_time, creater_id, updater_id, 
+      is_active)
+    values (#{id,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP},
+      #{update_time,jdbcType=TIMESTAMP}, #{creater_id,jdbcType=INTEGER}, #{updater_id,jdbcType=INTEGER},
+      #{is_active,jdbcType=TINYINT}, #{hotel_id,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.beans.RoomType" >
+    insert into room_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="desc != null" >
+        desc,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+      <if test="hotel_id != null" >
+        hotel_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="hotel_id != null" >
+        #{hotel_id,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.beans.RoomType" >
+    update room_type
+    <set >
+      <if test="desc != null" >
+        desc = #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="hotel_id != null" >
+        hotel_id = #{hotel_id,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.beans.RoomType" >
+    update room_type
+    set desc = #{desc,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      creater_id = #{creater_id,jdbcType=INTEGER},
+      updater_id = #{updater_id,jdbcType=INTEGER},
+      is_active = #{is_active,jdbcType=TINYINT},
+      hotel_id = #{hotel_id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

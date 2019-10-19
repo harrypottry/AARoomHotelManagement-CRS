@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>渠道信息配置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--门店详情-->
+            <div class="condition row" style="display:inline-block">
+                <span class="col-6">渠道信息配置-<span>AA小程序</span></span>
+            </div>
+            <p class="pleft"><span span class="rise">门店列表>><span class="shop_name"></span>>>渠道信息配置-<span>AA小程序</span></span></p>
+            <div class="card">
+                <div class="card-footer">酒店封面图片</div>
+                <div class="card-body cover"></div>
+                <div class="card-footer"><span style="vertical-align:middle;">酒店内页图片</span><span class="btn btn-danger btn-sm float-right" style="position: relative"><input class="import-btn" data-type="within" type="file" accept="image/*">添加图片</span></div>
+                <div class="card-body within"></div>
+                <div class="card-footer"><span style="vertical-align:middle;">房型图片</span><span class="btn btn-danger btn-sm float-right" style="position: relative"><input class="import-btn" data-type="model" type="file" accept="image/*">添加图片</span></div>
+                <div class="card-body model"></div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="warn">
+    <div></div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    var hotel_code=sessionStorage.getItem('hotel_code');
+    $(document).ready(function(){
+        request();//页面信息
+    });
+    // 图片修改备注
+    $(document).on("change",".images>p>input",function($pare){
+        $pare=$(this).parents('.images');
+        if($(this).val()){
+            postajax({id:$pare.attr('data-id'),comment:$(this).val()},"/console/api/updateWeChatPhotosCommentById",$pare);
+        }else{
+            $(this).val($pare.attr('data-comment'));
+        }
+    });
+    // 删除图片
+    $(document).on("click",".delimg",function($pare){
+        $pare=$(this).parents('.images');
+        postajax({id:$pare.attr('data-id'),pic_name:$pare.attr('data-pic_name')},"/console/api/deleteWeChatPhotosByIds",$pare);
+    });
+    // 添加替换图片
+    $(document).on("change",".import-btn",function($pare,file,type){
+         file=$(this)[0].files[0];
+         if(file){//选择图片
+             $pare=$(this).parents('.images');
+             var formData = new FormData();
+             formData.append('file',file);
+             formData.append('hotel_id',hotel_code);
+             if($pare.attr('data-id')){//替换图片
+                 formData.append('pic_type',$pare.attr('data-pic_type'));
+                 formData.append('comment',$pare.attr('data-comment'));
+                 formData.append('id',$pare.attr('data-id'));
+                 formData.append('url',$pare.attr('data-pic_name'));
+             }else{//新增图片
+                 type=$(this).attr('data-type');
+                 formData.append('pic_type',type);
+                 formData.append('comment','新增图片');
+             }
+             $.ajax({
+                 url:'/console/api/insertOrUpdateWeChatPhotos',
+                 type: 'post',
+                 processData: false,// 告诉jQuery不要去处理发送的数据
+                 contentType: false,// 告诉jQuery不要去设置Content-Type请求头
+                 data:formData,
+                 success: function (result) {
+                     if(result.errorDesc=='success'){
+                         warn('操作成功！');
+                         var reader = new FileReader();
+                         reader.readAsDataURL(file);
+                         reader.onload = function(e){
+                             if(type){//新增图片
+                                 if(type=='cover'){
+                                     $pare.replaceWith('<div class="images" data-comment="新增封面" data-pic_type='+type+' data-id='+result.data.id+' data-pic_name='+result.data.url+'><span style="width:300px"><span class="upimg">点击上传图片</span><input class="import-btn" type="file" accept="image/*"><img src='+e.target.result+'></span><p><input type="text" value="新增封面"></p></div>');
+                                 }else{
+                                     $('.'+type).prepend('<div class="images" data-comment="新增图片" data-pic_type='+type+' data-id='+result.data.id+' data-pic_name='+result.data.url+'><span><span class="delimg" title="删除照片"></span><span class="upimg">点击上传图片</span><input class="import-btn" type="file" accept="image/*"><img src='+e.target.result+'></span><p><input type="text" value="新增图片"></p></div>');
+                                 }
+                             }else{//替换图片
+                                 $pare.attr('data-pic_name',result.data.url);
+                                 $pare.find('img').attr('src',e.target.result);
+                             }
+                         }
+                     }else{
+                         warn('操作失败，请重新操作！');
+                     }
+                 }
+             })
+         }
+    });
+    function request(){
+        $.ajax({
+            url :"/console/api/showWeChatPhotos",
+            data:{hotel_id:hotel_code},
+            type: "POST",
+            success:function(result,$img){
+                $('.shop_name').html(result.shop_name);
+                if(JSON.stringify(result.coverList)!='[]'){//cover酒店封面图片
+                    $img='';
+                    for(var i of result.coverList){
+                        $img+='<div class="images" data-pic_type="cover" data-id='+i.id+' data-comment='+i.comment+' data-pic_name='+i.pic_name+'><span style="width:300px"><span class="upimg">点击上传图片</span><input class="import-btn" type="file" accept="image/*"><img src='+i.url+'></span><p><input type="text" value='+i.comment+'></p></div>';
+                    }
+                    $('.cover').html($img);
+                }
+                if($('.cover img').length<3){//固定cover酒店封面图片3张
+                    $img='';
+                    for(var i=$('.cover img').length;i<3;i++){
+                        $img+='<div class="images"><span style="width:300px"><span class="upimg">点击上传图片</span><input class="import-btn" data-type="cover" type="file" accept="image/*"><img src="../../import/img/add.png"></span><p>新增封面</p></div>';
+                    }
+                    $('.cover').append($img);
+                }
+                if(JSON.stringify(result.withinList)!='[]'){//within酒店内页图片
+                    $img='';
+                    for(var i of result.withinList){
+                        $img+='<div class="images" data-pic_type="within" data-id='+i.id+' data-comment='+i.comment+' data-pic_name='+i.pic_name+'><span><span class="delimg" title="删除照片"></span><span class="upimg">点击上传图片</span><input class="import-btn" type="file" accept="image/*"><img src='+i.url+'></span><p><input type="text" value='+i.comment+'></p></div>';
+                    }
+                    $('.within').html($img);
+                }
+                if(JSON.stringify(result.modelList)!='[]'){//model房型图片
+                    $img='';
+                    for(var i of result.modelList){
+                        $img+='<div class="images" data-pic_type="model" data-id='+i.id+' data-comment='+i.comment+' data-pic_name='+i.pic_name+'><span><span class="delimg" title="删除照片"></span><span class="upimg">点击上传图片</span><input class="import-btn" type="file" accept="image/*"><img src='+i.url+'></span><p><input type="text" value='+i.comment+'></p></div>';
+                    }
+                    $('.model').html($img);
+                }
+            }
+        })
+    }
+    function postajax(datas,url,$dom) {
+        $.ajax({
+            url :url,
+            data:datas,
+            type: "POST",
+            success:function (result) {
+                if(result.errorDesc=='success'){
+                    warn('操作成功！');
+                    if(url=='/console/api/updateWeChatPhotosCommentById'){//图片修改备注
+                        $dom.attr('data-comment',datas.comment);
+                    }
+                    if(url=='/console/api/deleteWeChatPhotosByIds'){//删除图片
+                        $dom.remove();
+                    }
+                }else{
+                    warn('操作失败，请重新操作！');
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

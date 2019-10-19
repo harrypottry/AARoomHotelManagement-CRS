@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.ShangmeiMapper" >
+
+    <select id="getHotel" resultType="com.shangmei.beans.Hotel">
+      SELECT shopName as `name` from shopbase WHERE shopID = #{id}
+    </select>
+
+    <select id="getUserByPhone" resultType="com.shangmei.beans.User">
+      SELECT mi.cardid from membercardinfo WHERE phoneNum = #{memberId}
+    </select>
+
+    <select id="getChkinAccountsList" resultType="com.aaroom.beans.Chkinaccounts">
+        SELECT shopid ,atime ,dtime ,overtime ,ifover ,totalfee AS totelfee,
+        CASE WHEN FIELD = '入住' THEN 1 ELSE 0 END AS chkintype ,
+        CASE WHEN custometype = #{AA_BOOKSOURCE} THEN 1 ELSE 0 END AS custometype
+        FROM chkinaccount WHERE (overtime BETWEEN #{fromDateTime} AND #{toDateTime}) AND ifover = 1
+        AND shopid in
+        <foreach item="hotelBase" index="index" collection="allHotelBase"
+                 open="(" separator="," close=")">
+            #{hotelBase.smhotel_id}
+        </foreach>
+    </select>
+
+</mapper>

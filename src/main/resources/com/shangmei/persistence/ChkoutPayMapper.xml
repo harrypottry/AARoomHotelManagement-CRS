@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.ChkoutPayMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.ChkoutPay" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="atime" property="atime" jdbcType="DATE" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+    <result column="outPayType" property="outpaytype" jdbcType="VARCHAR" />
+    <result column="fieldNo" property="fieldno" jdbcType="VARCHAR" />
+    <result column="flowNo" property="flowno" jdbcType="INTEGER" />
+    <result column="classID" property="classid" jdbcType="VARCHAR" />
+    <result column="staffID" property="staffid" jdbcType="VARCHAR" />
+    <result column="deposit" property="deposit" jdbcType="DECIMAL" />
+    <result column="totalFee" property="totalfee" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="INTEGER" />
+    <result column="zHmoney" property="zhmoney" jdbcType="DECIMAL" />
+    <result column="decMoney" property="decmoney" jdbcType="DECIMAL" />
+    <result column="moling" property="moling" jdbcType="DECIMAL" />
+    <result column="fanYong" property="fanyong" jdbcType="DECIMAL" />
+    <result column="mayPay" property="maypay" jdbcType="DECIMAL" />
+    <result column="payType" property="paytype" jdbcType="VARCHAR" />
+    <result column="guaZhangPay" property="guazhangpay" jdbcType="INTEGER" />
+    <result column="payment01" property="payment01" jdbcType="VARCHAR" />
+    <result column="payMoney01" property="paymoney01" jdbcType="DECIMAL" />
+    <result column="payment02" property="payment02" jdbcType="VARCHAR" />
+    <result column="payMoney02" property="paymoney02" jdbcType="DECIMAL" />
+    <result column="payment03" property="payment03" jdbcType="VARCHAR" />
+    <result column="payMoney03" property="paymoney03" jdbcType="DECIMAL" />
+    <result column="zhaoLing" property="zhaoling" jdbcType="DECIMAL" />
+    <result column="ySQ" property="ysq" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastRepair" property="lastrepair" jdbcType="VARCHAR" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="isyajie" property="isyajie" jdbcType="VARCHAR" />
+    <result column="batch" property="batch" jdbcType="VARCHAR" />
+    <result column="points" property="points" jdbcType="DECIMAL" />
+    <result column="P01" property="p01" jdbcType="DECIMAL" />
+    <result column="P02" property="p02" jdbcType="DECIMAL" />
+    <result column="P03" property="p03" jdbcType="DECIMAL" />
+    <result column="P04" property="p04" jdbcType="DECIMAL" />
+    <result column="P05" property="p05" jdbcType="DECIMAL" />
+    <result column="P06" property="p06" jdbcType="DECIMAL" />
+    <result column="P07" property="p07" jdbcType="DECIMAL" />
+    <result column="P08" property="p08" jdbcType="DECIMAL" />
+    <result column="P09" property="p09" jdbcType="DECIMAL" />
+    <result column="P10" property="p10" jdbcType="DECIMAL" />
+    <result column="P11" property="p11" jdbcType="DECIMAL" />
+    <result column="P12" property="p12" jdbcType="DECIMAL" />
+    <result column="P13" property="p13" jdbcType="DECIMAL" />
+    <result column="P14" property="p14" jdbcType="DECIMAL" />
+    <result column="P15" property="p15" jdbcType="DECIMAL" />
+    <result column="P16" property="p16" jdbcType="DECIMAL" />
+    <result column="P17" property="p17" jdbcType="DECIMAL" />
+    <result column="P18" property="p18" jdbcType="DECIMAL" />
+    <result column="P19" property="p19" jdbcType="DECIMAL" />
+    <result column="P20" property="p20" jdbcType="DECIMAL" />
+    <result column="offlineCredit" property="offlinecredit" jdbcType="INTEGER" />
+    <result column="tid" property="tid" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shangmei.beans.ChkoutPay" extends="BaseResultMap" >
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shopID, atime, dtime, outPayType, fieldNo, flowNo, classID, staffID, deposit, 
+    totalFee, discount, zHmoney, decMoney, moling, fanYong, mayPay, payType, guaZhangPay, 
+    payment01, payMoney01, payment02, payMoney02, payment03, payMoney03, zhaoLing, ySQ, 
+    flag, createBy, createTime, lastRepair, lastTime, isyajie, batch, points, P01, P02, 
+    P03, P04, P05, P06, P07, P08, P09, P10, P11, P12, P13, P14, P15, P16, P17, P18, P19, 
+    P20, offlineCredit, tid
+  </sql>
+  <sql id="Blob_Column_List" >
+    memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from chkoutpay
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from chkoutpay
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.ChkoutPay" >
+    insert into chkoutpay (id, shopID, atime, 
+      dtime, outPayType, fieldNo, 
+      flowNo, classID, staffID, 
+      deposit, totalFee, discount, 
+      zHmoney, decMoney, moling, 
+      fanYong, mayPay, payType, 
+      guaZhangPay, payment01, payMoney01, 
+      payment02, payMoney02, payment03, 
+      payMoney03, zhaoLing, ySQ, 
+      flag, createBy, createTime, 
+      lastRepair, lastTime, isyajie, 
+      batch, points, P01, 
+      P02, P03, P04, P05, 
+      P06, P07, P08, P09, 
+      P10, P11, P12, P13, 
+      P14, P15, P16, P17, 
+      P18, P19, P20, offlineCredit, 
+      tid, memo)
+    values (#{id,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{atime,jdbcType=DATE}, 
+      #{dtime,jdbcType=TIMESTAMP}, #{outpaytype,jdbcType=VARCHAR}, #{fieldno,jdbcType=VARCHAR}, 
+      #{flowno,jdbcType=INTEGER}, #{classid,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, 
+      #{deposit,jdbcType=DECIMAL}, #{totalfee,jdbcType=DECIMAL}, #{discount,jdbcType=INTEGER}, 
+      #{zhmoney,jdbcType=DECIMAL}, #{decmoney,jdbcType=DECIMAL}, #{moling,jdbcType=DECIMAL}, 
+      #{fanyong,jdbcType=DECIMAL}, #{maypay,jdbcType=DECIMAL}, #{paytype,jdbcType=VARCHAR}, 
+      #{guazhangpay,jdbcType=INTEGER}, #{payment01,jdbcType=VARCHAR}, #{paymoney01,jdbcType=DECIMAL}, 
+      #{payment02,jdbcType=VARCHAR}, #{paymoney02,jdbcType=DECIMAL}, #{payment03,jdbcType=VARCHAR}, 
+      #{paymoney03,jdbcType=DECIMAL}, #{zhaoling,jdbcType=DECIMAL}, #{ysq,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=INTEGER}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{lastrepair,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}, #{isyajie,jdbcType=VARCHAR}, 
+      #{batch,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, #{p01,jdbcType=DECIMAL}, 
+      #{p02,jdbcType=DECIMAL}, #{p03,jdbcType=DECIMAL}, #{p04,jdbcType=DECIMAL}, #{p05,jdbcType=DECIMAL}, 
+      #{p06,jdbcType=DECIMAL}, #{p07,jdbcType=DECIMAL}, #{p08,jdbcType=DECIMAL}, #{p09,jdbcType=DECIMAL}, 
+      #{p10,jdbcType=DECIMAL}, #{p11,jdbcType=DECIMAL}, #{p12,jdbcType=DECIMAL}, #{p13,jdbcType=DECIMAL}, 
+      #{p14,jdbcType=DECIMAL}, #{p15,jdbcType=DECIMAL}, #{p16,jdbcType=DECIMAL}, #{p17,jdbcType=DECIMAL}, 
+      #{p18,jdbcType=DECIMAL}, #{p19,jdbcType=DECIMAL}, #{p20,jdbcType=DECIMAL}, #{offlinecredit,jdbcType=INTEGER}, 
+      #{tid,jdbcType=BIGINT}, #{memo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.ChkoutPay" >
+    insert into chkoutpay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="atime != null" >
+        atime,
+      </if>
+      <if test="dtime != null" >
+        dtime,
+      </if>
+      <if test="outpaytype != null" >
+        outPayType,
+      </if>
+      <if test="fieldno != null" >
+        fieldNo,
+      </if>
+      <if test="flowno != null" >
+        flowNo,
+      </if>
+      <if test="classid != null" >
+        classID,
+      </if>
+      <if test="staffid != null" >
+        staffID,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="totalfee != null" >
+        totalFee,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="zhmoney != null" >
+        zHmoney,
+      </if>
+      <if test="decmoney != null" >
+        decMoney,
+      </if>
+      <if test="moling != null" >
+        moling,
+      </if>
+      <if test="fanyong != null" >
+        fanYong,
+      </if>
+      <if test="maypay != null" >
+        mayPay,
+      </if>
+      <if test="paytype != null" >
+        payType,
+      </if>
+      <if test="guazhangpay != null" >
+        guaZhangPay,
+      </if>
+      <if test="payment01 != null" >
+        payment01,
+      </if>
+      <if test="paymoney01 != null" >
+        payMoney01,
+      </if>
+      <if test="payment02 != null" >
+        payment02,
+      </if>
+      <if test="paymoney02 != null" >
+        payMoney02,
+      </if>
+      <if test="payment03 != null" >
+        payment03,
+      </if>
+      <if test="paymoney03 != null" >
+        payMoney03,
+      </if>
+      <if test="zhaoling != null" >
+        zhaoLing,
+      </if>
+      <if test="ysq != null" >
+        ySQ,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="isyajie != null" >
+        isyajie,
+      </if>
+      <if test="batch != null" >
+        batch,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="p01 != null" >
+        P01,
+      </if>
+      <if test="p02 != null" >
+        P02,
+      </if>
+      <if test="p03 != null" >
+        P03,
+      </if>
+      <if test="p04 != null" >
+        P04,
+      </if>
+      <if test="p05 != null" >
+        P05,
+      </if>
+      <if test="p06 != null" >
+        P06,
+      </if>
+      <if test="p07 != null" >
+        P07,
+      </if>
+      <if test="p08 != null" >
+        P08,
+      </if>
+      <if test="p09 != null" >
+        P09,
+      </if>
+      <if test="p10 != null" >
+        P10,
+      </if>
+      <if test="p11 != null" >
+        P11,
+      </if>
+      <if test="p12 != null" >
+        P12,
+      </if>
+      <if test="p13 != null" >
+        P13,
+      </if>
+      <if test="p14 != null" >
+        P14,
+      </if>
+      <if test="p15 != null" >
+        P15,
+      </if>
+      <if test="p16 != null" >
+        P16,
+      </if>
+      <if test="p17 != null" >
+        P17,
+      </if>
+      <if test="p18 != null" >
+        P18,
+      </if>
+      <if test="p19 != null" >
+        P19,
+      </if>
+      <if test="p20 != null" >
+        P20,
+      </if>
+      <if test="offlinecredit != null" >
+        offlineCredit,
+      </if>
+      <if test="tid != null" >
+        tid,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        #{atime,jdbcType=DATE},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outpaytype != null" >
+        #{outpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldno != null" >
+        #{fieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="flowno != null" >
+        #{flowno,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="totalfee != null" >
+        #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="zhmoney != null" >
+        #{zhmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="decmoney != null" >
+        #{decmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="moling != null" >
+        #{moling,jdbcType=DECIMAL},
+      </if>
+      <if test="fanyong != null" >
+        #{fanyong,jdbcType=DECIMAL},
+      </if>
+      <if test="maypay != null" >
+        #{maypay,jdbcType=DECIMAL},
+      </if>
+      <if test="paytype != null" >
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="guazhangpay != null" >
+        #{guazhangpay,jdbcType=INTEGER},
+      </if>
+      <if test="payment01 != null" >
+        #{payment01,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney01 != null" >
+        #{paymoney01,jdbcType=DECIMAL},
+      </if>
+      <if test="payment02 != null" >
+        #{payment02,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney02 != null" >
+        #{paymoney02,jdbcType=DECIMAL},
+      </if>
+      <if test="payment03 != null" >
+        #{payment03,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney03 != null" >
+        #{paymoney03,jdbcType=DECIMAL},
+      </if>
+      <if test="zhaoling != null" >
+        #{zhaoling,jdbcType=DECIMAL},
+      </if>
+      <if test="ysq != null" >
+        #{ysq,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isyajie != null" >
+        #{isyajie,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="p01 != null" >
+        #{p01,jdbcType=DECIMAL},
+      </if>
+      <if test="p02 != null" >
+        #{p02,jdbcType=DECIMAL},
+      </if>
+      <if test="p03 != null" >
+        #{p03,jdbcType=DECIMAL},
+      </if>
+      <if test="p04 != null" >
+        #{p04,jdbcType=DECIMAL},
+      </if>
+      <if test="p05 != null" >
+        #{p05,jdbcType=DECIMAL},
+      </if>
+      <if test="p06 != null" >
+        #{p06,jdbcType=DECIMAL},
+      </if>
+      <if test="p07 != null" >
+        #{p07,jdbcType=DECIMAL},
+      </if>
+      <if test="p08 != null" >
+        #{p08,jdbcType=DECIMAL},
+      </if>
+      <if test="p09 != null" >
+        #{p09,jdbcType=DECIMAL},
+      </if>
+      <if test="p10 != null" >
+        #{p10,jdbcType=DECIMAL},
+      </if>
+      <if test="p11 != null" >
+        #{p11,jdbcType=DECIMAL},
+      </if>
+      <if test="p12 != null" >
+        #{p12,jdbcType=DECIMAL},
+      </if>
+      <if test="p13 != null" >
+        #{p13,jdbcType=DECIMAL},
+      </if>
+      <if test="p14 != null" >
+        #{p14,jdbcType=DECIMAL},
+      </if>
+      <if test="p15 != null" >
+        #{p15,jdbcType=DECIMAL},
+      </if>
+      <if test="p16 != null" >
+        #{p16,jdbcType=DECIMAL},
+      </if>
+      <if test="p17 != null" >
+        #{p17,jdbcType=DECIMAL},
+      </if>
+      <if test="p18 != null" >
+        #{p18,jdbcType=DECIMAL},
+      </if>
+      <if test="p19 != null" >
+        #{p19,jdbcType=DECIMAL},
+      </if>
+      <if test="p20 != null" >
+        #{p20,jdbcType=DECIMAL},
+      </if>
+      <if test="offlinecredit != null" >
+        #{offlinecredit,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.ChkoutPay" >
+    update chkoutpay
+    <set >
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        atime = #{atime,jdbcType=DATE},
+      </if>
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outpaytype != null" >
+        outPayType = #{outpaytype,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldno != null" >
+        fieldNo = #{fieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="flowno != null" >
+        flowNo = #{flowno,jdbcType=INTEGER},
+      </if>
+      <if test="classid != null" >
+        classID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffID = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="totalfee != null" >
+        totalFee = #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="zhmoney != null" >
+        zHmoney = #{zhmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="decmoney != null" >
+        decMoney = #{decmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="moling != null" >
+        moling = #{moling,jdbcType=DECIMAL},
+      </if>
+      <if test="fanyong != null" >
+        fanYong = #{fanyong,jdbcType=DECIMAL},
+      </if>
+      <if test="maypay != null" >
+        mayPay = #{maypay,jdbcType=DECIMAL},
+      </if>
+      <if test="paytype != null" >
+        payType = #{paytype,jdbcType=VARCHAR},
+      </if>
+      <if test="guazhangpay != null" >
+        guaZhangPay = #{guazhangpay,jdbcType=INTEGER},
+      </if>
+      <if test="payment01 != null" >
+        payment01 = #{payment01,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney01 != null" >
+        payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      </if>
+      <if test="payment02 != null" >
+        payment02 = #{payment02,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney02 != null" >
+        payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      </if>
+      <if test="payment03 != null" >
+        payment03 = #{payment03,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney03 != null" >
+        payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      </if>
+      <if test="zhaoling != null" >
+        zhaoLing = #{zhaoling,jdbcType=DECIMAL},
+      </if>
+      <if test="ysq != null" >
+        ySQ = #{ysq,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isyajie != null" >
+        isyajie = #{isyajie,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null" >
+        batch = #{batch,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="p01 != null" >
+        P01 = #{p01,jdbcType=DECIMAL},
+      </if>
+      <if test="p02 != null" >
+        P02 = #{p02,jdbcType=DECIMAL},
+      </if>
+      <if test="p03 != null" >
+        P03 = #{p03,jdbcType=DECIMAL},
+      </if>
+      <if test="p04 != null" >
+        P04 = #{p04,jdbcType=DECIMAL},
+      </if>
+      <if test="p05 != null" >
+        P05 = #{p05,jdbcType=DECIMAL},
+      </if>
+      <if test="p06 != null" >
+        P06 = #{p06,jdbcType=DECIMAL},
+      </if>
+      <if test="p07 != null" >
+        P07 = #{p07,jdbcType=DECIMAL},
+      </if>
+      <if test="p08 != null" >
+        P08 = #{p08,jdbcType=DECIMAL},
+      </if>
+      <if test="p09 != null" >
+        P09 = #{p09,jdbcType=DECIMAL},
+      </if>
+      <if test="p10 != null" >
+        P10 = #{p10,jdbcType=DECIMAL},
+      </if>
+      <if test="p11 != null" >
+        P11 = #{p11,jdbcType=DECIMAL},
+      </if>
+      <if test="p12 != null" >
+        P12 = #{p12,jdbcType=DECIMAL},
+      </if>
+      <if test="p13 != null" >
+        P13 = #{p13,jdbcType=DECIMAL},
+      </if>
+      <if test="p14 != null" >
+        P14 = #{p14,jdbcType=DECIMAL},
+      </if>
+      <if test="p15 != null" >
+        P15 = #{p15,jdbcType=DECIMAL},
+      </if>
+      <if test="p16 != null" >
+        P16 = #{p16,jdbcType=DECIMAL},
+      </if>
+      <if test="p17 != null" >
+        P17 = #{p17,jdbcType=DECIMAL},
+      </if>
+      <if test="p18 != null" >
+        P18 = #{p18,jdbcType=DECIMAL},
+      </if>
+      <if test="p19 != null" >
+        P19 = #{p19,jdbcType=DECIMAL},
+      </if>
+      <if test="p20 != null" >
+        P20 = #{p20,jdbcType=DECIMAL},
+      </if>
+      <if test="offlinecredit != null" >
+        offlineCredit = #{offlinecredit,jdbcType=INTEGER},
+      </if>
+      <if test="tid != null" >
+        tid = #{tid,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shangmei.beans.ChkoutPay" >
+    update chkoutpay
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      atime = #{atime,jdbcType=DATE},
+      dtime = #{dtime,jdbcType=TIMESTAMP},
+      outPayType = #{outpaytype,jdbcType=VARCHAR},
+      fieldNo = #{fieldno,jdbcType=VARCHAR},
+      flowNo = #{flowno,jdbcType=INTEGER},
+      classID = #{classid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      totalFee = #{totalfee,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=INTEGER},
+      zHmoney = #{zhmoney,jdbcType=DECIMAL},
+      decMoney = #{decmoney,jdbcType=DECIMAL},
+      moling = #{moling,jdbcType=DECIMAL},
+      fanYong = #{fanyong,jdbcType=DECIMAL},
+      mayPay = #{maypay,jdbcType=DECIMAL},
+      payType = #{paytype,jdbcType=VARCHAR},
+      guaZhangPay = #{guazhangpay,jdbcType=INTEGER},
+      payment01 = #{payment01,jdbcType=VARCHAR},
+      payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      payment02 = #{payment02,jdbcType=VARCHAR},
+      payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      payment03 = #{payment03,jdbcType=VARCHAR},
+      payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      zhaoLing = #{zhaoling,jdbcType=DECIMAL},
+      ySQ = #{ysq,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      isyajie = #{isyajie,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=VARCHAR},
+      points = #{points,jdbcType=DECIMAL},
+      P01 = #{p01,jdbcType=DECIMAL},
+      P02 = #{p02,jdbcType=DECIMAL},
+      P03 = #{p03,jdbcType=DECIMAL},
+      P04 = #{p04,jdbcType=DECIMAL},
+      P05 = #{p05,jdbcType=DECIMAL},
+      P06 = #{p06,jdbcType=DECIMAL},
+      P07 = #{p07,jdbcType=DECIMAL},
+      P08 = #{p08,jdbcType=DECIMAL},
+      P09 = #{p09,jdbcType=DECIMAL},
+      P10 = #{p10,jdbcType=DECIMAL},
+      P11 = #{p11,jdbcType=DECIMAL},
+      P12 = #{p12,jdbcType=DECIMAL},
+      P13 = #{p13,jdbcType=DECIMAL},
+      P14 = #{p14,jdbcType=DECIMAL},
+      P15 = #{p15,jdbcType=DECIMAL},
+      P16 = #{p16,jdbcType=DECIMAL},
+      P17 = #{p17,jdbcType=DECIMAL},
+      P18 = #{p18,jdbcType=DECIMAL},
+      P19 = #{p19,jdbcType=DECIMAL},
+      P20 = #{p20,jdbcType=DECIMAL},
+      offlineCredit = #{offlinecredit,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=BIGINT},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.ChkoutPay" >
+    update chkoutpay
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      atime = #{atime,jdbcType=DATE},
+      dtime = #{dtime,jdbcType=TIMESTAMP},
+      outPayType = #{outpaytype,jdbcType=VARCHAR},
+      fieldNo = #{fieldno,jdbcType=VARCHAR},
+      flowNo = #{flowno,jdbcType=INTEGER},
+      classID = #{classid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      totalFee = #{totalfee,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=INTEGER},
+      zHmoney = #{zhmoney,jdbcType=DECIMAL},
+      decMoney = #{decmoney,jdbcType=DECIMAL},
+      moling = #{moling,jdbcType=DECIMAL},
+      fanYong = #{fanyong,jdbcType=DECIMAL},
+      mayPay = #{maypay,jdbcType=DECIMAL},
+      payType = #{paytype,jdbcType=VARCHAR},
+      guaZhangPay = #{guazhangpay,jdbcType=INTEGER},
+      payment01 = #{payment01,jdbcType=VARCHAR},
+      payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      payment02 = #{payment02,jdbcType=VARCHAR},
+      payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      payment03 = #{payment03,jdbcType=VARCHAR},
+      payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      zhaoLing = #{zhaoling,jdbcType=DECIMAL},
+      ySQ = #{ysq,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      isyajie = #{isyajie,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=VARCHAR},
+      points = #{points,jdbcType=DECIMAL},
+      P01 = #{p01,jdbcType=DECIMAL},
+      P02 = #{p02,jdbcType=DECIMAL},
+      P03 = #{p03,jdbcType=DECIMAL},
+      P04 = #{p04,jdbcType=DECIMAL},
+      P05 = #{p05,jdbcType=DECIMAL},
+      P06 = #{p06,jdbcType=DECIMAL},
+      P07 = #{p07,jdbcType=DECIMAL},
+      P08 = #{p08,jdbcType=DECIMAL},
+      P09 = #{p09,jdbcType=DECIMAL},
+      P10 = #{p10,jdbcType=DECIMAL},
+      P11 = #{p11,jdbcType=DECIMAL},
+      P12 = #{p12,jdbcType=DECIMAL},
+      P13 = #{p13,jdbcType=DECIMAL},
+      P14 = #{p14,jdbcType=DECIMAL},
+      P15 = #{p15,jdbcType=DECIMAL},
+      P16 = #{p16,jdbcType=DECIMAL},
+      P17 = #{p17,jdbcType=DECIMAL},
+      P18 = #{p18,jdbcType=DECIMAL},
+      P19 = #{p19,jdbcType=DECIMAL},
+      P20 = #{p20,jdbcType=DECIMAL},
+      offlineCredit = #{offlinecredit,jdbcType=INTEGER},
+      tid = #{tid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

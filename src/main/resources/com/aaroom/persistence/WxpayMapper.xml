@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaroom.wechat.persistence.WxpayMapper">
+    <insert id="insertOrderData" parameterType="com.aaroom.wechat.bean.WxOrder">
+        INSERT INTO wx_order(id, body, out_trade_no, spbill_create_ip, fee_type, open_id, goods_tag, trade_type, total_fee, status)
+        VALUES(#{wo.id}, #{wo.body}, #{wo.outTradeNo}, #{wo.spbillCreateIp}, #{wo.feeType}, #{wo.openId}, #{wo.goodsTag}, #{wo.tradeType}, #{wo.totalFee}, #{wo.status})
+    </insert>
+
+    <update id="updateOrderStatus" parameterType="java.lang.String">
+        UPDATE wx_order SET status = 1 WHERE out_trade_no = #{orderId}
+    </update>
+    <select id="queryWXOrderByOrderId" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.WxOrder">
+        SELECT id,body,out_trade_no outTradeNo, spbill_create_ip spbillCreateIp,fee_type feeType,open_id openId,goods_tag goodsTag,
+        trade_type tradeType,total_fee totalFee ,status
+        FROM wx_order WHERE id = #{orderId}
+    </select>
+    <select id="queryWXorderByTradeNo" parameterType="java.lang.String" resultType="string">
+        SELECT goods_tag FROM wx_order WHERE out_trade_no = #{orderId}
+    </select>
+    <select id="getOrderInfo" parameterType="string" resultType="com.aaroom.model.OrderParam">
+        SELECT channel_order_no,arrival_time arrival,contact_name ,hotel_code,contact_phone,customer_name, end_time `end` , address, remark ,
+        price_total,room_num,room_type_code,room_type_name,begin_time start ,invoce_id invoiceId,member_id memberId,price_code priceCode,hotel_name,pay_status,remark
+        from aa_order
+        where channel_order_no = #{channel_order_no}
+    </select>
+</mapper>

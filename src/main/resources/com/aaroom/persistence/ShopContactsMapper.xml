@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.persistence.ShopContactsMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.beans.ShopContacts" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="contacts_name" property="contactsName" jdbcType="VARCHAR" />
+    <result column="contacts_tel" property="contactsTel" jdbcType="VARCHAR" />
+    <result column="contacts_qq" property="contactsQq" jdbcType="VARCHAR" />
+    <result column="contacts_email" property="contactsEmail" jdbcType="VARCHAR" />
+    <result column="contacts_job" property="contactsJob" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="is_active" property="isActive" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shop_id, contacts_name, contacts_tel, contacts_qq, contacts_email, contacts_job, 
+    create_time, update_time, creater_id, updater_id, is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop_contacts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shop_contacts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.beans.ShopContacts" >
+    insert into shop_contacts (id, shop_id, contacts_name, 
+      contacts_tel, contacts_qq, contacts_email, 
+      contacts_job, create_time, update_time, 
+      creater_id, updater_id, is_active
+      )
+    values (#{id,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{contactsName,jdbcType=VARCHAR}, 
+      #{contactsTel,jdbcType=VARCHAR}, #{contactsQq,jdbcType=VARCHAR}, #{contactsEmail,jdbcType=VARCHAR}, 
+      #{contactsJob,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{createrId,jdbcType=INTEGER}, #{updaterId,jdbcType=INTEGER}, #{isActive,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.beans.ShopContacts" >
+    insert into shop_contacts
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shop_id != null" >
+        shop_id,
+      </if>
+      <if test="contacts_name != null" >
+        contacts_name,
+      </if>
+      <if test="contacts_tel != null" >
+        contacts_tel,
+      </if>
+      <if test="contacts_qq != null" >
+        contacts_qq,
+      </if>
+      <if test="contacts_email != null" >
+        contacts_email,
+      </if>
+      <if test="contacts_job != null" >
+        contacts_job,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="shop_id != null" >
+        #{shop_id,jdbcType=INTEGER},
+      </if>
+      <if test="contacts_name != null" >
+        #{contacts_name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_tel != null" >
+        #{contacts_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_qq != null" >
+        #{contacts_qq,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_email != null" >
+        #{contacts_email,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_job != null" >
+        #{contacts_job,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.beans.ShopContacts" >
+    update shop_contacts
+    <set >
+      <if test="shop_id != null" >
+        shop_id = #{shop_id,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_name != null" >
+        contacts_name = #{contacts_name,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_tel != null" >
+        contacts_tel = #{contacts_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_qq != null" >
+        contacts_qq = #{contacts_qq,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_email != null" >
+        contacts_email = #{contacts_email,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts_job != null" >
+        contacts_job = #{contacts_job,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.beans.ShopContacts" >
+    update shop_contacts
+    set shop_id = #{shopId,jdbcType=INTEGER},
+      contacts_name = #{contactsName,jdbcType=VARCHAR},
+      contacts_tel = #{contactsTel,jdbcType=VARCHAR},
+      contacts_qq = #{contactsQq,jdbcType=VARCHAR},
+      contacts_email = #{contactsEmail,jdbcType=VARCHAR},
+      contacts_job = #{contactsJob,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getShopContactsList" resultType="com.aaroom.beans.ShopContacts">
+    select * from shop_contacts
+    where 1=1
+    <if test="shop_id != null" >
+      and shop_id = #{shop_id,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

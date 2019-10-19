@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.ShopBaseSMMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.ShopBase" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="shopName" property="shopname" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="DATE" />
+    <result column="areaID" property="areaid" jdbcType="VARCHAR" />
+    <result column="provinceID" property="provinceid" jdbcType="VARCHAR" />
+    <result column="cityID" property="cityid" jdbcType="VARCHAR" />
+    <result column="countyID" property="countyid" jdbcType="VARCHAR" />
+    <result column="streetAddress" property="streetaddress" jdbcType="VARCHAR" />
+    <result column="shopType" property="shoptype" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="brandID" property="brandid" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastRepair" property="lastrepair" jdbcType="VARCHAR" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="system" property="system" jdbcType="INTEGER" />
+    <result column="startdate" property="startdate" jdbcType="DATE" />
+    <result column="qydate" property="qydate" jdbcType="DATE" />
+    <result column="jydate" property="jydate" jdbcType="DATE" />
+    <result column="rundate" property="rundate" jdbcType="DATE" />
+    <result column="stopDate" property="stopdate" jdbcType="DATE" />
+    <result column="powernum" property="powernum" jdbcType="INTEGER" />
+    <result column="authorizeDate" property="authorizedate" jdbcType="DATE" />
+    <result column="isUsing" property="isusing" jdbcType="INTEGER" />
+    <result column="opt_flag" property="optFlag" jdbcType="INTEGER" />
+    <result column="offlineCredit" property="offlinecredit" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shopID, shopName, createDate, areaID, provinceID, cityID, countyID, streetAddress, 
+    shopType, status, brandID, flag, audit_status, createBy, createTime, lastRepair, 
+    lastTime, customer_id, system, startdate, qydate, jydate, rundate, stopDate, powernum, 
+    authorizeDate, isUsing, opt_flag, offlineCredit
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shopbase
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shopbase
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.ShopBase" >
+    insert into shopbase (id, shopID, shopName, 
+      createDate, areaID, provinceID, 
+      cityID, countyID, streetAddress, 
+      shopType, status, brandID, 
+      flag, audit_status, createBy, 
+      createTime, lastRepair, lastTime, 
+      customer_id, system, startdate, 
+      qydate, jydate, rundate, stopDate, 
+      powernum, authorizeDate, isUsing, 
+      opt_flag, offlineCredit)
+    values (#{id,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{shopname,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=DATE}, #{areaid,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, 
+      #{cityid,jdbcType=VARCHAR}, #{countyid,jdbcType=VARCHAR}, #{streetaddress,jdbcType=VARCHAR}, 
+      #{shoptype,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{brandid,jdbcType=VARCHAR}, 
+      #{flag,jdbcType=INTEGER}, #{auditStatus,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastrepair,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}, 
+      #{customerId,jdbcType=VARCHAR}, #{system,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, 
+      #{qydate,jdbcType=DATE}, #{jydate,jdbcType=DATE}, #{rundate,jdbcType=DATE}, #{stopdate,jdbcType=DATE}, 
+      #{powernum,jdbcType=INTEGER}, #{authorizedate,jdbcType=DATE}, #{isusing,jdbcType=INTEGER}, 
+      #{optFlag,jdbcType=INTEGER}, #{offlinecredit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.ShopBase" >
+    insert into shopbase
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="shopname != null" >
+        shopName,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="areaid != null" >
+        areaID,
+      </if>
+      <if test="provinceid != null" >
+        provinceID,
+      </if>
+      <if test="cityid != null" >
+        cityID,
+      </if>
+      <if test="countyid != null" >
+        countyID,
+      </if>
+      <if test="streetaddress != null" >
+        streetAddress,
+      </if>
+      <if test="shoptype != null" >
+        shopType,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="brandid != null" >
+        brandID,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="auditStatus != null" >
+        audit_status,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="system != null" >
+        system,
+      </if>
+      <if test="startdate != null" >
+        startdate,
+      </if>
+      <if test="qydate != null" >
+        qydate,
+      </if>
+      <if test="jydate != null" >
+        jydate,
+      </if>
+      <if test="rundate != null" >
+        rundate,
+      </if>
+      <if test="stopdate != null" >
+        stopDate,
+      </if>
+      <if test="powernum != null" >
+        powernum,
+      </if>
+      <if test="authorizedate != null" >
+        authorizeDate,
+      </if>
+      <if test="isusing != null" >
+        isUsing,
+      </if>
+      <if test="optFlag != null" >
+        opt_flag,
+      </if>
+      <if test="offlinecredit != null" >
+        offlineCredit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopname != null" >
+        #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="countyid != null" >
+        #{countyid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetaddress != null" >
+        #{streetaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shoptype != null" >
+        #{shoptype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        #{brandid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        #{system,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="qydate != null" >
+        #{qydate,jdbcType=DATE},
+      </if>
+      <if test="jydate != null" >
+        #{jydate,jdbcType=DATE},
+      </if>
+      <if test="rundate != null" >
+        #{rundate,jdbcType=DATE},
+      </if>
+      <if test="stopdate != null" >
+        #{stopdate,jdbcType=DATE},
+      </if>
+      <if test="powernum != null" >
+        #{powernum,jdbcType=INTEGER},
+      </if>
+      <if test="authorizedate != null" >
+        #{authorizedate,jdbcType=DATE},
+      </if>
+      <if test="isusing != null" >
+        #{isusing,jdbcType=INTEGER},
+      </if>
+      <if test="optFlag != null" >
+        #{optFlag,jdbcType=INTEGER},
+      </if>
+      <if test="offlinecredit != null" >
+        #{offlinecredit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.ShopBase" >
+    update shopbase
+    <set >
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopname != null" >
+        shopName = #{shopname,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="areaid != null" >
+        areaID = #{areaid,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null" >
+        provinceID = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null" >
+        cityID = #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="countyid != null" >
+        countyID = #{countyid,jdbcType=VARCHAR},
+      </if>
+      <if test="streetaddress != null" >
+        streetAddress = #{streetaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shoptype != null" >
+        shopType = #{shoptype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="brandid != null" >
+        brandID = #{brandid,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="auditStatus != null" >
+        audit_status = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        system = #{system,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        startdate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="qydate != null" >
+        qydate = #{qydate,jdbcType=DATE},
+      </if>
+      <if test="jydate != null" >
+        jydate = #{jydate,jdbcType=DATE},
+      </if>
+      <if test="rundate != null" >
+        rundate = #{rundate,jdbcType=DATE},
+      </if>
+      <if test="stopdate != null" >
+        stopDate = #{stopdate,jdbcType=DATE},
+      </if>
+      <if test="powernum != null" >
+        powernum = #{powernum,jdbcType=INTEGER},
+      </if>
+      <if test="authorizedate != null" >
+        authorizeDate = #{authorizedate,jdbcType=DATE},
+      </if>
+      <if test="isusing != null" >
+        isUsing = #{isusing,jdbcType=INTEGER},
+      </if>
+      <if test="optFlag != null" >
+        opt_flag = #{optFlag,jdbcType=INTEGER},
+      </if>
+      <if test="offlinecredit != null" >
+        offlineCredit = #{offlinecredit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.ShopBase" >
+    update shopbase
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      shopName = #{shopname,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=DATE},
+      areaID = #{areaid,jdbcType=VARCHAR},
+      provinceID = #{provinceid,jdbcType=VARCHAR},
+      cityID = #{cityid,jdbcType=VARCHAR},
+      countyID = #{countyid,jdbcType=VARCHAR},
+      streetAddress = #{streetaddress,jdbcType=VARCHAR},
+      shopType = #{shoptype,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      brandID = #{brandid,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      audit_status = #{auditStatus,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      system = #{system,jdbcType=INTEGER},
+      startdate = #{startdate,jdbcType=DATE},
+      qydate = #{qydate,jdbcType=DATE},
+      jydate = #{jydate,jdbcType=DATE},
+      rundate = #{rundate,jdbcType=DATE},
+      stopDate = #{stopdate,jdbcType=DATE},
+      powernum = #{powernum,jdbcType=INTEGER},
+      authorizeDate = #{authorizedate,jdbcType=DATE},
+      isUsing = #{isusing,jdbcType=INTEGER},
+      opt_flag = #{optFlag,jdbcType=INTEGER},
+      offlineCredit = #{offlinecredit,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getShopBaseSMByAABrandId" resultType="com.shangmei.beans.ShopBase">
+    select * from shopbase sb where sb.brandID = 'ffda849b054a11e6404d00163e006eee'
+  </select>
+
+  <select id="getDataByHotelId" resultType="com.shangmei.beans.ShopBase">
+    select * from shopbase sb where sb.brandID = 'ffda849b054a11e6404d00163e006eee'
+    and sb.shopID = #{shop_id}
+  </select>
+
+</mapper>

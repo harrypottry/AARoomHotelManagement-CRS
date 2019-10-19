@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.Staff" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="staffID" property="staffid" jdbcType="VARCHAR" />
+    <result column="staffName" property="staffname" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="staffCard" property="staffcard" jdbcType="VARCHAR" />
+    <result column="psw" property="psw" jdbcType="VARCHAR" />
+    <result column="psw1" property="psw1" jdbcType="VARCHAR" />
+    <result column="powerGroup" property="powergroup" jdbcType="VARCHAR" />
+    <result column="maxRoomDis" property="maxroomdis" jdbcType="INTEGER" />
+    <result column="roomDis" property="roomdis" jdbcType="INTEGER" />
+    <result column="maxGoodsDis" property="maxgoodsdis" jdbcType="INTEGER" />
+    <result column="goodsDis" property="goodsdis" jdbcType="VARCHAR" />
+    <result column="maxYH" property="maxyh" jdbcType="INTEGER" />
+    <result column="maxML" property="maxml" jdbcType="INTEGER" />
+    <result column="telPhone" property="telphone" jdbcType="VARCHAR" />
+    <result column="shouYin" property="shouyin" jdbcType="INTEGER" />
+    <result column="guaZhang" property="guazhang" jdbcType="INTEGER" />
+    <result column="youHui" property="youhui" jdbcType="INTEGER" />
+    <result column="daoChu" property="daochu" jdbcType="INTEGER" />
+    <result column="daYin" property="dayin" jdbcType="INTEGER" />
+    <result column="zheKou" property="zhekou" jdbcType="INTEGER" />
+    <result column="moLing" property="moling" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="oa_status" property="oaStatus" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="usb_login" property="usbLogin" jdbcType="INTEGER" />
+    <result column="defaultshop" property="defaultshop" jdbcType="VARCHAR" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastRepair" property="lastrepair" jdbcType="VARCHAR" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="macs" property="macs" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="system" property="system" jdbcType="INTEGER" />
+    <result column="tryoutDate" property="tryoutdate" jdbcType="TIMESTAMP" />
+    <result column="isadmin" property="isadmin" jdbcType="INTEGER" />
+    <result column="phone_manage_login" property="phoneManageLogin" jdbcType="CHAR" />
+    <result column="head_sculpture_url" property="headSculptureUrl" jdbcType="VARCHAR" />
+    <result column="isHandGold" property="ishandgold" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shopID, staffID, staffName, sex, staffCard, psw, psw1, powerGroup, maxRoomDis, 
+    roomDis, maxGoodsDis, goodsDis, maxYH, maxML, telPhone, shouYin, guaZhang, youHui, 
+    daoChu, daYin, zheKou, moLing, status, oa_status, flag, usb_login, defaultshop, createBy, 
+    createTime, lastRepair, lastTime, salt, macs, customer_id, system, tryoutDate, isadmin, 
+    phone_manage_login, head_sculpture_url, isHandGold
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from staff
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.Staff" >
+    insert into staff (id, shopID, staffID, 
+      staffName, sex, staffCard, 
+      psw, psw1, powerGroup, 
+      maxRoomDis, roomDis, maxGoodsDis, 
+      goodsDis, maxYH, maxML, 
+      telPhone, shouYin, guaZhang, 
+      youHui, daoChu, daYin, 
+      zheKou, moLing, status, 
+      oa_status, flag, usb_login, 
+      defaultshop, createBy, createTime, 
+      lastRepair, lastTime, salt, 
+      macs, customer_id, system, 
+      tryoutDate, isadmin, phone_manage_login, 
+      head_sculpture_url, isHandGold)
+    values (#{id,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{staffid,jdbcType=VARCHAR}, 
+      #{staffname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{staffcard,jdbcType=VARCHAR}, 
+      #{psw,jdbcType=VARCHAR}, #{psw1,jdbcType=VARCHAR}, #{powergroup,jdbcType=VARCHAR}, 
+      #{maxroomdis,jdbcType=INTEGER}, #{roomdis,jdbcType=INTEGER}, #{maxgoodsdis,jdbcType=INTEGER}, 
+      #{goodsdis,jdbcType=VARCHAR}, #{maxyh,jdbcType=INTEGER}, #{maxml,jdbcType=INTEGER}, 
+      #{telphone,jdbcType=VARCHAR}, #{shouyin,jdbcType=INTEGER}, #{guazhang,jdbcType=INTEGER}, 
+      #{youhui,jdbcType=INTEGER}, #{daochu,jdbcType=INTEGER}, #{dayin,jdbcType=INTEGER}, 
+      #{zhekou,jdbcType=INTEGER}, #{moling,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{oaStatus,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}, #{usbLogin,jdbcType=INTEGER}, 
+      #{defaultshop,jdbcType=VARCHAR}, #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{lastrepair,jdbcType=VARCHAR}, #{lasttime,jdbcType=TIMESTAMP}, #{salt,jdbcType=VARCHAR}, 
+      #{macs,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{system,jdbcType=INTEGER}, 
+      #{tryoutdate,jdbcType=TIMESTAMP}, #{isadmin,jdbcType=INTEGER}, #{phoneManageLogin,jdbcType=CHAR}, 
+      #{headSculptureUrl,jdbcType=VARCHAR}, #{ishandgold,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.Staff" >
+    insert into staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="staffid != null" >
+        staffID,
+      </if>
+      <if test="staffname != null" >
+        staffName,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="staffcard != null" >
+        staffCard,
+      </if>
+      <if test="psw != null" >
+        psw,
+      </if>
+      <if test="psw1 != null" >
+        psw1,
+      </if>
+      <if test="powergroup != null" >
+        powerGroup,
+      </if>
+      <if test="maxroomdis != null" >
+        maxRoomDis,
+      </if>
+      <if test="roomdis != null" >
+        roomDis,
+      </if>
+      <if test="maxgoodsdis != null" >
+        maxGoodsDis,
+      </if>
+      <if test="goodsdis != null" >
+        goodsDis,
+      </if>
+      <if test="maxyh != null" >
+        maxYH,
+      </if>
+      <if test="maxml != null" >
+        maxML,
+      </if>
+      <if test="telphone != null" >
+        telPhone,
+      </if>
+      <if test="shouyin != null" >
+        shouYin,
+      </if>
+      <if test="guazhang != null" >
+        guaZhang,
+      </if>
+      <if test="youhui != null" >
+        youHui,
+      </if>
+      <if test="daochu != null" >
+        daoChu,
+      </if>
+      <if test="dayin != null" >
+        daYin,
+      </if>
+      <if test="zhekou != null" >
+        zheKou,
+      </if>
+      <if test="moling != null" >
+        moLing,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="oaStatus != null" >
+        oa_status,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="usbLogin != null" >
+        usb_login,
+      </if>
+      <if test="defaultshop != null" >
+        defaultshop,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="macs != null" >
+        macs,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="system != null" >
+        system,
+      </if>
+      <if test="tryoutdate != null" >
+        tryoutDate,
+      </if>
+      <if test="isadmin != null" >
+        isadmin,
+      </if>
+      <if test="phoneManageLogin != null" >
+        phone_manage_login,
+      </if>
+      <if test="headSculptureUrl != null" >
+        head_sculpture_url,
+      </if>
+      <if test="ishandgold != null" >
+        isHandGold,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffname != null" >
+        #{staffname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffcard != null" >
+        #{staffcard,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null" >
+        #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="psw1 != null" >
+        #{psw1,jdbcType=VARCHAR},
+      </if>
+      <if test="powergroup != null" >
+        #{powergroup,jdbcType=VARCHAR},
+      </if>
+      <if test="maxroomdis != null" >
+        #{maxroomdis,jdbcType=INTEGER},
+      </if>
+      <if test="roomdis != null" >
+        #{roomdis,jdbcType=INTEGER},
+      </if>
+      <if test="maxgoodsdis != null" >
+        #{maxgoodsdis,jdbcType=INTEGER},
+      </if>
+      <if test="goodsdis != null" >
+        #{goodsdis,jdbcType=VARCHAR},
+      </if>
+      <if test="maxyh != null" >
+        #{maxyh,jdbcType=INTEGER},
+      </if>
+      <if test="maxml != null" >
+        #{maxml,jdbcType=INTEGER},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="shouyin != null" >
+        #{shouyin,jdbcType=INTEGER},
+      </if>
+      <if test="guazhang != null" >
+        #{guazhang,jdbcType=INTEGER},
+      </if>
+      <if test="youhui != null" >
+        #{youhui,jdbcType=INTEGER},
+      </if>
+      <if test="daochu != null" >
+        #{daochu,jdbcType=INTEGER},
+      </if>
+      <if test="dayin != null" >
+        #{dayin,jdbcType=INTEGER},
+      </if>
+      <if test="zhekou != null" >
+        #{zhekou,jdbcType=INTEGER},
+      </if>
+      <if test="moling != null" >
+        #{moling,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="oaStatus != null" >
+        #{oaStatus,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="usbLogin != null" >
+        #{usbLogin,jdbcType=INTEGER},
+      </if>
+      <if test="defaultshop != null" >
+        #{defaultshop,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="macs != null" >
+        #{macs,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        #{system,jdbcType=INTEGER},
+      </if>
+      <if test="tryoutdate != null" >
+        #{tryoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isadmin != null" >
+        #{isadmin,jdbcType=INTEGER},
+      </if>
+      <if test="phoneManageLogin != null" >
+        #{phoneManageLogin,jdbcType=CHAR},
+      </if>
+      <if test="headSculptureUrl != null" >
+        #{headSculptureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ishandgold != null" >
+        #{ishandgold,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.Staff" >
+    update staff
+    <set >
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffID = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffname != null" >
+        staffName = #{staffname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="staffcard != null" >
+        staffCard = #{staffcard,jdbcType=VARCHAR},
+      </if>
+      <if test="psw != null" >
+        psw = #{psw,jdbcType=VARCHAR},
+      </if>
+      <if test="psw1 != null" >
+        psw1 = #{psw1,jdbcType=VARCHAR},
+      </if>
+      <if test="powergroup != null" >
+        powerGroup = #{powergroup,jdbcType=VARCHAR},
+      </if>
+      <if test="maxroomdis != null" >
+        maxRoomDis = #{maxroomdis,jdbcType=INTEGER},
+      </if>
+      <if test="roomdis != null" >
+        roomDis = #{roomdis,jdbcType=INTEGER},
+      </if>
+      <if test="maxgoodsdis != null" >
+        maxGoodsDis = #{maxgoodsdis,jdbcType=INTEGER},
+      </if>
+      <if test="goodsdis != null" >
+        goodsDis = #{goodsdis,jdbcType=VARCHAR},
+      </if>
+      <if test="maxyh != null" >
+        maxYH = #{maxyh,jdbcType=INTEGER},
+      </if>
+      <if test="maxml != null" >
+        maxML = #{maxml,jdbcType=INTEGER},
+      </if>
+      <if test="telphone != null" >
+        telPhone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="shouyin != null" >
+        shouYin = #{shouyin,jdbcType=INTEGER},
+      </if>
+      <if test="guazhang != null" >
+        guaZhang = #{guazhang,jdbcType=INTEGER},
+      </if>
+      <if test="youhui != null" >
+        youHui = #{youhui,jdbcType=INTEGER},
+      </if>
+      <if test="daochu != null" >
+        daoChu = #{daochu,jdbcType=INTEGER},
+      </if>
+      <if test="dayin != null" >
+        daYin = #{dayin,jdbcType=INTEGER},
+      </if>
+      <if test="zhekou != null" >
+        zheKou = #{zhekou,jdbcType=INTEGER},
+      </if>
+      <if test="moling != null" >
+        moLing = #{moling,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="oaStatus != null" >
+        oa_status = #{oaStatus,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="usbLogin != null" >
+        usb_login = #{usbLogin,jdbcType=INTEGER},
+      </if>
+      <if test="defaultshop != null" >
+        defaultshop = #{defaultshop,jdbcType=VARCHAR},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="macs != null" >
+        macs = #{macs,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="system != null" >
+        system = #{system,jdbcType=INTEGER},
+      </if>
+      <if test="tryoutdate != null" >
+        tryoutDate = #{tryoutdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isadmin != null" >
+        isadmin = #{isadmin,jdbcType=INTEGER},
+      </if>
+      <if test="phoneManageLogin != null" >
+        phone_manage_login = #{phoneManageLogin,jdbcType=CHAR},
+      </if>
+      <if test="headSculptureUrl != null" >
+        head_sculpture_url = #{headSculptureUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ishandgold != null" >
+        isHandGold = #{ishandgold,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.Staff" >
+    update staff
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      staffName = #{staffname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      staffCard = #{staffcard,jdbcType=VARCHAR},
+      psw = #{psw,jdbcType=VARCHAR},
+      psw1 = #{psw1,jdbcType=VARCHAR},
+      powerGroup = #{powergroup,jdbcType=VARCHAR},
+      maxRoomDis = #{maxroomdis,jdbcType=INTEGER},
+      roomDis = #{roomdis,jdbcType=INTEGER},
+      maxGoodsDis = #{maxgoodsdis,jdbcType=INTEGER},
+      goodsDis = #{goodsdis,jdbcType=VARCHAR},
+      maxYH = #{maxyh,jdbcType=INTEGER},
+      maxML = #{maxml,jdbcType=INTEGER},
+      telPhone = #{telphone,jdbcType=VARCHAR},
+      shouYin = #{shouyin,jdbcType=INTEGER},
+      guaZhang = #{guazhang,jdbcType=INTEGER},
+      youHui = #{youhui,jdbcType=INTEGER},
+      daoChu = #{daochu,jdbcType=INTEGER},
+      daYin = #{dayin,jdbcType=INTEGER},
+      zheKou = #{zhekou,jdbcType=INTEGER},
+      moLing = #{moling,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      oa_status = #{oaStatus,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=INTEGER},
+      usb_login = #{usbLogin,jdbcType=INTEGER},
+      defaultshop = #{defaultshop,jdbcType=VARCHAR},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      salt = #{salt,jdbcType=VARCHAR},
+      macs = #{macs,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      system = #{system,jdbcType=INTEGER},
+      tryoutDate = #{tryoutdate,jdbcType=TIMESTAMP},
+      isadmin = #{isadmin,jdbcType=INTEGER},
+      phone_manage_login = #{phoneManageLogin,jdbcType=CHAR},
+      head_sculpture_url = #{headSculptureUrl,jdbcType=VARCHAR},
+      isHandGold = #{ishandgold,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getIsDongle" parameterType="HashMap" resultType="String">
+		select isDongle from shopother where shopid=#{shopID} and flag = 1
+  </select>
+  <select id="selectStaffForLogin" resultType="HashMap" parameterType="HashMap">
+		select
+			s.id,s.staffID,s.staffName,s.psw,s.powerGroup,s.salt,s.phone_manage_login,s.maxRoomDis,sb.shopID,sb.customer_id,sb.id shop_id,sb.shopName,
+			so.hotel_pwd,d.customer_type customer_type,sb.streetAddress,so.telPhone as shopMobile,s.isadmin,sb.audit_status,
+			sb.startdate,sb.qydate,sb.jydate,sb.status,sb.authorizeDate,sb.isUsing,sb.rundate,sb.stopdate,sb.powernum, sb.opt_flag opt_flag
+		from
+			staff s
+			inner join shopbase sb on sb.flag=1 and sb.shopid=#{shopID}
+			inner join shopother so on so.shopid=sb.shopid and so.flag=1
+			inner join customer d on d.id=sb.customer_id and d.status in (2,4) and d.flag=1
+		where
+			s.flag=1 and s.status=1 and s.system=0 and s.staffid=#{username}
+		limit 0,1
+	</select>
+</mapper>

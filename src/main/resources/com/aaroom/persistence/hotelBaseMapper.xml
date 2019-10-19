@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.aaroom.persistence.HotelBaseMapper" >
+        <resultMap id="BaseResultMap" type="com.aaroom.beans.HotelBase" >
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="flag" property="flag" jdbcType="INTEGER" />
+            <result column="hotel_name" property="hotel_name" jdbcType="VARCHAR" />
+            <result column="create_date" property="create_date" jdbcType="VARCHAR" />
+            <result column="area_id" property="area_id" jdbcType="VARCHAR" />
+            <result column="province_id" property="province_id" jdbcType="VARCHAR" />
+            <result column="city_id" property="city_id" jdbcType="VARCHAR" />
+            <result column="county_id" property="county_id" jdbcType="VARCHAR" />
+            <result column="street_address" property="street_address" jdbcType="VARCHAR" />
+            <result column="hotel_type" property="hotel_type" jdbcType="VARCHAR" />
+            <result column="status" property="status" jdbcType="VARCHAR" />
+            <result column="brand_id" property="brand_id" jdbcType="VARCHAR" />
+            <result column="audit_status" property="audit_status" jdbcType="VARCHAR" />
+            <result column="create_by" property="create_by" jdbcType="VARCHAR" />
+            <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+            <result column="last_repair" property="last_repair" jdbcType="VARCHAR" />
+            <result column="last_time" property="last_time" jdbcType="TIMESTAMP" />
+            <result column="customer_id" property="customer_id" jdbcType="VARCHAR" />
+            <result column="system" property="system" jdbcType="INTEGER" />
+            <result column="start_date" property="start_date" jdbcType="VARCHAR" />
+            <result column="qy_date" property="qy_date" jdbcType="VARCHAR" />
+            <result column="jy_date" property="jy_date" jdbcType="VARCHAR" />
+            <result column="run_date" property="run_date" jdbcType="VARCHAR" />
+            <result column="stop_date" property="stop_date" jdbcType="VARCHAR" />
+            <result column="power_num" property="power_num" jdbcType="INTEGER" />
+            <result column="authorize_date" property="authorize_date" jdbcType="VARCHAR" />
+            <result column="is_using" property="is_using" jdbcType="INTEGER" />
+            <result column="opt_flag" property="opt_flag" jdbcType="INTEGER" />
+            <result column="offline_credit" property="offline_credit" jdbcType="INTEGER" />
+            <result column="smhotel_id" property="smhotel_id" jdbcType="VARCHAR" />
+            <result column="room_num" property="room_num" jdbcType="INTEGER" />
+        </resultMap>
+    <select id="getById" resultType="com.aaroom.beans.HotelBase">
+        select
+                id as id,         <!---->
+                hotel_name as hotel_name,         <!---->
+                create_date as create_date,         <!---->
+                area_id as area_id,         <!--区域主键ID-->
+                province_id as province_id,         <!---->
+                city_id as city_id,         <!---->
+                county_id as county_id,         <!---->
+                street_address as street_address,         <!---->
+                hotel_type as hotel_type,         <!--分店类型（直营、加盟）-->
+                status as status,         <!---->
+                brand_id as brand_id,         <!---->
+                flag as flag,         <!---->
+                audit_status as audit_status,         <!---->
+                create_by as create_by,         <!---->
+                create_time as create_time,         <!---->
+                last_repair as last_repair,         <!---->
+                last_time as last_time,         <!---->
+                customer_id as customer_id,         <!---->
+                system as system,         <!---->
+                start_date as start_date,         <!---->
+                qy_date as qy_date,         <!---->
+                jy_date as jy_date,         <!---->
+                run_date as run_date,         <!---->
+                stop_date as stop_date,         <!---->
+                power_num as power_num,         <!---->
+                authorize_date as authorize_date,         <!---->
+                is_using as is_using,         <!---->
+                opt_flag as opt_flag,         <!---->
+                offline_credit as offline_credit,         <!--线下信用住门店-->
+                smhotel_id as smhotel_id,          <!--尚美酒店ID-->
+                room_num as room_num
+        from hotel_base
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getListByMap" resultType="com.aaroom.beans.HotelBase"
+            parameterType="java.util.Map">
+            select
+                id as id,      <!---->
+                hotel_name as hotel_name,      <!---->
+                create_date as create_date,      <!---->
+                area_id as area_id,      <!--区域主键ID-->
+                province_id as province_id,      <!---->
+                city_id as city_id,      <!---->
+                county_id as county_id,      <!---->
+                street_address as street_address,      <!---->
+                hotel_type as hotel_type,      <!--分店类型（直营、加盟）-->
+                status as status,      <!---->
+                brand_id as brand_id,      <!---->
+                flag as flag,      <!---->
+                audit_status as audit_status,      <!---->
+                create_by as create_by,      <!---->
+                create_time as create_time,      <!---->
+                last_repair as last_repair,      <!---->
+                last_time as last_time,      <!---->
+                customer_id as customer_id,      <!---->
+                system as system,      <!---->
+                start_date as start_date,      <!---->
+                qy_date as qy_date,      <!---->
+                jy_date as jy_date,      <!---->
+                run_date as run_date,      <!---->
+                stop_date as stop_date,      <!---->
+                power_num as power_num,      <!---->
+                authorize_date as authorize_date,      <!---->
+                is_using as is_using,      <!---->
+                opt_flag as opt_flag,      <!---->
+                offline_credit as offline_credit,      <!--线下信用住门店-->
+                smhotel_id as smhotel_id,       <!--尚美酒店ID-->
+                room_num as room_num
+            from hotel_base
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and (id!='' or id==0)">
+                    and id=#{id}
+                </if>
+                <if test="hotel_name != null and hotel_name!=''">
+                    and hotel_name=#{hotel_name}
+                </if>
+                <if test="create_date != null and create_date!=''">
+                    and create_date=#{create_date}
+                </if>
+                <if test="area_id != null and area_id!=''">
+                    and area_id=#{area_id}
+                </if>
+                <if test="province_id != null and province_id!=''">
+                    and province_id=#{province_id}
+                </if>
+                <if test="city_id != null and city_id!=''">
+                    and city_id=#{city_id}
+                </if>
+                <if test="county_id != null and county_id!=''">
+                    and county_id=#{county_id}
+                </if>
+                <if test="street_address != null and street_address!=''">
+                    and street_address=#{street_address}
+                </if>
+                <if test="hotel_type != null and hotel_type!=''">
+                    and hotel_type=#{hotel_type}
+                </if>
+                <if test="status != null and status!=''">
+                    and status=#{status}
+                </if>
+                <if test="brand_id != null and brand_id!=''">
+                    and brand_id=#{brand_id}
+                </if>
+                <if test="flag != null and (flag!='' or flag==0)">
+                    and flag=#{flag}
+                </if>
+                <if test="audit_status != null and audit_status!=''">
+                    and audit_status=#{audit_status}
+                </if>
+                <if test="create_by != null and create_by!=''">
+                    and create_by=#{create_by}
+                </if>
+                <if test="create_time != null">
+                    and create_time=#{create_time}
+                </if>
+                <if test="last_repair != null and last_repair!=''">
+                    and last_repair=#{last_repair}
+                </if>
+                <if test="last_time != null">
+                    and last_time=#{last_time}
+                </if>
+                <if test="customer_id != null and customer_id!=''">
+                    and customer_id=#{customer_id}
+                </if>
+                <if test="system != null and (system!='' or system==0)">
+                    and system=#{system}
+                </if>
+                <if test="start_date != null and start_date!=''">
+                    and start_date=#{start_date}
+                </if>
+                <if test="qy_date != null and qy_date!=''">
+                    and qy_date=#{qy_date}
+                </if>
+                <if test="jy_date != null and jy_date!=''">
+                    and jy_date=#{jy_date}
+                </if>
+                <if test="run_date != null and run_date!=''">
+                    and run_date=#{run_date}
+                </if>
+                <if test="stop_date != null and stop_date!=''">
+                    and stop_date=#{stop_date}
+                </if>
+                <if test="power_num != null and (power_num!='' or power_num==0)">
+                    and power_num=#{power_num}
+                </if>
+                <if test="authorize_date != null and authorize_date!=''">
+                    and authorize_date=#{authorize_date}
+                </if>
+                <if test="is_using != null and (is_using!='' or is_using==0)">
+                    and is_using=#{is_using}
+                </if>
+                <if test="opt_flag != null and (opt_flag!='' or opt_flag==0)">
+                    and opt_flag=#{opt_flag}
+                </if>
+                <if test="offline_credit != null and (offline_credit!='' or offline_credit==0)">
+                    and offline_credit=#{offline_credit}
+                </if>
+                <if test="smhotel_id != null and smhotel_id!=''">
+                    and smhotel_id=#{smhotel_id}
+                </if>
+                <if test="room_num != null and (room_num!='' or room_num==0)">
+                    and room_num=#{room_num}
+                </if>
+        </trim>
+        order by creationDate desc
+        <if test="beginPos != null and beginPos!='' and pageSize != null  and pageSize !='' ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCountByMap" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from hotel_base
+        <trim prefix="where" prefixOverrides="and | or">
+                    <if test="id != null and (id!='' or id==0)">
+                        and id=#{id}
+                    </if>
+                    <if test="hotel_name != null and hotel_name!=''">
+                        and hotel_name=#{hotel_name}
+                    </if>
+                    <if test="create_date != null and create_date!=''">
+                        and create_date=#{create_date}
+                    </if>
+                    <if test="area_id != null and area_id!=''">
+                        and area_id=#{area_id}
+                    </if>
+                    <if test="province_id != null and province_id!=''">
+                        and province_id=#{province_id}
+                    </if>
+                    <if test="city_id != null and city_id!=''">
+                        and city_id=#{city_id}
+                    </if>
+                    <if test="county_id != null and county_id!=''">
+                        and county_id=#{county_id}
+                    </if>
+                    <if test="street_address != null and street_address!=''">
+                        and street_address=#{street_address}
+                    </if>
+                    <if test="hotel_type != null and hotel_type!=''">
+                        and hotel_type=#{hotel_type}
+                    </if>
+                    <if test="status != null and status!=''">
+                        and status=#{status}
+                    </if>
+                    <if test="brand_id != null and brand_id!=''">
+                        and brand_id=#{brand_id}
+                    </if>
+                    <if test="flag != null and (flag!='' or flag==0)">
+                        and flag=#{flag}
+                    </if>
+                    <if test="audit_status != null and audit_status!=''">
+                        and audit_status=#{audit_status}
+                    </if>
+                    <if test="create_by != null and create_by!=''">
+                        and create_by=#{create_by}
+                    </if>
+                    <if test="create_time != null">
+                        and create_time=#{create_time}
+                    </if>
+                    <if test="last_repair != null and last_repair!=''">
+                        and last_repair=#{last_repair}
+                    </if>
+                    <if test="last_time != null">
+                        and last_time=#{last_time}
+                    </if>
+                    <if test="customer_id != null and customer_id!=''">
+                        and customer_id=#{customer_id}
+                    </if>
+                    <if test="system != null and (system!='' or system==0)">
+                        and system=#{system}
+                    </if>
+                    <if test="start_date != null and start_date!=''">
+                        and start_date=#{start_date}
+                    </if>
+                    <if test="qy_date != null and qy_date!=''">
+                        and qy_date=#{qy_date}
+                    </if>
+                    <if test="jy_date != null and jy_date!=''">
+                        and jy_date=#{jy_date}
+                    </if>
+                    <if test="run_date != null and run_date!=''">
+                        and run_date=#{run_date}
+                    </if>
+                    <if test="stop_date != null and stop_date!=''">
+                        and stop_date=#{stop_date}
+                    </if>
+                    <if test="power_num != null and (power_num!='' or power_num==0)">
+                        and power_num=#{power_num}
+                    </if>
+                    <if test="authorize_date != null and authorize_date!=''">
+                        and authorize_date=#{authorize_date}
+                    </if>
+                    <if test="is_using != null and (is_using!='' or is_using==0)">
+                        and is_using=#{is_using}
+                    </if>
+                    <if test="opt_flag != null and (opt_flag!='' or opt_flag==0)">
+                        and opt_flag=#{opt_flag}
+                    </if>
+                    <if test="offline_credit != null and (offline_credit!='' or offline_credit==0)">
+                        and offline_credit=#{offline_credit}
+                    </if>
+                    <if test="smhotel_id != null and smhotel_id!=''">
+                        and smhotel_id=#{smhotel_id}
+                    </if>
+                    <if test="room_num != null and (room_num!='' or room_num==0)">
+                        and room_num=#{room_num}
+                    </if>
+        </trim>
+    </select>
+
+    <insert id="save" parameterType="com.aaroom.beans.HotelBase">
+        insert into hotel_base(
+            hotel_name ,      <!---->
+            create_date ,      <!---->
+            area_id ,      <!--区域主键ID-->
+            province_id ,      <!---->
+            city_id ,      <!---->
+            county_id ,      <!---->
+            street_address ,      <!---->
+            hotel_type ,      <!--分店类型（直营、加盟）-->
+            status ,      <!---->
+            brand_id ,      <!---->
+            flag ,      <!---->
+            audit_status ,      <!---->
+            create_by ,      <!---->
+            create_time ,      <!---->
+            last_repair ,      <!---->
+            last_time ,      <!---->
+            customer_id ,      <!---->
+            system ,      <!---->
+            start_date ,      <!---->
+            qy_date ,      <!---->
+            jy_date ,      <!---->
+            run_date ,      <!---->
+            stop_date ,      <!---->
+            power_num ,      <!---->
+            authorize_date ,      <!---->
+            is_using ,      <!---->
+            opt_flag ,      <!---->
+            offline_credit ,      <!--线下信用住门店-->
+            smhotel_id,       <!--尚美酒店ID-->
+            room_num
+        )
+        values(
+                    #{hotel_name} ,      <!---->
+                    #{create_date} ,      <!---->
+                    #{area_id} ,      <!--区域主键ID-->
+                    #{province_id} ,      <!---->
+                    #{city_id} ,      <!---->
+                    #{county_id} ,      <!---->
+                    #{street_address} ,      <!---->
+                    #{hotel_type} ,      <!--分店类型（直营、加盟）-->
+                    #{status} ,      <!---->
+                    #{brand_id} ,      <!---->
+                    #{flag} ,      <!---->
+                    #{audit_status} ,      <!---->
+                    #{create_by} ,      <!---->
+                    #{create_time} ,      <!---->
+                    #{last_repair} ,      <!---->
+                    #{last_time} ,      <!---->
+                    #{customer_id} ,      <!---->
+                    #{system} ,      <!---->
+                    #{start_date} ,      <!---->
+                    #{qy_date} ,      <!---->
+                    #{jy_date} ,      <!---->
+                    #{run_date} ,      <!---->
+                    #{stop_date} ,      <!---->
+                    #{power_num} ,      <!---->
+                    #{authorize_date} ,      <!---->
+                    #{is_using} ,      <!---->
+                    #{opt_flag} ,      <!---->
+                    #{offline_credit} ,      <!--线下信用住门店-->
+                    #{smhotel_id},       <!--尚美酒店ID-->
+                    #{room_num}
+        )
+    </insert>
+
+    <update id="modify" parameterType="com.aaroom.beans.HotelBase">
+        update hotel_base
+        <trim prefix="set" suffixOverrides="," suffix="where id= #{id}">
+                <if test="id != null and (id!='' or id==0)">
+                     id=#{id},
+                </if>
+                <if test="hotel_name != null and hotel_name!=''">
+                     hotel_name=#{hotel_name},
+                </if>
+                <if test="create_date != null and create_date!=''">
+                     create_date=#{create_date},
+                </if>
+                <if test="area_id != null and area_id!=''">
+                     area_id=#{area_id},
+                </if>
+                <if test="province_id != null and province_id!=''">
+                     province_id=#{province_id},
+                </if>
+                <if test="city_id != null and city_id!=''">
+                     city_id=#{city_id},
+                </if>
+                <if test="county_id != null and county_id!=''">
+                     county_id=#{county_id},
+                </if>
+                <if test="street_address != null and street_address!=''">
+                     street_address=#{street_address},
+                </if>
+                <if test="hotel_type != null and hotel_type!=''">
+                     hotel_type=#{hotel_type},
+                </if>
+                <if test="status != null and status!=''">
+                     status=#{status},
+                </if>
+                <if test="brand_id != null and brand_id!=''">
+                     brand_id=#{brand_id},
+                </if>
+                <if test="flag != null and (flag!='' or flag==0)">
+                     flag=#{flag},
+                </if>
+                <if test="audit_status != null and audit_status!=''">
+                     audit_status=#{audit_status},
+                </if>
+                <if test="create_by != null and create_by!=''">
+                     create_by=#{create_by},
+                </if>
+                <if test="create_time != null">
+                     create_time=#{create_time},
+                </if>
+                <if test="last_repair != null and last_repair!=''">
+                     last_repair=#{last_repair},
+                </if>
+                <if test="last_time != null">
+                     last_time=#{last_time},
+                </if>
+                <if test="customer_id != null and customer_id!=''">
+                     customer_id=#{customer_id},
+                </if>
+                <if test="system != null and (system!='' or system==0)">
+                     system=#{system},
+                </if>
+                <if test="start_date != null and start_date!=''">
+                     start_date=#{start_date},
+                </if>
+                <if test="qy_date != null and qy_date!=''">
+                     qy_date=#{qy_date},
+                </if>
+                <if test="jy_date != null and jy_date!=''">
+                     jy_date=#{jy_date},
+                </if>
+                <if test="run_date != null and run_date!=''">
+                     run_date=#{run_date},
+                </if>
+                <if test="stop_date != null and stop_date!=''">
+                     stop_date=#{stop_date},
+                </if>
+                <if test="power_num != null and (power_num!='' or power_num==0)">
+                     power_num=#{power_num},
+                </if>
+                <if test="authorize_date != null and authorize_date!=''">
+                     authorize_date=#{authorize_date},
+                </if>
+                <if test="is_using != null and (is_using!='' or is_using==0)">
+                     is_using=#{is_using},
+                </if>
+                <if test="opt_flag != null and (opt_flag!='' or opt_flag==0)">
+                     opt_flag=#{opt_flag},
+                </if>
+                <if test="offline_credit != null and (offline_credit!='' or offline_credit==0)">
+                     offline_credit=#{offline_credit},
+                </if>
+                <if test="smhotel_id != null and smhotel_id!=''">
+                     smhotel_id=#{smhotel_id},
+                </if>
+                <if test="room_num != null and (room_num!='' or room_num==0)">
+                     room_num=#{room_num},
+                </if>
+        </trim>
+    </update>
+
+    <delete id="removeById" parameterType="java.lang.Integer">
+        delete from hotel_base where id = #{id}
+    </delete>
+    <select id="getAllHotelBase" resultType="com.aaroom.beans.HotelBase">
+        select * from hotel_base
+    </select>
+    <select id="getAllHotelBaseByAARoom" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+	    p.name 'province',c.name 'city',co.name 'county',hb.*
+        FROM
+	    hotel_base hb
+        LEFT JOIN province p ON p.id = hb.province_id
+        LEFT JOIN city c ON c.id = hb.city_id
+        LEFT JOIN county co ON co.id = hb.county_id
+        WHERE
+	    hb.brand_id = 'ffda849b054a11e6404d00163e006eee'
+        AND c.name like '%${cityName}%'
+    </select>
+    <select id="exportHotelBaseName" resultType="java.util.Map">
+        select b.id ,b.hotel_name newName ,b.old_hotel_name oldName from hotel_base b
+    </select>
+    
+    <select id="getHotelTempByName" parameterType="java.lang.String" resultType="com.aaroom.beans.HotelBase">
+        SELECT * FROM hotel_temp WHERE hotel_name = #{hotel_name}
+    </select>
+
+    <insert id="saveTemp" parameterType="com.aaroom.beans.HotelBase">
+        insert into hotel_temp(
+        hotel_name ,
+        street_address ,
+        room_num
+        )
+        values(
+        #{hotel_name},
+        #{street_address},
+        #{room_num}
+        )
+    </insert>
+
+    <delete id="removeByIdTemp" parameterType="java.lang.Integer">
+        delete from hotel_temp where id = #{id}
+    </delete>
+
+    <select id="getListByParams" resultType="com.aaroom.beans.HotelBase">
+        select * from hotel_base where hotel_base.brand_id = 'ffda849b054a11e6404d00163e006eee'
+    </select>
+</mapper>

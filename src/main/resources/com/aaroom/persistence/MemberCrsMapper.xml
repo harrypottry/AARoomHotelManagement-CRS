@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaroom.persistence.MemberCrsMapper">
+
+    <select id="getMemberList" resultType="com.aaroom.model.MemberListView">
+        SELECT m.id id, ml.level_name cardLevel, m.card_num cardNum, m.name name, m.phone_num phoneNum, m.reg_date regDate, m.promote_date promoteDate, m.promote_price promotePrice, m.open_mode openMode, m.reg_hotel_id regHotelId, m.hotel_name hotelName, m.province province, m.city city, m.hotel_owern hotelOwern
+        FROM member m
+        INNER JOIN member_level ml ON m.card_level_id = ml.level_num
+        <where>
+            1 = 1
+            <if test="beginTime != null and beginTime != ''">
+                <![CDATA[ and DATE_FORMAT(m.reg_date,'%Y-%m-%d') >= DATE_FORMAT(#{beginTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[ and DATE_FORMAT(m.reg_date,'%Y-%m-%d') <= DATE_FORMAT(#{endTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="province != null and province != ''">
+                AND province = #{province}
+            </if>
+            <if test="city != null and city != ''">
+                AND city = #{city}
+            </if>
+            <if test="vipType != null and vipType != ''">
+                AND card_level_id = #{vipType}
+            </if>
+            <if test="param != null and param != ''">
+                AND m.phone_num LIKE "%" #{param} "%" OR m.name LIKE "%" #{param} "%" OR m.hotel_owern LIKE "%" #{param} "%"
+            </if>
+        </where>
+    </select>
+
+    <sql id="INTEGRAL_COLUMN_LIST">
+        id id, member_id memberId, integral_budget integralBudget, causes causes, status status, hotel_name hotelName, relate_order relateOrder,
+        creation_time creationTime, integral_all integralAll, remark remark, type type
+    </sql>
+
+    <select id="getMemberIntegralFlow" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.Integral">
+        SELECT
+        <include refid="INTEGRAL_COLUMN_LIST"/>
+        FROM integral WHERE member_id = #{memberId} ORDER BY creation_time DESC
+    </select>
+
+    <sql id="MEMBER_LEVEL_COLUMN_LIST">
+        id id, level_name levelName, level_num levelNum, up_level upLevel, down_level downLevel, discount_price discountPrice, sale_price salePrice, integral_times integralTimes, promote_jy promoteJy,
+        integral_promote integralPromote, invate_promote invatePromote, meanwhile_iptimize_num meanwhileIptimizeNum, pre_retain preRetain, delay delay, integral_exchange integralExchange,
+        create_time create_time, update_time update_time, creater_id creater_id, updater_id updater_id, is_active is_active
+    </sql>
+
+    <select id="getMemberEquity" resultType="com.aaroom.wechat.bean.MemberLevel">
+        SELECT
+        <include refid="MEMBER_LEVEL_COLUMN_LIST"/>
+        FROM member_level
+    </select>
+</mapper>

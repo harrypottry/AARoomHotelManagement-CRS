@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.OrderMapper">
+    <select id="getAllOrderStatusList" resultType="com.shangmei.model.OrderStatusView">
+       select
+			dm.id,dm.dictID,dm.code,dm.name
+		from
+			dictcodemap dm where dm.dictID='5931a07f546511e5bb78d8cb8a2f9c07' and dm.flag=1 and dm.status=1
+    </select>
+	<select id="getAllOrderList" resultType="com.shangmei.model.OrderInfoView">
+		SELECT dcm.name bookStatus,bt.order_status orderStatus,r.rName roomName,rt.rTName roomType,bt.id bookteamno,
+		dict.name roomStatus, brtp.price price,ra.beginDate startDate ,ra.endDate endDate,bt.createTime orderDate
+			FROM  bookteam bt
+			LEFT  JOIN  roomarrange ra  ON ra.shopid = bt.shopid
+			LEFT  JOIN  book_room_type_price brtp ON bt.teamNo = brtp.teamNo
+			LEFT  JOIN  room r  on ra.rID = r.id
+			LEFT  JOIN  roomtype rt ON  r.rTID = rt.id
+			LEFT  JOIN  dictcodemap dict on r.roomstatus = dict.id
+			LEFT  JOIN  dictcodemap dcm on bt.bookStatus = dcm.id
+			where ra.shopID = #{shopID}
+			<if test="flag == 1 and flag!= null">
+				and
+				DATEDIFF(bt.createTime,'2019-1-29') = 0
+            </if>
+            <if test="flag == 2 and flag!= null">
+				and
+				DATEDIFF(bt.createTime,'2019-1-29') >=-3
+				and
+				DATEDIFF(bt.createTime,'2019-1-29') &lt;= 0
+            </if>
+            <if test="flag == 3 and flag!= null">
+				and
+				DATEDIFF(bt.createTime,'2019-1-29') >=-7
+				and
+				DATEDIFF(bt.createTime,'2019-1-29') &lt;= 0
+            </if>
+			<if test="orderStatus >0 and orderStatus != null">
+				and bt.order_status = #{orderStatus}
+			</if>
+		group by bookteamno
+		order by bt.createTime desc
+
+	</select>
+</mapper>

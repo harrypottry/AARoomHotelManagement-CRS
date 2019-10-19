@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>积分流水</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--积分流水-->
+            <div class="condition row" style="display:inline-block">
+                <span class="col-6"></span><span></span>
+            </div>
+            <p class="pleft"><span class="rise">会员列表>>积分流水</span></p>
+            <div class="table-header row">
+                <!--<span class="col-md-2">当前积分：<span>11</span></span>-->
+                <!--<span class="col-md-2">总获取积分：<span>11</span></span>-->
+                <!--<span class="col-md-2">总消耗积分：<span>11</span></span>-->
+            </div>
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>积分收支</th>
+                    <th>产生原因</th>
+                    <th>是否有入住</th>
+                    <th>入住门店</th>
+                    <th>关联订单</th>
+                    <th>产生时间</th>
+                    <th>积分总额</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
+</div>
+<div class="warn">
+    <div></div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    var member;
+    $(document).ready(function(){
+        member=sessionStorage.getItem('memberId').split("/");
+        $('.condition>.col-6').html(member[1]).next('span').html(member[2]);
+        request();//页面信息
+    });
+    function request(datas,pageCount){//获取页面信息
+        datas={memberId:member[0]};
+        $('#table').dataTable({
+            scrollY:window.innerHeight-337,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:true,
+            aLengthMenu:[20],
+            filter:false,
+            serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                datas.pageNo=(data.start / data.length)+1;//当前页码
+                datas.pageSize='20';//每页条数
+                $.ajax({
+                    type:"GET",
+                    url:'/console/api/getMemberIntegralFlow',
+                    cache: false,//禁用缓存
+                    data:datas,//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        $('.table-header').html('<span class="col-md-2">当前积分：<span>'+result.curIngetral+'</span></span><span class="col-md-2">总获取积分：<span>'+result.integralAll+'</span></span><span class="col-md-2">总消耗积分：<span>'+result.integralKou+'</span></span>');
+                        console.log(result);
+                        pageCount=result.data.pageCount;//总页码
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.data.count;//返回数据全部记录
+                        returnData.recordsFiltered = result.data.count;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.data.dataList;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'integralBudget'},
+                {data:'causes'},
+                {data:'status'},
+                {data:'hotelName'},
+                {data:'relateOrder'},
+                {data:'creationTime'},
+                {data:'integralAll'},
+                {data:'remark'}
+            ],
+            columnDefs:[
+                {
+                    "render": function (value,type,row){
+                        if(row.type=='0'){return '<span class="rise">'+"+"+value+'</span>';}
+                        if(row.type=='1'){return '<span class="fall">'+"-"+value+'</span>';}
+                    },
+                    "targets":0 //操作列
+                },
+                {
+                    "render": function (value){
+                        var status=['是','否'];
+                        return status[value];
+                    },
+                    "targets":2 //操作列
+                }
+            ],
+            language:tablelang,
+            fnDrawCallback: function(table) {
+                if(pageCount>7){//页码大于7出现页码跳转方式
+                    $('#table_paginate .pagination').append('<li class="jump">跳至&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0);" class="page-link" data-dt-id="#table">GO</a></li>');
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

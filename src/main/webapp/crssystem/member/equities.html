@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>会员权益设置</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--会员权益设置-->
+            <!--<div class="table-header row">-->
+                <!--<span class="col-md-6"></span>-->
+                <!--<span class="col-md-6"></span>-->
+            <!--</div>-->
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>等级名称</th>
+                    <th>等级编号</th>
+                    <th>上一等级</th>
+                    <th>下一等级</th>
+                    <th>折扣价</th>
+                    <th>会员售卖价格</th>
+                    <th>积分倍数</th>
+                    <th>升级间夜</th>
+                    <th>积分升级</th>
+                    <th>邀请升级</th>
+                    <th>同时优惠间数</th>
+                    <th>预定保留</th>
+                    <th>退房延迟</th>
+                    <th>积分兑换限额</th>
+                </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    $(document).ready(function(){
+        request();//页面信息
+    });
+    function request(){//获取页面信息
+        $('#table').dataTable({
+            scrollY:window.innerHeight-207,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:false,
+            filter:false,
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                $.ajax({
+                    type:"GET",
+                    url:'/console/api/getMemberEquity',
+                    cache: false,//禁用缓存
+                    data:'',//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.length;//返回数据全部记录
+                        returnData.recordsFiltered = result.length;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'levelName'},
+                {data:'levelNum'},
+                {data:'upLevel'},
+                {data:'downLevel'},
+                {data:'discountPrice'},
+                {data:'salePrice'},
+                {data:'integralTimes'},
+                {data:'promoteJy'},
+                {data:'integralPromote'},
+                {data:'invatePromote'},
+                {data:'meanwhileIptimizeNum'},
+                {data:'preRetain'},
+                {data:'delay'},
+                {data:'integralExchange'}
+            ],
+            language:tablelang
+        });
+    }
+</script>
+</body>
+</html>

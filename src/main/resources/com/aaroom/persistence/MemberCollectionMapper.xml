@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.wechat.persistence.MemberCollectionMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.wechat.bean.MemberCollection" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="hotel_id" property="hotel_id" jdbcType="VARCHAR" />
+    <result column="member_id" property="member_id" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="is_active" property="isActive" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hotel_id, member_id, create_time, update_time, creater_id, updater_id, is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_collection
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_collection
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.wechat.bean.MemberCollection" >
+    insert into member_collection (id, hotel_id, member_id, 
+      create_time, update_time, creater_id, 
+      updater_id, is_active)
+    values (#{id,jdbcType=INTEGER}, #{hotelId,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, 
+      #{updaterId,jdbcType=INTEGER}, #{isActive,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.wechat.bean.MemberCollection" >
+    insert into member_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hotel_id != null" >
+        hotel_id,
+      </if>
+      <if test="member_id != null" >
+        member_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="updaterId != null" >
+        updater_id,
+      </if>
+      <if test="isActive != null" >
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hotel_id != null" >
+        #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="member_id != null" >
+        #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="updaterId != null" >
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null" >
+        #{isActive,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.wechat.bean.MemberCollection" >
+    update member_collection
+    <set >
+      <if test="hotel_id != null" >
+        hotel_id = #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="member_id != null" >
+        member_id = #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=INTEGER},
+      </if>
+      <if test="updaterId != null" >
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="isActive != null" >
+        is_active = #{isActive,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.wechat.bean.MemberCollection" >
+    update member_collection
+    set hotel_id = #{hotelId,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getMemberCollectionByMemberId" parameterType="string" resultType="com.aaroom.wechat.bean.MemberCollection">
+    select * from member_collection where member_id = #{member_id}
+  </select>
+  <select id="getMemberCollectionByEntity" resultType="com.aaroom.wechat.bean.MemberCollection">
+    select *
+    from member_collection
+    where 1=1
+    <if test="hotel_id != null" >
+      and hotel_id = #{hotel_id,jdbcType=VARCHAR}
+    </if>
+    <if test="member_id != null" >
+      and member_id = #{member_id,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByEntity" parameterType="com.aaroom.wechat.bean.MemberCollection">
+    delete from member_collection
+    where 1=1
+    <if test="id != null" >
+      and #{id,jdbcType=INTEGER}
+    </if>
+    <if test="hotel_id != null" >
+      and hotel_id = #{hotel_id,jdbcType=VARCHAR}
+    </if>
+    <if test="member_id != null" >
+      and member_id = #{member_id,jdbcType=VARCHAR}
+    </if>
+    <if test="createTime != null" >
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updateTime != null" >
+      and update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createrId != null" >
+      and creater_id = #{createrId,jdbcType=INTEGER}
+    </if>
+    <if test="updaterId != null" >
+      and updater_id = #{updaterId,jdbcType=INTEGER}
+    </if>
+    <if test="isActive != null" >
+      and is_active = #{isActive,jdbcType=TINYINT}
+    </if>
+  </delete>
+</mapper>

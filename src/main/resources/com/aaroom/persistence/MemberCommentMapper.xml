@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.wechat.persistence.MemberCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.wechat.bean.MemberComment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="member_id" property="member_id" jdbcType="VARCHAR" />
+    <result column="hotel_id" property="hotel_id" jdbcType="VARCHAR" />
+    <result column="order_id" property="order_id" jdbcType="VARCHAR" />
+    <result column="utility" property="utility" jdbcType="VARCHAR" />
+    <result column="comment_text" property="comment_text" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="creater_id" jdbcType="INTEGER" />
+    <result column="updater_id" property="updater_id" jdbcType="INTEGER" />
+    <result column="is_active" property="is_active" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, member_id, hotel_id, order_id, utility, comment_text, create_time, update_time, 
+    creater_id, updater_id, is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.aaroom.wechat.bean.MemberComment" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from member_comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.wechat.bean.MemberComment" >
+    insert into member_comment (id, member_id, hotel_id, 
+      order_id, utility, comment_text, 
+      create_time, update_time, creater_id, 
+      updater_id, is_active)
+    values (#{id,jdbcType=INTEGER}, #{memberId,jdbcType=VARCHAR}, #{hotelId,jdbcType=VARCHAR}, 
+      #{orderId,jdbcType=VARCHAR}, #{utility,jdbcType=VARCHAR}, #{commentText,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, 
+      #{updaterId,jdbcType=INTEGER}, #{isActive,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.wechat.bean.MemberComment" >
+    insert into member_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="member_id != null" >
+        member_id,
+      </if>
+      <if test="hotel_id != null" >
+        hotel_id,
+      </if>
+      <if test="order_id != null" >
+        order_id,
+      </if>
+      <if test="utility != null" >
+        utility,
+      </if>
+      <if test="comment_text != null" >
+        comment_text,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="member_id != null" >
+        #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel_id != null" >
+        #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="order_id != null" >
+        #{order_id,jdbcType=VARCHAR},
+      </if>
+      <if test="utility != null" >
+        #{utility,jdbcType=VARCHAR},
+      </if>
+      <if test="comment_text != null" >
+        #{comment_text,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective"  >
+    update member_comment
+    <set >
+      <if test="member_id != null" >
+        member_id = #{member_id,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel_id != null" >
+        hotel_id = #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="order_id != null" >
+        order_id = #{order_id,jdbcType=VARCHAR},
+      </if>
+      <if test="utility != null" >
+        utility = #{utility,jdbcType=VARCHAR},
+      </if>
+      <if test="comment_text != null" >
+        comment_text = #{comment_text,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.wechat.bean.MemberComment" >
+    update member_comment
+    set member_id = #{memberId,jdbcType=VARCHAR},
+      hotel_id = #{hotelId,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      utility = #{utility,jdbcType=VARCHAR},
+      comment_text = #{commentText,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getMemberCommentByParams" resultType="com.aaroom.wechat.bean.MemberComment">
+    select  <include refid="Base_Column_List" />
+    from member_comment
+    where 1=1
+    <if test="member_id != null" >
+      and member_id = #{member_id,jdbcType=VARCHAR}
+    </if>
+    <if test="hotel_id != null" >
+        and hotel_id = #{hotel_id,jdbcType=VARCHAR}
+    </if>
+    <if test="order_id != null" >
+        and order_id = #{order_id,jdbcType=VARCHAR}
+    </if>
+    <if test="utility != null" >
+        and utility = #{utility,jdbcType=VARCHAR}
+    </if>
+    <if test="comment_text != null" >
+        and comment_text = #{comment_text,jdbcType=VARCHAR}
+    </if>
+    <if test="is_active != null" >
+      and is_active = #{is_active,jdbcType=TINYINT}
+    </if>
+  </select>
+
+  <select id="getCommentListByParams" resultType="java.util.Map">
+    SELECT
+    mc.id,
+    sb.province,
+    sb.city,
+    IFNULL(sb.shop_name,"")
+    shop_name,
+    IFNULL(mc.utility,"")
+    utility,
+    IFNULL(m.`name`,"")
+    `name`,
+    IFNULL(m.phone_num,"")
+    phone_num,
+    IFNULL(mc.comment_text,"")
+    comment_text,
+    IFNULL(ao.order_no,"")
+    order_no,
+    mc.is_active
+    FROM
+	member_comment mc
+    LEFT JOIN aa_order ao ON ao.hotel_code = mc.hotel_id
+    AND ao.member_id = mc.member_id
+    AND mc.order_id = ao.order_no
+    LEFT JOIN member m ON m.id = mc.member_id
+    LEFT JOIN shop_base sb ON sb.smhotel_code = mc.hotel_id
+    WHERE 1=1
+    and
+	ao.comment_status = 1
+    and sb.is_active = 1
+    <if test="is_active != null" >
+      and mc.is_active = #{is_active,jdbcType=TINYINT}
+    </if>
+    <if test="begin_time!='' and begin_time!=null">
+      and mc.create_time>=#{begin_time}
+    </if>
+    <if test="end_time!='' and end_time!=null">
+      and mc.create_time&lt;=#{end_time}
+    </if>
+    <if test="province!='' and province!=null">
+      and sb.province = #{province}
+    </if>
+    <if test="city!='' and city!=null">
+      and sb.city = #{city}
+    </if>
+    <if test="hotel_id!='' and hotel_id!=null">
+      and sb.smhotel_code = #{hotel_id}
+    </if>
+    order by mc.create_time desc
+  </select>
+</mapper>

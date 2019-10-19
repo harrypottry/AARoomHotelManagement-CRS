@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.RoomUseMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.RoomUse" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="atime" property="atime" jdbcType="TIMESTAMP" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="rtid" property="rtid" jdbcType="VARCHAR" />
+    <result column="rtname" property="rtname" jdbcType="VARCHAR" />
+    <result column="roomcounts" property="roomcounts" jdbcType="INTEGER" />
+    <result column="sellNum" property="sellnum" jdbcType="INTEGER" />
+    <result column="nouseNum" property="nousenum" jdbcType="INTEGER" />
+    <result column="nullNum" property="nullnum" jdbcType="INTEGER" />
+    <result column="repairNum" property="repairnum" jdbcType="INTEGER" />
+    <result column="freeNum" property="freenum" jdbcType="INTEGER" />
+    <result column="myNum" property="mynum" jdbcType="INTEGER" />
+    <result column="roomrate" property="roomrate" jdbcType="DOUBLE" />
+    <result column="rentalNum" property="rentalnum" jdbcType="DOUBLE" />
+    <result column="roomavgfee" property="roomavgfee" jdbcType="DOUBLE" />
+    <result column="money" property="money" jdbcType="DOUBLE" />
+    <result column="P04" property="p04" jdbcType="VARCHAR" />
+    <result column="P05" property="p05" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, atime, shopID, rtid, rtname, roomcounts, sellNum, nouseNum, nullNum, repairNum, 
+    freeNum, myNum, roomrate, rentalNum, roomavgfee, money, P04, P05, flag, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from roomuse
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from roomuse
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.RoomUse" >
+    insert into roomuse (id, atime, shopID, 
+      rtid, rtname, roomcounts, 
+      sellNum, nouseNum, nullNum, 
+      repairNum, freeNum, myNum, 
+      roomrate, rentalNum, roomavgfee, 
+      money, P04, P05, flag, 
+      createTime)
+    values (#{id,jdbcType=VARCHAR}, #{atime,jdbcType=TIMESTAMP}, #{shopid,jdbcType=VARCHAR}, 
+      #{rtid,jdbcType=VARCHAR}, #{rtname,jdbcType=VARCHAR}, #{roomcounts,jdbcType=INTEGER}, 
+      #{sellnum,jdbcType=INTEGER}, #{nousenum,jdbcType=INTEGER}, #{nullnum,jdbcType=INTEGER}, 
+      #{repairnum,jdbcType=INTEGER}, #{freenum,jdbcType=INTEGER}, #{mynum,jdbcType=INTEGER}, 
+      #{roomrate,jdbcType=DOUBLE}, #{rentalnum,jdbcType=DOUBLE}, #{roomavgfee,jdbcType=DOUBLE}, 
+      #{money,jdbcType=DOUBLE}, #{p04,jdbcType=VARCHAR}, #{p05,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.RoomUse" >
+    insert into roomuse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="atime != null" >
+        atime,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="rtid != null" >
+        rtid,
+      </if>
+      <if test="rtname != null" >
+        rtname,
+      </if>
+      <if test="roomcounts != null" >
+        roomcounts,
+      </if>
+      <if test="sellnum != null" >
+        sellNum,
+      </if>
+      <if test="nousenum != null" >
+        nouseNum,
+      </if>
+      <if test="nullnum != null" >
+        nullNum,
+      </if>
+      <if test="repairnum != null" >
+        repairNum,
+      </if>
+      <if test="freenum != null" >
+        freeNum,
+      </if>
+      <if test="mynum != null" >
+        myNum,
+      </if>
+      <if test="roomrate != null" >
+        roomrate,
+      </if>
+      <if test="rentalnum != null" >
+        rentalNum,
+      </if>
+      <if test="roomavgfee != null" >
+        roomavgfee,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="p04 != null" >
+        P04,
+      </if>
+      <if test="p05 != null" >
+        P05,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        #{atime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtid != null" >
+        #{rtid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtname != null" >
+        #{rtname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcounts != null" >
+        #{roomcounts,jdbcType=INTEGER},
+      </if>
+      <if test="sellnum != null" >
+        #{sellnum,jdbcType=INTEGER},
+      </if>
+      <if test="nousenum != null" >
+        #{nousenum,jdbcType=INTEGER},
+      </if>
+      <if test="nullnum != null" >
+        #{nullnum,jdbcType=INTEGER},
+      </if>
+      <if test="repairnum != null" >
+        #{repairnum,jdbcType=INTEGER},
+      </if>
+      <if test="freenum != null" >
+        #{freenum,jdbcType=INTEGER},
+      </if>
+      <if test="mynum != null" >
+        #{mynum,jdbcType=INTEGER},
+      </if>
+      <if test="roomrate != null" >
+        #{roomrate,jdbcType=DOUBLE},
+      </if>
+      <if test="rentalnum != null" >
+        #{rentalnum,jdbcType=DOUBLE},
+      </if>
+      <if test="roomavgfee != null" >
+        #{roomavgfee,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="p04 != null" >
+        #{p04,jdbcType=VARCHAR},
+      </if>
+      <if test="p05 != null" >
+        #{p05,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.RoomUse" >
+    update roomuse
+    <set >
+      <if test="atime != null" >
+        atime = #{atime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtid != null" >
+        rtid = #{rtid,jdbcType=VARCHAR},
+      </if>
+      <if test="rtname != null" >
+        rtname = #{rtname,jdbcType=VARCHAR},
+      </if>
+      <if test="roomcounts != null" >
+        roomcounts = #{roomcounts,jdbcType=INTEGER},
+      </if>
+      <if test="sellnum != null" >
+        sellNum = #{sellnum,jdbcType=INTEGER},
+      </if>
+      <if test="nousenum != null" >
+        nouseNum = #{nousenum,jdbcType=INTEGER},
+      </if>
+      <if test="nullnum != null" >
+        nullNum = #{nullnum,jdbcType=INTEGER},
+      </if>
+      <if test="repairnum != null" >
+        repairNum = #{repairnum,jdbcType=INTEGER},
+      </if>
+      <if test="freenum != null" >
+        freeNum = #{freenum,jdbcType=INTEGER},
+      </if>
+      <if test="mynum != null" >
+        myNum = #{mynum,jdbcType=INTEGER},
+      </if>
+      <if test="roomrate != null" >
+        roomrate = #{roomrate,jdbcType=DOUBLE},
+      </if>
+      <if test="rentalnum != null" >
+        rentalNum = #{rentalnum,jdbcType=DOUBLE},
+      </if>
+      <if test="roomavgfee != null" >
+        roomavgfee = #{roomavgfee,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="p04 != null" >
+        P04 = #{p04,jdbcType=VARCHAR},
+      </if>
+      <if test="p05 != null" >
+        P05 = #{p05,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.RoomUse" >
+    update roomuse
+    set atime = #{atime,jdbcType=TIMESTAMP},
+      shopID = #{shopid,jdbcType=VARCHAR},
+      rtid = #{rtid,jdbcType=VARCHAR},
+      rtname = #{rtname,jdbcType=VARCHAR},
+      roomcounts = #{roomcounts,jdbcType=INTEGER},
+      sellNum = #{sellnum,jdbcType=INTEGER},
+      nouseNum = #{nousenum,jdbcType=INTEGER},
+      nullNum = #{nullnum,jdbcType=INTEGER},
+      repairNum = #{repairnum,jdbcType=INTEGER},
+      freeNum = #{freenum,jdbcType=INTEGER},
+      myNum = #{mynum,jdbcType=INTEGER},
+      roomrate = #{roomrate,jdbcType=DOUBLE},
+      rentalNum = #{rentalnum,jdbcType=DOUBLE},
+      roomavgfee = #{roomavgfee,jdbcType=DOUBLE},
+      money = #{money,jdbcType=DOUBLE},
+      P04 = #{p04,jdbcType=VARCHAR},
+      P05 = #{p05,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 房型分析报表总数 -->
+  <select id="getRoomTypeAnalysisReportCount" resultType="HashMap">
+	     select count(1) recordTotal ,sum(ming.rentalNum) rentalNum, concat(round(if(sum(ming.rentalNum) = 0,0,sum(ming.rentalNum)/sum(ming.roomcounts))*100,2),'%') roomrate,
+       round(if(sum(ming.rentalNum) = 0,0,sum(ming.money)/sum(ming.rentalNum)),2) roomavgfee,sum(ming.money) money,
+       sum(ming.thismonthrentalNum) thismonthrentalNum, concat(round(if(sum(ming.thismonthrentalNum) = 0,0,sum(ming.thismonthrentalNum)/sum(ming.thismonthroomcounts))*100,2),'%') thismonthroomrate,
+       round(if(sum(ming.thismonthrentalNum) = 0,0,sum(ming.thismonthmoney)/sum(ming.thismonthrentalNum)),2) thismonthroomavgfee,sum(ming.thismonthmoney) thismonthmoney,
+       sum(ming.lastmonthrentalNum) lastmonthrentalNum, concat(round(if(sum(ming.lastmonthrentalNum) = 0,0,sum(ming.lastmonthrentalNum)/sum(ming.lastmonthroomcounts))*100,2),'%') lastmonthroomrate,
+       round(if(sum(ming.lastmonthrentalNum) = 0,0,sum(ming.lastmonthmoney)/sum(ming.lastmonthrentalNum)),2) lastmonthroomavgfee,sum(ming.lastmonthmoney) lastmonthmoney,
+       sum(ming.thisyearrentalNum) thisyearrentalNum, concat(round(if(sum(ming.thisyearrentalNum) = 0,0,sum(ming.thisyearrentalNum)/sum(ming.thisyearroomcounts))*100,2),'%') thisyearroomrate,
+       round(if(sum(ming.thisyearrentalNum) = 0,0,sum(ming.thisyearmoney)/sum(ming.thisyearrentalNum)),2) thisyearroomavgfee,sum(ming.thisyearmoney) thisyearmoney,
+       sum(ming.lastyearrentalNum) lastyearrentalNum, concat(round(if(sum(ming.lastyearrentalNum) = 0,0,sum(ming.lastyearrentalNum)/sum(ming.lastyearroomcounts))*100,2),'%') lastyearroomrate,
+       round(if(sum(ming.lastyearrentalNum) = 0,0,sum(ming.lastyearmoney)/sum(ming.lastyearrentalNum)),2) lastyearroomavgfee,sum(ming.lastyearmoney) lastyearmoney,
+       concat(round(sum(ming.rentalNumzzl)/count(1),2),'%') rentalNumzzl,
+			 concat(round(sum(ming.roomratezzl)/count(1),2),'%') roomratezzl,
+       concat(round(sum(ming.roomavgfeezzl)/count(1),2),'%') roomavgfeezzl,
+       concat(round(sum(ming.moneyzzl)/count(1),2),'%') moneyzzl
+	from (
+  		select rm.rtname,rm.rentalNum,concat(rm.roomrate,'%') roomrate,rm.roomavgfee,rm.money,rm.roomcounts,
+       thismonth.rentalNum thismonthrentalNum,concat(truncate(thismonth.roomrate*100,2),'%')  thismonthroomrate,
+       truncate(thismonth.roomavgfee,2) thismonthroomavgfee,thismonth.money thismonthmoney,thismonth.roomcounts thismonthroomcounts,
+       IFNULL(lastmonth.rentalNum,0) lastmonthrentalNum,concat(truncate(IFNULL(lastmonth.roomrate,0)*100,2),'%') lastmonthroomrate,
+       truncate(IFNULL(lastmonth.roomavgfee,0),2) lastmonthroomavgfee,IFNULL(lastmonth.money,0) lastmonthmoney,IFNULL(lastmonth.roomcounts,0) lastmonthroomcounts,
+       thisyear.rentalNum thisyearrentalNum,concat(truncate(thisyear.roomrate*100,2),'%') thisyearroomrate,
+       truncate(thisyear.roomavgfee,2) thisyearroomavgfee,thisyear.money thisyearmoney,thisyear.roomcounts thisyearroomcounts,
+       IFNULL(lastyear.rentalNum,0) lastyearrentalNum,concat(truncate(IFNULL(lastyear.roomrate,0)*100,2),'%') lastyearroomrate,
+       IFNULL(lastyear.roomavgfee,0) lastyearroomavgfee,IFNULL(lastyear.money,0) lastyearmoney,IFNULL(lastyear.roomcounts,0) lastyearroomcounts,
+        if(IFNULL(lastyear.rentalNum,0) = 0,0,concat(truncate(((thisyear.rentalNum-IFNULL(lastyear.rentalNum,0))/lastyear.rentalNum)*100,2),'%'))  rentalNumzzl,
+        if(IFNULL(lastyear.roomrate,0) = 0,0,concat(truncate(((thisyear.roomrate-IFNULL(lastyear.roomrate,0))/lastyear.roomrate)*100,2),'%')) roomratezzl,
+        if(IFNULL(lastyear.roomavgfee,0) = 0,0,concat(truncate(((thisyear.roomavgfee-IFNULL(lastyear.roomavgfee,0))/lastyear.roomavgfee)*100,2),'%')) roomavgfeezzl,
+				if(IFNULL(lastyear.money,0) = 0,0,concat(truncate(((thisyear.money-IFNULL(lastyear.money,0))/lastyear.money)*100,2),'%')) moneyzzl
+		from roomuse rm
+		LEFT JOIN (select rm.rtname,sum(IFNULL(rm.rentalNum,0))  rentalNum,if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.rentalNum,0))/sum(IFNULL(rm.roomcounts,0))) roomrate,
+					if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.money,0))/sum(IFNULL(rm.rentalNum,0))) roomavgfee,sum(IFNULL(rm.money,0)) money,sum(IFNULL(rm.roomcounts,0)) roomcounts
+					from roomuse rm
+					where rm.flag = 1 AND rm.shopID = #{shopID} and DATEDIFF(rm.atime,#{thismonthAtimeStart})>=0
+                     <![CDATA[      and DATEDIFF(rm.atime,#{thismonthAtimeEnd})<=0  ]]>
+					GROUP BY rm.rtname) thismonth on thismonth.rtname = rm.rtname
+		LEFT JOIN (select rm.rtname,sum(IFNULL(rm.rentalNum,0))  rentalNum,if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.rentalNum,0))/sum(IFNULL(rm.roomcounts,0))) roomrate,
+					if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.money,0))/sum(IFNULL(rm.rentalNum,0))) roomavgfee,sum(IFNULL(rm.money,0)) money,sum(IFNULL(rm.roomcounts,0)) roomcounts
+					from roomuse rm
+					where rm.flag = 1 AND rm.shopID = #{shopID} and DATEDIFF(rm.atime,#{lastmonthAtimeStart})>=0
+                     <![CDATA[      and DATEDIFF(rm.atime,#{lastmonthAtimeEnd})<=0  ]]>
+					GROUP BY rm.rtname) lastmonth on lastmonth.rtname = rm.rtname
+		left join (select rm.rtname,sum(IFNULL(rm.rentalNum,0))  rentalNum,if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.rentalNum,0))/sum(IFNULL(rm.roomcounts,0))) roomrate,
+					if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.money,0))/sum(IFNULL(rm.rentalNum,0))) roomavgfee,sum(IFNULL(rm.money,0)) money,sum(IFNULL(rm.roomcounts,0)) roomcounts
+				from roomuse rm
+				where rm.flag = 1 AND rm.shopID = #{shopID} and DATEDIFF(rm.atime,#{thisyearAtimeStart})>=0
+                     <![CDATA[      and DATEDIFF(rm.atime,#{thisyearAtimeEnd})<=0  ]]>
+				GROUP BY rm.rtname) thisyear on thisyear.rtname = rm.rtname
+		LEFT JOIN (select rm.rtname,sum(IFNULL(rm.rentalNum,0))  rentalNum,if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.rentalNum,0))/sum(IFNULL(rm.roomcounts,0))) roomrate,
+					if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.money,0))/sum(IFNULL(rm.rentalNum,0))) roomavgfee,sum(IFNULL(rm.money,0)) money,sum(IFNULL(rm.roomcounts,0)) roomcounts
+			from roomuse rm
+			where rm.flag = 1 AND rm.shopID = #{shopID} and DATEDIFF(rm.atime,#{lastyearAtimeStart})>=0
+                     <![CDATA[      and DATEDIFF(rm.atime,#{lastyearAtimeEnd})<=0  ]]>
+			GROUP BY rm.rtname) lastyear on lastyear.rtname = rm.rtname
+		LEFT JOIN (select rm.rtname,sum(IFNULL(rm.rentalNum,0))  rentalNum,if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.rentalNum,0))/sum(IFNULL(rm.roomcounts,0))) roomrate,
+					if(sum(IFNULL(rm.rentalNum,0)) = 0,0,sum(IFNULL(rm.money,0))/sum(IFNULL(rm.rentalNum,0))) roomavgfee,sum(IFNULL(rm.money,0)) money,sum(IFNULL(rm.roomcounts,0)) roomcounts
+			from roomuse rm
+			where rm.flag = 1 AND rm.shopID = #{shopID} and DATEDIFF(rm.atime,#{myStart})>=0
+                     <![CDATA[      and DATEDIFF(rm.atime,#{myEnd})<=0  ]]>
+			GROUP BY rm.rtname) mytimediy on mytimediy.rtname = rm.rtname
+		where  rm.shopID = #{shopID} and rm.atime = #{atime}
+		) ming
+	</select>
+</mapper>

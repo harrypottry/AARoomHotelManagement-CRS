@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.DongleMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.Dongle" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="user_pin" property="userPin" jdbcType="VARCHAR" />
+    <result column="so_pin" property="soPin" jdbcType="VARCHAR" />
+    <result column="secret_key" property="secretKey" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="last_repair" property="lastRepair" jdbcType="VARCHAR" />
+    <result column="last_time" property="lastTime" jdbcType="TIMESTAMP" />
+    <result column="pid_seed" property="pidSeed" jdbcType="VARCHAR" />
+    <result column="so_pin_seed" property="soPinSeed" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shangmei.beans.Dongle" extends="BaseResultMap" >
+    <result column="store_data" property="storeData" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, shop_id, pid, user_pin, so_pin, secret_key, flag, create_by, create_time, 
+    last_repair, last_time, pid_seed, so_pin_seed, sn
+  </sql>
+  <sql id="Blob_Column_List" >
+    store_data
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dongle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dongle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.Dongle" >
+    insert into dongle (id, customer_id, shop_id, 
+      pid, user_pin, so_pin, 
+      secret_key, flag, create_by, 
+      create_time, last_repair, last_time, 
+      pid_seed, so_pin_seed, sn, 
+      store_data)
+    values (#{id,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=VARCHAR}, #{userPin,jdbcType=VARCHAR}, #{soPin,jdbcType=VARCHAR}, 
+      #{secretKey,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lastRepair,jdbcType=VARCHAR}, #{lastTime,jdbcType=TIMESTAMP}, 
+      #{pidSeed,jdbcType=VARCHAR}, #{soPinSeed,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, 
+      #{storeData,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.Dongle" >
+    insert into dongle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="userPin != null" >
+        user_pin,
+      </if>
+      <if test="soPin != null" >
+        so_pin,
+      </if>
+      <if test="secretKey != null" >
+        secret_key,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lastRepair != null" >
+        last_repair,
+      </if>
+      <if test="lastTime != null" >
+        last_time,
+      </if>
+      <if test="pidSeed != null" >
+        pid_seed,
+      </if>
+      <if test="soPinSeed != null" >
+        so_pin_seed,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="storeData != null" >
+        store_data,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="userPin != null" >
+        #{userPin,jdbcType=VARCHAR},
+      </if>
+      <if test="soPin != null" >
+        #{soPin,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null" >
+        #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastRepair != null" >
+        #{lastRepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pidSeed != null" >
+        #{pidSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="soPinSeed != null" >
+        #{soPinSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="storeData != null" >
+        #{storeData,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.Dongle" >
+    update dongle
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="userPin != null" >
+        user_pin = #{userPin,jdbcType=VARCHAR},
+      </if>
+      <if test="soPin != null" >
+        so_pin = #{soPin,jdbcType=VARCHAR},
+      </if>
+      <if test="secretKey != null" >
+        secret_key = #{secretKey,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastRepair != null" >
+        last_repair = #{lastRepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pidSeed != null" >
+        pid_seed = #{pidSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="soPinSeed != null" >
+        so_pin_seed = #{soPinSeed,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="storeData != null" >
+        store_data = #{storeData,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shangmei.beans.Dongle" >
+    update dongle
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      user_pin = #{userPin,jdbcType=VARCHAR},
+      so_pin = #{soPin,jdbcType=VARCHAR},
+      secret_key = #{secretKey,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_repair = #{lastRepair,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      pid_seed = #{pidSeed,jdbcType=VARCHAR},
+      so_pin_seed = #{soPinSeed,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      store_data = #{storeData,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.Dongle" >
+    update dongle
+    set customer_id = #{customerId,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      user_pin = #{userPin,jdbcType=VARCHAR},
+      so_pin = #{soPin,jdbcType=VARCHAR},
+      secret_key = #{secretKey,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=INTEGER},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_repair = #{lastRepair,jdbcType=VARCHAR},
+      last_time = #{lastTime,jdbcType=TIMESTAMP},
+      pid_seed = #{pidSeed,jdbcType=VARCHAR},
+      so_pin_seed = #{soPinSeed,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

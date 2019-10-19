@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>评价管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--会员列表-->
+            <div class="card">
+                <ul class="card-body nav" id="distpicker">
+                    <li>
+                        <b>评价时间：</b>
+                        <input type="text" class="form-control beginTime" data-name="begin_time" readonly>
+                        <input type="text" class="form-control endTime" data-name="end_time" readonly>
+                    </li>
+                    <li>
+                        <b>省份：</b>
+                        <select class="form-control" data-name="province" id="province"></select>
+                    </li>
+                    <li>
+                        <b>城市：</b>
+                        <select class="form-control" data-name="city" id="city"></select>
+                        <select style="display:none"></select>
+                    </li>
+                    <li>
+                        <b>显示状态：</b>
+                        <select class="form-control" data-name="is_active">
+                            <option value="2">全部</option>
+                            <option value="0">客户端未显示</option>
+                            <option value="1">客户端已显示</option>
+
+                        </select>
+                    </li>
+                    <li>
+                        <b>酒店名称：</b>
+                        <input type="text" class="form-control" value="全部酒店" name="0" data-name="hotel_id" id="quickhotel">
+                    </li>
+                    <li>
+                        <span class="btn btn-danger" onclick="request()">查询</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="table-header row">
+                <ul class="nav">
+                    <li><span class="btn btn-danger btn-sm allcheckd" data-status="true">全选</span></li>
+                    <li><span class="btn btn-danger btn-sm allbtn" data-status="1">打开显示</span></li>
+                    <li><span class="btn btn-danger btn-sm allbtn" data-status="0">关闭显示</span></li>
+                </ul>
+            </div>
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                <tr>
+                    <th>选择</th>
+                    <th>评价日期</th>
+                    <th>订单编号</th>
+                    <th>酒店名称</th>
+                    <th>会员姓名</th>
+                    <th>会员电话</th>
+                    <th>星级</th>
+                    <th>评价内容</th>
+                    <!--<th>客户端显示状态</th>-->
+                    <th>客户端显示状态</th>
+                </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
+</div>
+<div class="warn">
+    <div></div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap-datepicker.js"></script><!--时间选择-->
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/packer.js"></script><!--模糊查询-->
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/distpicker.js"></script><!--省市县-->
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    $(document).ready(function(){
+        $quickQuery({"quickhotel":hotels},{'isPage':false});//酒店模糊查询
+        $("#distpicker").distpicker({autoSelect: false});//省市
+        request();//页面信息
+    });
+    // 全选
+    $('.allcheckd').click(function (status) {
+        status=$(this).attr('data-status');
+        if(status=='true'){
+            $('input[type="checkbox"]').each(function () {
+                $(this)[0].checked=true;
+            });
+            $(this).attr('data-status','false');
+        }else{
+            $('input[type="checkbox"]').each(function () {
+                $(this)[0].checked=false;
+            });
+            $(this).attr('data-status','true');
+        }
+    });
+    $(document).on("click","span.getbtn",function(id,status){//点击操作内按钮
+        whether($(this).attr('data-id'),$(this).attr('data-status'),$(this));
+    });
+    $('.allbtn').click(function(status){
+        whether('',$(this).attr('data-status'),'');
+    });
+    function whether(Id,status,$dom,datas){
+        datas={ids:[],is_active:status};
+        if(Id){//单独控制
+            datas.ids.push(Id);
+        }else{//多个操作
+            if($('input[type="checkbox"]:checked').length>0){
+                $('input[type="checkbox"]:checked').each(function(){
+                    datas.ids.push($(this).attr('data-id'));
+                });
+            }
+        }
+        if(datas.ids.length=='0'){
+            warn('请选择后再操作！');return
+        }
+        $.ajax({
+            url :'/console/api/updateCommentByIds',
+            contentType: "application/json;charset=UTF-8",
+            data:JSON.stringify(datas),
+            type: "POST",
+            success:function(data){
+                if(data.errorDesc=='success'){
+                    if($dom){//单独操作
+                        if(status=='1'){//开启成功
+                            $dom.html('显示中').attr('data-status','0');
+                            // $dom.parent('td').prev('td').html('正在显示');
+                        }else{//关闭成功
+                            $dom.html('未显示').attr('data-status','1');
+                            // $dom.parent('td').prev('td').html('未显示');
+                        }
+                    }else{//多个操作
+                        warn('操作成功！');
+                        request();//页面信息
+                    }
+                }else{
+                    warn('操作失败，请重新操作！');
+                }
+            }
+        })
+    }
+    function request(datas,pageCount){//获取页面信息
+        datas={};
+        $('.form-control').each(function(name){
+            name=$(this).attr('data-name');
+            if(name=='hotel_id'){
+                datas[name]=$(this).attr('name');
+            }else{
+                datas[name]=$(this).val();
+            }
+        });
+        $('#table').dataTable({
+            scrollY:window.innerHeight-413,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:true,
+            aLengthMenu:[20],
+            filter:false,
+            serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                datas.pageNo=(data.start / data.length)+1;//当前页码
+                datas.pageSize='20';//每页条数
+                $.ajax({
+                    type:"POST",
+                    url:'/console/api/getMemberCommentByParams',
+                    cache: false,//禁用缓存
+                    data:datas,//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        $('#quickhotel').val(hotelbug[datas.hotel_id]);//酒店名称重填
+                        pageCount=result.pageCount;//总页码
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.count;//返回数据全部记录
+                        returnData.recordsFiltered = result.count;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.dataList;//返回的数据列表
+                        callback(returnData);
+
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'id'},
+                {data:'create_time'},
+                {data:'order_no'},
+                {data:'shop_name'},
+                {data:'name'},
+                {data:'phone_num'},
+                {data:'utility'},
+                {data:'comment_text'},
+                // {data:'is_active'},
+                {data:'id'}
+            ],
+            columnDefs:[
+                {
+                    "render": function (value){
+                        return '<input name="execute" data-id='+value+' type="checkbox">';
+                    },
+                    "targets":0//操作列
+                },
+                // {
+                //     "render": function (value){
+                //         var status=['未显示','正在显示'];
+                //         return status[value];
+                //     },
+                //     "targets":-2//操作列
+                // },
+                {
+                    "render": function (value,type,row){
+                        if(row.is_active=='1'){//显示中
+                            return '<span class="getbtn" data-id='+value+' data-status="0">显示中</span>';
+                        }else{//未显示
+                            return '<span class="getbtn" data-id='+value+' data-status="1">未显示</span>';
+                        }
+
+                    },
+                    "targets":-1//操作列
+                }
+            ],
+            language:tablelang,
+            fnDrawCallback: function(table) {
+                if(pageCount>7){//页码大于7出现页码跳转方式
+                    $('#table_paginate .pagination').append('<li class="jump">跳至&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0);" class="page-link" data-dt-id="#table">GO</a></li>');
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

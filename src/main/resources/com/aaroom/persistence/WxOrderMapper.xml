@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.wechat.persistence.WxOrderMapper" >
+      <sql id="Base_Column_List" >
+        id, order_no, channel_name,
+        hotel_name, hotel_code, room_type_name,
+        member_id, room_num,price_total, order_time,begin_time,
+        end_time, arrival_time,status
+      </sql>
+      <insert id="insert" parameterType="com.aaroom.wechat.bean.Order"  useGeneratedKeys="true" keyProperty="id"
+              keyColumn="id">
+        insert into aa_order (id, order_no,channel_order_no ,channel_name,
+        hotel_name, hotel_code, room_type_name,room_type_code,
+        member_id, room_num,price_total, order_time,begin_time,
+        end_time, arrival_time,status,comment_status,address,pay_status,
+        room_night,
+        customer_name,contact_name,contact_phone,invoce_id,price_code,hasInvoice,remark
+        )
+        values (#{id}, #{order_no}, #{channel_order_no} , #{channel_name},
+        #{hotel_name}, #{hotel_code}, #{room_type_name}, #{room_type_code},
+        #{member_id}, #{room_num}, #{price_total}, #{order_time},#{begin_time},
+        #{end_time}, #{arrival_time},'接收预订',0,#{address},1,#{room_night},
+        #{customer_name},#{contact_name},#{contact_phone},#{invoce_id},#{price_code},#{hasInvoice},#{remark}
+        )
+      </insert>
+      <select id="getUsuallyHotelInfoByEmpAndStatus" resultType="com.aaroom.wechat.bean.Order">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+        aa_order ao
+        WHERE
+        ao.member_id = #{member_id,jdbcType=VARCHAR}
+        AND ao.status = #{status,jdbcType=VARCHAR}
+      </select>
+      <update id="updateOrderStatus">
+          UPDATE  aa_order set status = "已取消" ,pay_status = 5
+          WHERE  channel_order_no = #{channel_order_no} and order_no = #{order_no} and hotel_code = #{hotel_id}
+      </update>
+      <update id="updateOrderStatusFinally">
+         UPDATE aa_order ao
+         SET ao.comment_status = 1 , ao.pay_status = 3 ,ao.status = "已评价"
+         WHERE
+         ao.order_no = #{order_no}
+      </update>
+      <select id="queryOrderList" resultType="com.aaroom.wechat.bean.Order">
+        SELECT  id, order_no,channel_order_no ,channel_name,
+          hotel_name, hotel_code, room_type_name,
+          member_id, room_num, price_total , order_time,begin_time,
+          end_time, arrival_time,status,comment_status,address,pay_status
+          from aa_order
+          WHERE  member_id = #{member_id}
+          <if test= "pay_status != null">
+              and pay_status = #{pay_status}
+          </if>
+          <if test="comment_status != null">
+              and  comment_status = #{comment_status}
+          </if>
+          order by id desc
+    </select>
+    <select id="queryOrderByOrerNo" resultType="com.aaroom.wechat.bean.Order">
+            SELECT  id, order_no,channel_order_no ,channel_name,
+            hotel_name, hotel_code, room_type_name,
+            member_id, room_num,price_total, order_time,begin_time,
+            end_time, arrival_time,status,comment_status,address,pay_status
+            from aa_order
+            WHERE  channel_order_no = #{channel_order_no}
+    </select>
+    <update id="updateOrderPayStatus">
+            UPDATE  aa_order set status = "已支付",pay_status=4
+            WHERE  member_id = #{member_id} and order_no = #{order_no}
+    </update>
+    <insert id="relationOrderAndInvoice">
+          INSERT INTO order_invoice
+              <trim prefix="(" suffix=")" suffixOverrides="," >
+                    <if test="channel_order_no != null" >
+                        channel_order_no,
+                    </if>
+                    <if test="invoice_id != null" >
+                        invoice_id
+                    </if>
+              </trim>
+              <trim prefix="values (" suffix=")" suffixOverrides="," >
+                  <if test="channel_order_no != null" >
+                      #{channel_order_no},
+                  </if>
+                  <if test="invoice_id != null" >
+                      #{invoice_id}
+                  </if>
+              </trim>
+    </insert>
+    <select id="queryRelationByChannel_order_no" parameterType="string" resultType="integer">
+          SELECT invoice_id from order_invoice where channel_order_no = #{channel_order_no}
+    </select>
+    <select id="queryInvoiceByid" parameterType="integer" resultType="com.aaroom.wechat.bean.Invoice">
+          SELECT id,member_id,invoice_rise,company_name,company_number
+          from member_invoice WHERE id = #{invoiceid}
+    </select>
+    <select id="getMemeberLevelById" parameterType="string" resultType="string">
+          SELECT card_level_id FROM member
+          where id = #{memberID}
+    </select>
+    <select id="queryMemberIdByOrderNo" parameterType="string" resultType="string">
+        SELECT  member_id
+        from aa_order
+        WHERE  channel_order_no = #{order_no}
+    </select>
+    <select id="getNotCancelOrder" resultType="com.aaroom.wechat.bean.Order">
+        SELECT id, order_no,channel_order_no ,channel_name,
+        hotel_name, hotel_code, room_type_name,
+        member_id, room_num,price_total, order_time,begin_time,
+        end_time, arrival_time,status,comment_status,address,pay_status,room_night
+        from aa_order
+        where pay_status != 5
+    </select>
+    <update id="timingUpdateOrderStatus">
+        UPDATE aa_order SET
+        status = #{book_status_desc},
+            <if test="pay_status != null">
+                pay_status = #{pay_status}
+            </if>
+        where order_no = #{order_no} and channel_order_no =#{channel_order_no}
+    </update>
+    <select id="getOutTradeNo" resultType="string">
+        select out_trade_no from  wx_order
+        where goods_tag = #{channel_order_no}
+        and status = 1
+    </select>
+    <select id="getTotalFee" resultType="double">
+        SELECT total_fee from wx_order
+        where goods_tag = #{order_no} and out_trade_no = #{out_trade_no}
+    </select>
+    <select id="getArrivalTime" resultType="string">
+        SELECT arrival_time from aa_order
+        where channel_order_no = #{channel_order_no}
+    </select>
+    <select id="getOrderPayStatus" resultType="string">
+        SELECT status from wx_order
+        where out_trade_no = #{out_trade_no}
+    </select>
+    <select id="getRoomNumByOrderNo" resultType="integer">
+        SELECT room_num from aa_order
+        where order_no = #{order_no}
+    </select>
+    <update id="updateWXOrderPayStatus" parameterType="string">
+        UPDATE wx_order set status = 2
+        where out_trade_no = #{out_trade_no}
+    </update>
+    <update id="updateOrderNumber" >
+        UPDATE aa_order set order_no = #{order_no},status = '已支付',pay_status = 4
+        where  channel_order_no = #{channel_order_no}
+    </update>
+    <insert id="insertPriceListRelChannelOrderNo" parameterType="com.aaroom.model.Price">
+        INSERT into price_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="start != null" >
+                start,
+            </if>
+            <if test="end != null" >
+                end,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="aa_plus_price != null" >
+                aa_plus_price,
+            </if>
+            <if test="aa_pro_price != null" >
+                aa_pro_price,
+            </if>
+            <if test="channel_order_no != null" >
+                channel_order_no
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="start != null" >
+                #{start},
+            </if>
+            <if test="end != null" >
+                #{end},
+            </if>
+            <if test="price != null" >
+                #{price},
+            </if>
+            <if test="aa_plus_price != null" >
+                #{aa_plus_price},
+            </if>
+            <if test="aa_pro_price != null" >
+                #{aa_pro_price},
+            </if>
+            <if test="channel_order_no != null" >
+                #{channel_order_no}
+            </if>
+        </trim>
+    </insert>
+    <select id="getPriceListByChannelOrderNo" resultType="com.aaroom.model.Price">
+      SELECT * from price_order
+      where channel_order_no = #{channel_order_no}
+    </select>
+    <select id="getOrderPayStatusByChannelOrderNo" resultType="integer" parameterType="string">
+        select pay_status from aa_order
+        where channel_order_no = #{channel_order_no};
+    </select>
+    <select id="getOrderNoByChannelOrderNo" resultType="string" parameterType="string">
+        select order_no from aa_order
+        where channel_order_no = #{channel_order_no};
+    </select>
+    <update id="updateOrderStatusByChannelOrderNo" parameterType="string">
+        UPDATE aa_order SET status='取消', pay_status = 5
+        where channel_order_no = #{channel_order_no}
+    </update>
+</mapper>

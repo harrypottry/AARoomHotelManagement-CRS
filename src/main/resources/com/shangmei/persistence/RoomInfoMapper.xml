@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.RoomInfoMapper">
+  <select id="getRoomList" resultType="com.shangmei.model.RoomView">
+    select r.rName roomName,f.floorNum floorNum,rs.name roomStatus,rt.rTName roomType
+    from
+    room r
+    inner join  roomtype rt on r.rtid=rt.id and rt.flag=1
+    inner join  floor f on r.floorid=f.id and f.flag=1
+    inner join dictcodemap rs on rs.id=r.roomstatus
+    where r.shopid = #{shopID}
+    <if test="roomType != null and roomType != ''">
+      and rt.rTName =#{roomType}
+    </if>
+    <if test="roomStatus != null and roomStatus != ''">
+      and rs.name =#{roomStatus}
+    </if>
+  </select>
+  <select id="getRoomStatusByShopID" resultType="com.shangmei.model.RoomView">
+    select
+       rs.name roomStatus
+    from
+       room r
+    inner join dictcodemap rs on rs.id=r.roomstatus and r.flag = 1
+    where r.shopid = #{shopID}
+    group by rs.name;
+  </select>
+  <select id="getRoomTypeByShopID" resultType="com.shangmei.model.RoomView">
+    SELECT
+      rt.rTName roomType
+    from
+      room r
+    inner join  roomtype rt on r.rtid=rt.id and rt.flag=1
+    where r.shopid = #{shopID}
+    GROUP BY rt.rtname;
+  </select>
+</mapper>

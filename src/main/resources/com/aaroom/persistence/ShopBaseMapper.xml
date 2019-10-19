@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.persistence.ShopBaseMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.beans.ShopBase" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="boss_name" property="bossName" jdbcType="VARCHAR" />
+    <result column="shop_status" property="shopStatus" jdbcType="VARCHAR" />
+    <result column="smhotel_code" property="smhotelCode" jdbcType="VARCHAR" />
+    <result column="online_time" property="onlineTime" jdbcType="TIMESTAMP" />
+    <result column="pms_status" property="pmsStatus" jdbcType="INTEGER" />
+    <result column="postal_code" property="postalCode" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="decorate_time" property="decorateTime" jdbcType="TIMESTAMP" />
+    <result column="business_square" property="businessSquare" jdbcType="VARCHAR" />
+    <result column="building_detail" property="buildingDetail" jdbcType="VARCHAR" />
+    <result column="hasforeign" property="hasforeign" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="pay_method" property="payMethod" jdbcType="VARCHAR" />
+    <result column="shop_detail" property="shopDetail" jdbcType="VARCHAR" />
+    <result column="bd_name" property="bdName" jdbcType="VARCHAR" />
+    <result column="travel_guide" property="travelGuide" jdbcType="VARCHAR" />
+    <result column="warm_prompt" property="warmPrompt" jdbcType="VARCHAR" />
+    <result column="shop_service" property="shopService" jdbcType="VARCHAR" />
+    <result column="hotel_brand" property="hotelBrand" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="createrId" jdbcType="INTEGER" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="is_active" property="isActive" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, province, city, area, shop_name, boss_name, shop_status, smhotel_code, online_time, 
+    pms_status, postal_code, address_detail, decorate_time, business_square, building_detail, 
+    hasforeign, channel, pay_method, shop_detail, bd_name, travel_guide, warm_prompt, 
+    shop_service, hotel_brand, create_time, update_time, creater_id, updater_id, is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultType="com.aaroom.beans.ShopBase" parameterType="java.lang.Integer" >
+    select 
+    *
+    from shop_base
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shop_base
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.beans.ShopBase" >
+    insert into shop_base (id, province, city, 
+      area, shop_name, boss_name, 
+      shop_status, smhotel_code, online_time, 
+      pms_status, postal_code, address_detail, 
+      decorate_time, business_square, building_detail, 
+      hasforeign, channel, pay_method, 
+      shop_detail, bd_name, travel_guide, 
+      warm_prompt, shop_service, hotel_brand, 
+      create_time, update_time, creater_id, 
+      updater_id, is_active)
+    values (#{id,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, #{bossName,jdbcType=VARCHAR}, 
+      #{shopStatus,jdbcType=VARCHAR}, #{smhotelCode,jdbcType=VARCHAR}, #{onlineTime,jdbcType=TIMESTAMP}, 
+      #{pmsStatus,jdbcType=INTEGER}, #{postalCode,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, 
+      #{decorateTime,jdbcType=TIMESTAMP}, #{businessSquare,jdbcType=VARCHAR}, #{buildingDetail,jdbcType=VARCHAR}, 
+      #{hasforeign,jdbcType=VARCHAR}, #{channel,jdbcType=VARCHAR}, #{payMethod,jdbcType=VARCHAR}, 
+      #{shopDetail,jdbcType=VARCHAR}, #{bdName,jdbcType=VARCHAR}, #{travelGuide,jdbcType=VARCHAR}, 
+      #{warmPrompt,jdbcType=VARCHAR}, #{shopService,jdbcType=VARCHAR}, #{hotelBrand,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createrId,jdbcType=INTEGER}, 
+      #{updaterId,jdbcType=INTEGER}, #{isActive,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.beans.ShopBase" >
+    insert into shop_base
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="shop_name != null" >
+        shop_name,
+      </if>
+      <if test="boss_name != null" >
+        boss_name,
+      </if>
+      <if test="shop_status != null" >
+        shop_status,
+      </if>
+      <if test="smhotel_code != null" >
+        smhotel_code,
+      </if>
+      <if test="online_time != null" >
+        online_time,
+      </if>
+      <if test="pms_status != null" >
+        pms_status,
+      </if>
+      <if test="postal_code != null" >
+        postal_code,
+      </if>
+      <if test="address_detail != null" >
+        address_detail,
+      </if>
+      <if test="decorate_time != null" >
+        decorate_time,
+      </if>
+      <if test="business_square != null" >
+        business_square,
+      </if>
+      <if test="building_detail != null" >
+        building_detail,
+      </if>
+      <if test="hasforeign != null" >
+        hasforeign,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="pay_method != null" >
+        pay_method,
+      </if>
+      <if test="shop_detail != null" >
+        shop_detail,
+      </if>
+      <if test="bd_name != null" >
+        bd_name,
+      </if>
+      <if test="travel_guide != null" >
+        travel_guide,
+      </if>
+      <if test="warm_prompt != null" >
+        warm_prompt,
+      </if>
+      <if test="shop_service != null" >
+        shop_service,
+      </if>
+      <if test="hotel_brand != null" >
+        hotel_brand,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+      <if test="master_name != null" >
+        master_name,
+      </if>
+      <if test="shop_comment != null" >
+        shop_comment,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="fax != null" >
+        fax,
+      </if>
+      <if test="room_num != null" >
+        room_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_name != null" >
+        #{shop_name,jdbcType=VARCHAR},
+      </if>
+      <if test="boss_name != null" >
+        #{boss_name,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_status != null" >
+        #{shop_status,jdbcType=VARCHAR},
+      </if>
+      <if test="smhotel_code != null" >
+        #{smhotel_code,jdbcType=VARCHAR},
+      </if>
+      <if test="online_time != null" >
+        #{online_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pms_status != null" >
+        #{pms_status,jdbcType=INTEGER},
+      </if>
+      <if test="postal_code != null" >
+        #{postal_code,jdbcType=VARCHAR},
+      </if>
+      <if test="address_detail != null" >
+        #{address_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="decorate_time != null" >
+        #{decorate_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="business_square != null" >
+        #{business_square,jdbcType=VARCHAR},
+      </if>
+      <if test="building_detail != null" >
+        #{building_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="hasforeign != null" >
+        #{hasforeign,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_method != null" >
+        #{pay_method,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_detail != null" >
+        #{shop_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="bd_name != null" >
+        #{bd_name,jdbcType=VARCHAR},
+      </if>
+      <if test="travel_guide != null" >
+        #{travel_guide,jdbcType=VARCHAR},
+      </if>
+      <if test="warm_prompt != null" >
+        #{warm_prompt,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_service != null" >
+        #{shop_service,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel_brand != null" >
+        #{hotel_brand,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="master_name != null" >
+        #{master_name,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_comment != null" >
+        #{shop_comment,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="room_num != null" >
+        #{room_num,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.beans.ShopBase" >
+    update shop_base
+    <set >
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_name != null" >
+        shop_name = #{shop_name,jdbcType=VARCHAR},
+      </if>
+      <if test="boss_name != null" >
+        boss_name = #{boss_name,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_status != null" >
+        shop_status = #{shop_status,jdbcType=VARCHAR},
+      </if>
+      <if test="smhotel_code != null" >
+        smhotel_code = #{smhotel_code,jdbcType=VARCHAR},
+      </if>
+      <if test="online_time != null" >
+        online_time = #{online_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pms_status != null" >
+        pms_status = #{pms_status,jdbcType=INTEGER},
+      </if>
+      <if test="postal_code != null" >
+        postal_code = #{postal_code,jdbcType=VARCHAR},
+      </if>
+      <if test="address_detail != null" >
+        address_detail = #{address_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="decorate_time != null" >
+        decorate_time = #{decorate_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="business_square != null" >
+        business_square = #{business_square,jdbcType=VARCHAR},
+      </if>
+      <if test="building_detail != null" >
+        building_detail = #{building_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="hasforeign != null" >
+        hasforeign = #{hasforeign,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="pay_method != null" >
+        pay_method = #{pay_method,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_detail != null" >
+        shop_detail = #{shop_detail,jdbcType=VARCHAR},
+      </if>
+      <if test="bd_name != null" >
+        bd_name = #{bd_name,jdbcType=VARCHAR},
+      </if>
+      <if test="travel_guide != null" >
+        travel_guide = #{travel_guide,jdbcType=VARCHAR},
+      </if>
+      <if test="warm_prompt != null" >
+        warm_prompt = #{warm_prompt,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_service != null" >
+        shop_service = #{shop_service,jdbcType=VARCHAR},
+      </if>
+      <if test="hotel_brand != null" >
+        hotel_brand = #{hotel_brand,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+      <if test="master_name != null" >
+        master_name = #{master_name,jdbcType=VARCHAR},
+      </if>
+      <if test="shop_comment != null" >
+        shop_comment = #{shop_comment,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel= #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="room_num != null" >
+        room_num = #{room_num,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.aaroom.beans.ShopBase" >
+    update shop_base
+    set province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      boss_name = #{bossName,jdbcType=VARCHAR},
+      shop_status = #{shopStatus,jdbcType=VARCHAR},
+      smhotel_code = #{smhotelCode,jdbcType=VARCHAR},
+      online_time = #{onlineTime,jdbcType=TIMESTAMP},
+      pms_status = #{pmsStatus,jdbcType=INTEGER},
+      postal_code = #{postalCode,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      decorate_time = #{decorateTime,jdbcType=TIMESTAMP},
+      business_square = #{businessSquare,jdbcType=VARCHAR},
+      building_detail = #{buildingDetail,jdbcType=VARCHAR},
+      hasforeign = #{hasforeign,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      pay_method = #{payMethod,jdbcType=VARCHAR},
+      shop_detail = #{shopDetail,jdbcType=VARCHAR},
+      bd_name = #{bdName,jdbcType=VARCHAR},
+      travel_guide = #{travelGuide,jdbcType=VARCHAR},
+      warm_prompt = #{warmPrompt,jdbcType=VARCHAR},
+      shop_service = #{shopService,jdbcType=VARCHAR},
+      hotel_brand = #{hotelBrand,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      creater_id = #{createrId,jdbcType=INTEGER},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      is_active = #{isActive,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectShopBaseByParams" resultType="com.aaroom.beans.ShopBase">
+    select * from shop_base
+    where 1=1
+    and is_active =1
+    <if test="hotel_bd!='' and hotel_bd!=null">
+     <!--bind 标签的两个属性都是必选项， name 为绑定到上下文的变量名,value为OGNL表达式。-->
+      <bind name="pattern" value="'%' + hotel_bd + '%'"/>
+      and shop_name like concat( '%',#{pattern} ,'%')
+      or bd_name like concat( '%',#{pattern} ,'%')
+    </if>
+    <if test="begin_time!='' and begin_time!=null">
+      and create_time>=#{begin_time}
+    </if>
+    <if test="end_time!='' and end_time!=null">
+      and create_time&lt;=#{end_time}
+    </if>
+    <if test="province!='' and province!=null">
+      and province = #{province}
+    </if>
+    <if test="city!='' and city!=null">
+      and city = #{city}
+    </if>
+  </select>
+
+
+
+  <select id="selectByParams" resultType="com.aaroom.beans.ShopBase">
+    select * from shop_base
+    where 1=1
+    and smhotel_code = #{smhotel_code,jdbcType=VARCHAR}
+    and is_active = #{is_active,jdbcType=TINYINT}
+  </select>
+</mapper>

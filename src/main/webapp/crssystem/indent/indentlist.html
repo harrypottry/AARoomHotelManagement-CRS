@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--会员列表-->
+            <div class="card">
+                <ul class="card-body nav">
+                    <li>
+                        <b>入住时间：</b>
+                        <input type="text" class="form-control beginTime" data-name="beginTime" readonly>
+                        <input type="text" class="form-control endTime" data-name="endTime" readonly>
+                    </li>
+                    <li>
+                        <b>预定来源：</b>
+                        <select class="form-control" data-name="channel_name"><option value="">全部</option><option value="AA酒店(微信)">AA酒店(微信)</option></select>
+                    </li>
+                    <li>
+                        <b>订单状态：</b>
+                        <select class="form-control" data-name="status">
+                            <option value="">全部</option>
+                            <option value="取消">取消</option>
+                            <option value="已转入住">已转入住</option>
+                            <option value="待确认">待确认</option>
+                            <option value="拒绝">拒绝</option>
+                            <option value="接收">接收</option>
+                            <option value="预定">预定</option>
+                            <option value="部分转入住">部分转入住</option>
+                        </select>
+                    </li>
+                    <li>
+                        <b>支付状态：</b>
+                        <select class="form-control" data-name="pay_status">
+                            <option value="">全部</option>
+                            <option value="1">待支付</option>
+                            <option value="2">待评价</option>
+                            <option value="3">已评价</option>
+                            <option value="4">已支付</option>
+                            <option value="5">已取消</option>
+                        </select>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control" data-name="param" style="width:14.5rem" placeholder="订单号/手机号/姓名/分店号">
+                    </li>
+                    <li>
+                        <span class="btn btn-danger" onclick="request()">查询</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="table-header row">
+                <ul class="nav">
+                    <li><span>汇总</span><span class="phases"></span></li>
+                    <li><span>订单数量</span><span class="orderSum"></span></li>
+                    <li><span>间夜</span><span class="roomNight"></span></li>
+                    <!--<li><span>预付房费（元）</span><span>1180987</span></li>-->
+                    <li><span>房费（元）</span><span class="roomPrice"></span></li>
+                    <li><span>平均房价（元）</span><span class="avgPrice"></span></li>
+                </ul>
+            </div>
+            <table class="table table-striped" id="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>订单号</th>
+                        <th>预定来源</th>
+                        <th>分店号</th>
+                        <th>分店名称</th>
+                        <th>会员等级</th>
+                        <th>会员姓名</th>
+                        <th>手机号码</th>
+                        <th>房型</th>
+                        <th>间数</th>
+                        <th>价格</th>
+                        <!--<th>预付房费</th>-->
+                        <th>下单时间</th>
+                        <th>入住日期</th>
+                        <th>离店日期</th>
+                        <th>留房截止</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap-datepicker.js"></script><!--时间选择-->
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/options.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    $(document).ready(function(){
+        request();//页面信息
+    });
+    $(document).on("click","span.getbtn",function(){//点击操作内按钮
+        sessionStorage.setItem('channel_order_no',$(this).attr('data-id'));
+        location.href ='details.html';//本页打开
+        // window.open('details.html');//新窗口
+    });
+    function request(datas,pageCount){//获取页面信息
+        datas={};
+        $('.form-control').each(function(name){
+            name=$(this).attr('data-name');
+            datas[name]=$(this).val();
+        });
+        $('#table').dataTable({
+            scrollY:window.innerHeight-413,
+            scrollX:true,
+            destroy:true,
+            ordering:false,//排序
+            lengthChange:false,
+            paging:true,
+            aLengthMenu:[20],
+            filter:false,
+            serverSide: true,  //启用服务器端分页
+            searching:false,  //禁用原生搜索
+            ajax: function (data, callback, settings){
+                datas.pageNo=(data.start / data.length)+1;//当前页码
+                datas.pageSize='20';//每页条数
+                $.ajax({
+                    type:"GET",
+                    url:'/console/api/getOrderList',
+                    cache: false,//禁用缓存
+                    data:datas,//传入组装的参数
+                    dataType:"json",
+                    success: function (result) {
+                        $('.phases').html('（'+datas.beginTime+'至'+datas.endTime+'）');
+                        for(var i in result.count){
+                            $('.'+i).html(result.count[i]);
+                        }
+                        pageCount=result.data.pageCount;//总页码
+                        var returnData = {};//封装返回数据
+                        returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+                        returnData.recordsTotal = result.data.count;//返回数据全部记录
+                        returnData.recordsFiltered = result.data.count;//后台不实现过滤功能，每次查询均视作全部结果
+                        returnData.data = result.data.dataList;//返回的数据列表
+                        callback(returnData);
+                    }
+                });
+            },
+            // 列表表头字段
+            columns:[
+                {data:'channel_order_no'},
+                {data:'channel_name'},
+                {data:'hotel_code'},
+                {data:'hotel_name'},
+                {data:'member_level'},
+                {data:'member_name'},
+                {data:'phone_num'},
+                {data:'room_type_name'},
+                {data:'room_num'},
+                {data:'price_total'},
+                {data:'order_time'},
+                {data:'begin_time'},
+                {data:'end_time'},
+                {data:'arrival_time'},
+                {data:'status'},
+                {data:'channel_order_no'}
+            ],
+            columnDefs:[
+                {
+                    "render": function (value){
+                        return '<span class="getbtn" data-id='+value+'>订单详情</span>';
+                    },
+                    "targets":-1 //操作列
+                }
+            ],
+            language:tablelang,
+            fnDrawCallback: function(table) {
+                if(pageCount>7){//页码大于7出现页码跳转方式
+                    $('#table_paginate .pagination').append('<li class="jump">跳至&nbsp;&nbsp;<input type="text">&nbsp;&nbsp;页&nbsp;&nbsp;<a href="javascript:void(0);" class="page-link" data-dt-id="#table">GO</a></li>');
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

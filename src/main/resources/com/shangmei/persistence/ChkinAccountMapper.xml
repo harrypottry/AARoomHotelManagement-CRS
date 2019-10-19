@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shangmei.persistence.ChkinAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.shangmei.beans.ChkinAccount" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="shopID" property="shopid" jdbcType="VARCHAR" />
+    <result column="atime" property="atime" jdbcType="DATE" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
+    <result column="field" property="field" jdbcType="VARCHAR" />
+    <result column="bookFieldNo" property="bookfieldno" jdbcType="VARCHAR" />
+    <result column="teamNo" property="teamno" jdbcType="VARCHAR" />
+    <result column="fieldNo" property="fieldno" jdbcType="VARCHAR" />
+    <result column="classID" property="classid" jdbcType="VARCHAR" />
+    <result column="staffID" property="staffid" jdbcType="VARCHAR" />
+    <result column="customeType" property="custometype" jdbcType="VARCHAR" />
+    <result column="openRoomType" property="openroomtype" jdbcType="VARCHAR" />
+    <result column="indateTime" property="indatetime" jdbcType="TIMESTAMP" />
+    <result column="rTID" property="rtid" jdbcType="VARCHAR" />
+    <result column="rID" property="rid" jdbcType="VARCHAR" />
+    <result column="mprc" property="mprc" jdbcType="DECIMAL" />
+    <result column="disPrc" property="disprc" jdbcType="DECIMAL" />
+    <result column="bedNum" property="bednum" jdbcType="INTEGER" />
+    <result column="breakfastNum" property="breakfastnum" jdbcType="INTEGER" />
+    <result column="guestNum" property="guestnum" jdbcType="INTEGER" />
+    <result column="stayDay" property="stayday" jdbcType="INTEGER" />
+    <result column="leaveTime" property="leavetime" jdbcType="TIMESTAMP" />
+    <result column="iSSecrecy" property="issecrecy" jdbcType="INTEGER" />
+    <result column="iSCard" property="iscard" jdbcType="INTEGER" />
+    <result column="iSIntegral" property="isintegral" jdbcType="INTEGER" />
+    <result column="iSInvoice" property="isinvoice" jdbcType="INTEGER" />
+    <result column="invoiceName" property="invoicename" jdbcType="VARCHAR" />
+    <result column="agreementID" property="agreementid" jdbcType="VARCHAR" />
+    <result column="seller" property="seller" jdbcType="VARCHAR" />
+    <result column="prefeID" property="prefeid" jdbcType="VARCHAR" />
+    <result column="prefeName" property="prefename" jdbcType="VARCHAR" />
+    <result column="beginDate" property="begindate" jdbcType="TIMESTAMP" />
+    <result column="endDate" property="enddate" jdbcType="TIMESTAMP" />
+    <result column="stopDate" property="stopdate" jdbcType="TIMESTAMP" />
+    <result column="iSNoSee" property="isnosee" jdbcType="INTEGER" />
+    <result column="deposit" property="deposit" jdbcType="DECIMAL" />
+    <result column="payment01" property="payment01" jdbcType="VARCHAR" />
+    <result column="payMoney01" property="paymoney01" jdbcType="DECIMAL" />
+    <result column="payment02" property="payment02" jdbcType="VARCHAR" />
+    <result column="payMoney02" property="paymoney02" jdbcType="DECIMAL" />
+    <result column="payment03" property="payment03" jdbcType="VARCHAR" />
+    <result column="payMoney03" property="paymoney03" jdbcType="DECIMAL" />
+    <result column="ySQ" property="ysq" jdbcType="VARCHAR" />
+    <result column="ifOver" property="ifover" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="overTime" property="overtime" jdbcType="TIMESTAMP" />
+    <result column="totalFee" property="totalfee" jdbcType="DECIMAL" />
+    <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="createBy" property="createby" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastRepair" property="lastrepair" jdbcType="VARCHAR" />
+    <result column="lastTime" property="lasttime" jdbcType="TIMESTAMP" />
+    <result column="isOfflineCredit" property="isofflinecredit" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.shangmei.beans.ChkinAccount" extends="BaseResultMap" >
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, shopID, atime, dtime, field, bookFieldNo, teamNo, fieldNo, classID, staffID, 
+    customeType, openRoomType, indateTime, rTID, rID, mprc, disPrc, bedNum, breakfastNum, 
+    guestNum, stayDay, leaveTime, iSSecrecy, iSCard, iSIntegral, iSInvoice, invoiceName, 
+    agreementID, seller, prefeID, prefeName, beginDate, endDate, stopDate, iSNoSee, deposit, 
+    payment01, payMoney01, payment02, payMoney02, payment03, payMoney03, ySQ, ifOver, 
+    status, overTime, totalFee, flag, createBy, createTime, lastRepair, lastTime, isOfflineCredit
+  </sql>
+  <sql id="Blob_Column_List" >
+    memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from chkinaccount
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from chkinaccount
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.shangmei.beans.ChkinAccount" >
+    insert into chkinaccount (id, shopID, atime, 
+      dtime, field, bookFieldNo, 
+      teamNo, fieldNo, classID, 
+      staffID, customeType, openRoomType, 
+      indateTime, rTID, rID, 
+      mprc, disPrc, bedNum, 
+      breakfastNum, guestNum, stayDay, 
+      leaveTime, iSSecrecy, iSCard, 
+      iSIntegral, iSInvoice, invoiceName, 
+      agreementID, seller, prefeID, 
+      prefeName, beginDate, endDate, 
+      stopDate, iSNoSee, deposit, 
+      payment01, payMoney01, payment02, 
+      payMoney02, payment03, payMoney03, 
+      ySQ, ifOver, status, 
+      overTime, totalFee, flag, 
+      createBy, createTime, lastRepair, 
+      lastTime, isOfflineCredit, memo
+      )
+    values (#{id,jdbcType=VARCHAR}, #{shopid,jdbcType=VARCHAR}, #{atime,jdbcType=DATE}, 
+      #{dtime,jdbcType=TIMESTAMP}, #{field,jdbcType=VARCHAR}, #{bookfieldno,jdbcType=VARCHAR}, 
+      #{teamno,jdbcType=VARCHAR}, #{fieldno,jdbcType=VARCHAR}, #{classid,jdbcType=VARCHAR}, 
+      #{staffid,jdbcType=VARCHAR}, #{custometype,jdbcType=VARCHAR}, #{openroomtype,jdbcType=VARCHAR}, 
+      #{indatetime,jdbcType=TIMESTAMP}, #{rtid,jdbcType=VARCHAR}, #{rid,jdbcType=VARCHAR}, 
+      #{mprc,jdbcType=DECIMAL}, #{disprc,jdbcType=DECIMAL}, #{bednum,jdbcType=INTEGER}, 
+      #{breakfastnum,jdbcType=INTEGER}, #{guestnum,jdbcType=INTEGER}, #{stayday,jdbcType=INTEGER}, 
+      #{leavetime,jdbcType=TIMESTAMP}, #{issecrecy,jdbcType=INTEGER}, #{iscard,jdbcType=INTEGER}, 
+      #{isintegral,jdbcType=INTEGER}, #{isinvoice,jdbcType=INTEGER}, #{invoicename,jdbcType=VARCHAR}, 
+      #{agreementid,jdbcType=VARCHAR}, #{seller,jdbcType=VARCHAR}, #{prefeid,jdbcType=VARCHAR}, 
+      #{prefename,jdbcType=VARCHAR}, #{begindate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, 
+      #{stopdate,jdbcType=TIMESTAMP}, #{isnosee,jdbcType=INTEGER}, #{deposit,jdbcType=DECIMAL}, 
+      #{payment01,jdbcType=VARCHAR}, #{paymoney01,jdbcType=DECIMAL}, #{payment02,jdbcType=VARCHAR}, 
+      #{paymoney02,jdbcType=DECIMAL}, #{payment03,jdbcType=VARCHAR}, #{paymoney03,jdbcType=DECIMAL}, 
+      #{ysq,jdbcType=VARCHAR}, #{ifover,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{overtime,jdbcType=TIMESTAMP}, #{totalfee,jdbcType=DECIMAL}, #{flag,jdbcType=INTEGER}, 
+      #{createby,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastrepair,jdbcType=VARCHAR}, 
+      #{lasttime,jdbcType=TIMESTAMP}, #{isofflinecredit,jdbcType=INTEGER}, #{memo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shangmei.beans.ChkinAccount" >
+    insert into chkinaccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="shopid != null" >
+        shopID,
+      </if>
+      <if test="atime != null" >
+        atime,
+      </if>
+      <if test="dtime != null" >
+        dtime,
+      </if>
+      <if test="field != null" >
+        field,
+      </if>
+      <if test="bookfieldno != null" >
+        bookFieldNo,
+      </if>
+      <if test="teamno != null" >
+        teamNo,
+      </if>
+      <if test="fieldno != null" >
+        fieldNo,
+      </if>
+      <if test="classid != null" >
+        classID,
+      </if>
+      <if test="staffid != null" >
+        staffID,
+      </if>
+      <if test="custometype != null" >
+        customeType,
+      </if>
+      <if test="openroomtype != null" >
+        openRoomType,
+      </if>
+      <if test="indatetime != null" >
+        indateTime,
+      </if>
+      <if test="rtid != null" >
+        rTID,
+      </if>
+      <if test="rid != null" >
+        rID,
+      </if>
+      <if test="mprc != null" >
+        mprc,
+      </if>
+      <if test="disprc != null" >
+        disPrc,
+      </if>
+      <if test="bednum != null" >
+        bedNum,
+      </if>
+      <if test="breakfastnum != null" >
+        breakfastNum,
+      </if>
+      <if test="guestnum != null" >
+        guestNum,
+      </if>
+      <if test="stayday != null" >
+        stayDay,
+      </if>
+      <if test="leavetime != null" >
+        leaveTime,
+      </if>
+      <if test="issecrecy != null" >
+        iSSecrecy,
+      </if>
+      <if test="iscard != null" >
+        iSCard,
+      </if>
+      <if test="isintegral != null" >
+        iSIntegral,
+      </if>
+      <if test="isinvoice != null" >
+        iSInvoice,
+      </if>
+      <if test="invoicename != null" >
+        invoiceName,
+      </if>
+      <if test="agreementid != null" >
+        agreementID,
+      </if>
+      <if test="seller != null" >
+        seller,
+      </if>
+      <if test="prefeid != null" >
+        prefeID,
+      </if>
+      <if test="prefename != null" >
+        prefeName,
+      </if>
+      <if test="begindate != null" >
+        beginDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+      <if test="stopdate != null" >
+        stopDate,
+      </if>
+      <if test="isnosee != null" >
+        iSNoSee,
+      </if>
+      <if test="deposit != null" >
+        deposit,
+      </if>
+      <if test="payment01 != null" >
+        payment01,
+      </if>
+      <if test="paymoney01 != null" >
+        payMoney01,
+      </if>
+      <if test="payment02 != null" >
+        payment02,
+      </if>
+      <if test="paymoney02 != null" >
+        payMoney02,
+      </if>
+      <if test="payment03 != null" >
+        payment03,
+      </if>
+      <if test="paymoney03 != null" >
+        payMoney03,
+      </if>
+      <if test="ysq != null" >
+        ySQ,
+      </if>
+      <if test="ifover != null" >
+        ifOver,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="overtime != null" >
+        overTime,
+      </if>
+      <if test="totalfee != null" >
+        totalFee,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="createby != null" >
+        createBy,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair,
+      </if>
+      <if test="lasttime != null" >
+        lastTime,
+      </if>
+      <if test="isofflinecredit != null" >
+        isOfflineCredit,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid != null" >
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        #{atime,jdbcType=DATE},
+      </if>
+      <if test="dtime != null" >
+        #{dtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="field != null" >
+        #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="bookfieldno != null" >
+        #{bookfieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="teamno != null" >
+        #{teamno,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldno != null" >
+        #{fieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="custometype != null" >
+        #{custometype,jdbcType=VARCHAR},
+      </if>
+      <if test="openroomtype != null" >
+        #{openroomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="indatetime != null" >
+        #{indatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtid != null" >
+        #{rtid,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="mprc != null" >
+        #{mprc,jdbcType=DECIMAL},
+      </if>
+      <if test="disprc != null" >
+        #{disprc,jdbcType=DECIMAL},
+      </if>
+      <if test="bednum != null" >
+        #{bednum,jdbcType=INTEGER},
+      </if>
+      <if test="breakfastnum != null" >
+        #{breakfastnum,jdbcType=INTEGER},
+      </if>
+      <if test="guestnum != null" >
+        #{guestnum,jdbcType=INTEGER},
+      </if>
+      <if test="stayday != null" >
+        #{stayday,jdbcType=INTEGER},
+      </if>
+      <if test="leavetime != null" >
+        #{leavetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issecrecy != null" >
+        #{issecrecy,jdbcType=INTEGER},
+      </if>
+      <if test="iscard != null" >
+        #{iscard,jdbcType=INTEGER},
+      </if>
+      <if test="isintegral != null" >
+        #{isintegral,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null" >
+        #{isinvoice,jdbcType=INTEGER},
+      </if>
+      <if test="invoicename != null" >
+        #{invoicename,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementid != null" >
+        #{agreementid,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="prefeid != null" >
+        #{prefeid,jdbcType=VARCHAR},
+      </if>
+      <if test="prefename != null" >
+        #{prefename,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopdate != null" >
+        #{stopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isnosee != null" >
+        #{isnosee,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="payment01 != null" >
+        #{payment01,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney01 != null" >
+        #{paymoney01,jdbcType=DECIMAL},
+      </if>
+      <if test="payment02 != null" >
+        #{payment02,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney02 != null" >
+        #{paymoney02,jdbcType=DECIMAL},
+      </if>
+      <if test="payment03 != null" >
+        #{payment03,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney03 != null" >
+        #{paymoney03,jdbcType=DECIMAL},
+      </if>
+      <if test="ysq != null" >
+        #{ysq,jdbcType=VARCHAR},
+      </if>
+      <if test="ifover != null" >
+        #{ifover,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null" >
+        #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalfee != null" >
+        #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createby != null" >
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isofflinecredit != null" >
+        #{isofflinecredit,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shangmei.beans.ChkinAccount" >
+    update chkinaccount
+    <set >
+      <if test="shopid != null" >
+        shopID = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="atime != null" >
+        atime = #{atime,jdbcType=DATE},
+      </if>
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="field != null" >
+        field = #{field,jdbcType=VARCHAR},
+      </if>
+      <if test="bookfieldno != null" >
+        bookFieldNo = #{bookfieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="teamno != null" >
+        teamNo = #{teamno,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldno != null" >
+        fieldNo = #{fieldno,jdbcType=VARCHAR},
+      </if>
+      <if test="classid != null" >
+        classID = #{classid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffid != null" >
+        staffID = #{staffid,jdbcType=VARCHAR},
+      </if>
+      <if test="custometype != null" >
+        customeType = #{custometype,jdbcType=VARCHAR},
+      </if>
+      <if test="openroomtype != null" >
+        openRoomType = #{openroomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="indatetime != null" >
+        indateTime = #{indatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rtid != null" >
+        rTID = #{rtid,jdbcType=VARCHAR},
+      </if>
+      <if test="rid != null" >
+        rID = #{rid,jdbcType=VARCHAR},
+      </if>
+      <if test="mprc != null" >
+        mprc = #{mprc,jdbcType=DECIMAL},
+      </if>
+      <if test="disprc != null" >
+        disPrc = #{disprc,jdbcType=DECIMAL},
+      </if>
+      <if test="bednum != null" >
+        bedNum = #{bednum,jdbcType=INTEGER},
+      </if>
+      <if test="breakfastnum != null" >
+        breakfastNum = #{breakfastnum,jdbcType=INTEGER},
+      </if>
+      <if test="guestnum != null" >
+        guestNum = #{guestnum,jdbcType=INTEGER},
+      </if>
+      <if test="stayday != null" >
+        stayDay = #{stayday,jdbcType=INTEGER},
+      </if>
+      <if test="leavetime != null" >
+        leaveTime = #{leavetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issecrecy != null" >
+        iSSecrecy = #{issecrecy,jdbcType=INTEGER},
+      </if>
+      <if test="iscard != null" >
+        iSCard = #{iscard,jdbcType=INTEGER},
+      </if>
+      <if test="isintegral != null" >
+        iSIntegral = #{isintegral,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null" >
+        iSInvoice = #{isinvoice,jdbcType=INTEGER},
+      </if>
+      <if test="invoicename != null" >
+        invoiceName = #{invoicename,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementid != null" >
+        agreementID = #{agreementid,jdbcType=VARCHAR},
+      </if>
+      <if test="seller != null" >
+        seller = #{seller,jdbcType=VARCHAR},
+      </if>
+      <if test="prefeid != null" >
+        prefeID = #{prefeid,jdbcType=VARCHAR},
+      </if>
+      <if test="prefename != null" >
+        prefeName = #{prefename,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        beginDate = #{begindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enddate != null" >
+        endDate = #{enddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stopdate != null" >
+        stopDate = #{stopdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isnosee != null" >
+        iSNoSee = #{isnosee,jdbcType=INTEGER},
+      </if>
+      <if test="deposit != null" >
+        deposit = #{deposit,jdbcType=DECIMAL},
+      </if>
+      <if test="payment01 != null" >
+        payment01 = #{payment01,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney01 != null" >
+        payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      </if>
+      <if test="payment02 != null" >
+        payment02 = #{payment02,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney02 != null" >
+        payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      </if>
+      <if test="payment03 != null" >
+        payment03 = #{payment03,jdbcType=VARCHAR},
+      </if>
+      <if test="paymoney03 != null" >
+        payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      </if>
+      <if test="ysq != null" >
+        ySQ = #{ysq,jdbcType=VARCHAR},
+      </if>
+      <if test="ifover != null" >
+        ifOver = #{ifover,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="overtime != null" >
+        overTime = #{overtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalfee != null" >
+        totalFee = #{totalfee,jdbcType=DECIMAL},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=INTEGER},
+      </if>
+      <if test="createby != null" >
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastrepair != null" >
+        lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttime != null" >
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isofflinecredit != null" >
+        isOfflineCredit = #{isofflinecredit,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.shangmei.beans.ChkinAccount" >
+    update chkinaccount
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      atime = #{atime,jdbcType=DATE},
+      dtime = #{dtime,jdbcType=TIMESTAMP},
+      field = #{field,jdbcType=VARCHAR},
+      bookFieldNo = #{bookfieldno,jdbcType=VARCHAR},
+      teamNo = #{teamno,jdbcType=VARCHAR},
+      fieldNo = #{fieldno,jdbcType=VARCHAR},
+      classID = #{classid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      customeType = #{custometype,jdbcType=VARCHAR},
+      openRoomType = #{openroomtype,jdbcType=VARCHAR},
+      indateTime = #{indatetime,jdbcType=TIMESTAMP},
+      rTID = #{rtid,jdbcType=VARCHAR},
+      rID = #{rid,jdbcType=VARCHAR},
+      mprc = #{mprc,jdbcType=DECIMAL},
+      disPrc = #{disprc,jdbcType=DECIMAL},
+      bedNum = #{bednum,jdbcType=INTEGER},
+      breakfastNum = #{breakfastnum,jdbcType=INTEGER},
+      guestNum = #{guestnum,jdbcType=INTEGER},
+      stayDay = #{stayday,jdbcType=INTEGER},
+      leaveTime = #{leavetime,jdbcType=TIMESTAMP},
+      iSSecrecy = #{issecrecy,jdbcType=INTEGER},
+      iSCard = #{iscard,jdbcType=INTEGER},
+      iSIntegral = #{isintegral,jdbcType=INTEGER},
+      iSInvoice = #{isinvoice,jdbcType=INTEGER},
+      invoiceName = #{invoicename,jdbcType=VARCHAR},
+      agreementID = #{agreementid,jdbcType=VARCHAR},
+      seller = #{seller,jdbcType=VARCHAR},
+      prefeID = #{prefeid,jdbcType=VARCHAR},
+      prefeName = #{prefename,jdbcType=VARCHAR},
+      beginDate = #{begindate,jdbcType=TIMESTAMP},
+      endDate = #{enddate,jdbcType=TIMESTAMP},
+      stopDate = #{stopdate,jdbcType=TIMESTAMP},
+      iSNoSee = #{isnosee,jdbcType=INTEGER},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      payment01 = #{payment01,jdbcType=VARCHAR},
+      payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      payment02 = #{payment02,jdbcType=VARCHAR},
+      payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      payment03 = #{payment03,jdbcType=VARCHAR},
+      payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      ySQ = #{ysq,jdbcType=VARCHAR},
+      ifOver = #{ifover,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      overTime = #{overtime,jdbcType=TIMESTAMP},
+      totalFee = #{totalfee,jdbcType=DECIMAL},
+      flag = #{flag,jdbcType=INTEGER},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      isOfflineCredit = #{isofflinecredit,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shangmei.beans.ChkinAccount" >
+    update chkinaccount
+    set shopID = #{shopid,jdbcType=VARCHAR},
+      atime = #{atime,jdbcType=DATE},
+      dtime = #{dtime,jdbcType=TIMESTAMP},
+      field = #{field,jdbcType=VARCHAR},
+      bookFieldNo = #{bookfieldno,jdbcType=VARCHAR},
+      teamNo = #{teamno,jdbcType=VARCHAR},
+      fieldNo = #{fieldno,jdbcType=VARCHAR},
+      classID = #{classid,jdbcType=VARCHAR},
+      staffID = #{staffid,jdbcType=VARCHAR},
+      customeType = #{custometype,jdbcType=VARCHAR},
+      openRoomType = #{openroomtype,jdbcType=VARCHAR},
+      indateTime = #{indatetime,jdbcType=TIMESTAMP},
+      rTID = #{rtid,jdbcType=VARCHAR},
+      rID = #{rid,jdbcType=VARCHAR},
+      mprc = #{mprc,jdbcType=DECIMAL},
+      disPrc = #{disprc,jdbcType=DECIMAL},
+      bedNum = #{bednum,jdbcType=INTEGER},
+      breakfastNum = #{breakfastnum,jdbcType=INTEGER},
+      guestNum = #{guestnum,jdbcType=INTEGER},
+      stayDay = #{stayday,jdbcType=INTEGER},
+      leaveTime = #{leavetime,jdbcType=TIMESTAMP},
+      iSSecrecy = #{issecrecy,jdbcType=INTEGER},
+      iSCard = #{iscard,jdbcType=INTEGER},
+      iSIntegral = #{isintegral,jdbcType=INTEGER},
+      iSInvoice = #{isinvoice,jdbcType=INTEGER},
+      invoiceName = #{invoicename,jdbcType=VARCHAR},
+      agreementID = #{agreementid,jdbcType=VARCHAR},
+      seller = #{seller,jdbcType=VARCHAR},
+      prefeID = #{prefeid,jdbcType=VARCHAR},
+      prefeName = #{prefename,jdbcType=VARCHAR},
+      beginDate = #{begindate,jdbcType=TIMESTAMP},
+      endDate = #{enddate,jdbcType=TIMESTAMP},
+      stopDate = #{stopdate,jdbcType=TIMESTAMP},
+      iSNoSee = #{isnosee,jdbcType=INTEGER},
+      deposit = #{deposit,jdbcType=DECIMAL},
+      payment01 = #{payment01,jdbcType=VARCHAR},
+      payMoney01 = #{paymoney01,jdbcType=DECIMAL},
+      payment02 = #{payment02,jdbcType=VARCHAR},
+      payMoney02 = #{paymoney02,jdbcType=DECIMAL},
+      payment03 = #{payment03,jdbcType=VARCHAR},
+      payMoney03 = #{paymoney03,jdbcType=DECIMAL},
+      ySQ = #{ysq,jdbcType=VARCHAR},
+      ifOver = #{ifover,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      overTime = #{overtime,jdbcType=TIMESTAMP},
+      totalFee = #{totalfee,jdbcType=DECIMAL},
+      flag = #{flag,jdbcType=INTEGER},
+      createBy = #{createby,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      lastRepair = #{lastrepair,jdbcType=VARCHAR},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      isOfflineCredit = #{isofflinecredit,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <!-- 查询中心-结账退房报表 -->
+    <select id="getChkOutRefund" resultMap="chkInOutMap">
+    select ort.name openRoomTypeName,rt.rtName,ca.indateTime,ca.overTime,ca.disprc,ca.atime,rt.rTCode
+    from (select id,`name` from dictcodemap where flag=1 and dictid='4bc7a95b546411e5bb78d8cb8a2f9c07') ct
+    INNER JOIN chkinaccount ca on  ca.shopid=#{shopid} and ca.flag=1 and ca.ifover=1 and ca.custometype=ct.id
+    inner join roomtype rt on rt.id=ca.rtid and  rt.shopid=#{shopid}
+    inner join dictcodemap ort on ca.openroomtype=ort.id and ort.flag=1 and ort.dictid='d270fc55555d11e5ba30d8cb8a2f9c07'
+        where 1=1
+    and ca.atime >= #{begin_time}     and ca.atime &lt;= #{end_time}
+    order by ca.atime desc
+    </select>
+    <!--映射实体字段-->
+  <resultMap id="chkInOutMap" type="java.util.Map">
+    <result column="name" property="name" jdbcType="VARCHAR"></result>
+    <result column="rtName" property="rtname" jdbcType="VARCHAR"></result>
+    <result column="indateTime" property="indatetime" jdbcType="VARCHAR"></result>
+    <result column="overTime" property="overtime" jdbcType="VARCHAR"></result>
+    <result column="disprc" property="disprc" jdbcType="VARCHAR"></result>
+  </resultMap>
+</mapper>

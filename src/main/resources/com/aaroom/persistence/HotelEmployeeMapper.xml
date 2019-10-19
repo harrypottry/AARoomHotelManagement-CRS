@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaroom.persistence.HotelEmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.aaroom.beans.HotelEmployee" >
+    <result column="hotel_id" property="hotel_id" jdbcType="INTEGER" />
+    <result column="employee_id" property="employee_id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="update_time" jdbcType="TIMESTAMP" />
+    <result column="creater_id" property="creater_id" jdbcType="INTEGER" />
+    <result column="updater_id" property="updater_id" jdbcType="INTEGER" />
+    <result column="is_active" property="is_active" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hotel_id, employee_id, `type`, create_time, update_time, creater_id, updater_id,
+    is_active
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hotel_employee
+    where hotel_id = #{hotel_id} AND employee_id=#{employee_id} and is_active=1
+  </select>
+  <delete id="deleteByPrimaryKey">
+    delete from hotel_employee
+    where hotel_id = #{hotel_id} AND employee_id=#{employee_id}
+  </delete>
+  <insert id="insert" parameterType="com.aaroom.beans.HotelEmployee">
+    insert into hotel_employee (hotel_id, employee_id,
+      `type`, create_time, update_time,
+      creater_id, updater_id, is_active
+      )
+    values (#{hotel_id,jdbcType=VARCHAR}, #{employee_id,jdbcType=INTEGER},
+      #{type,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP},
+      #{creater_id,jdbcType=INTEGER}, #{updater_id,jdbcType=INTEGER}, #{is_active,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.aaroom.beans.HotelEmployee" >
+    insert into hotel_employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotel_id != null" >
+        hotel_id,
+      </if>
+      <if test="employee_id != null" >
+        employee_id,
+      </if>
+      <if test="type != null" >
+        `type`,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="update_time != null" >
+        update_time,
+      </if>
+      <if test="creater_id != null" >
+        creater_id,
+      </if>
+      <if test="updater_id != null" >
+        updater_id,
+      </if>
+      <if test="is_active != null" >
+        is_active,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotel_id != null" >
+        #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="employee_id != null" >
+        #{employee_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        #{is_active,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.aaroom.beans.HotelEmployee" >
+    update hotel_employee
+    <set >
+      <if test="hotel_id != null" >
+        hotel_id = #{hotel_id,jdbcType=VARCHAR},
+      </if>
+      <if test="employee_id != null" >
+        employee_id = #{employee_id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        `type` = #{type,jdbcType=DOUBLE},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null" >
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater_id != null" >
+        creater_id = #{creater_id,jdbcType=INTEGER},
+      </if>
+      <if test="updater_id != null" >
+        updater_id = #{updater_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_active != null" >
+        is_active = #{is_active,jdbcType=TINYINT},
+      </if>
+    </set>
+    where hotel_id = #{hotel_id} AND employee_id=#{employee_id} and `type`= #{type}
+  </update>
+
+  <select id="getHotelEmployeeByEmployeeIdSoloParam" resultType="com.aaroom.beans.HotelEmployee">
+    select * FROM hotel_employee WHERE employee_id = #{employee_id}
+  </select>
+  <select id="getemployeenamebyloginid" resultType="String" parameterType="java.lang.String">
+    select emp.name from employee as emp where emp.id in (select employee_id from hotel_employee where hotel_id =#{hotel_ id})
+  </select>
+  <select id="getEmployeeNameIdbyloginid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+SELECT
+	id
+FROM
+	employee emp
+	LEFT JOIN hotel_employee hemp ON emp.id = hemp.employee_id
+WHERE
+	emp.role_id = 6
+	AND hemp.hotel_id = #{hotel_ id}
+  </select>
+  <select id="getHotelEmployeeByEmployeeId" resultType="com.aaroom.beans.HotelEmployee">
+    select * FROM hotel_employee WHERE employee_id = #{employee_id} AND is_active = 1
+    <if test="type != null" >
+      and `type` = #{type}
+    </if>
+    limit 0,1
+  </select>
+
+  <select id="exist" resultType="com.aaroom.beans.HotelEmployee">
+     SELECT * FROM hotel_employee WHERE hotel_id = #{hotel_id} AND employee_id=#{employee_id} and `type`= #{type} AND is_active = 1
+  </select>
+
+  <update id="deleteByIds">
+      UPDATE hotel_employee
+      set is_active = 0
+      WHERE hotel_id = #{hotel_id} AND employee_id=#{employee_id} and `type`= #{type}
+  </update>
+
+  <select id="getHotelEmployeesByHotelId" resultType="com.aaroom.beans.HotelEmployee">
+    SELECT * FROM hotel_employee
+    WHERE hotel_id = #{hotel_id} AND is_active = 1
+  </select>
+
+  <select id="getemloyeeinworking" resultType="com.aaroom.beans.Employee" parameterType="java.lang.Integer">
+  SELECT e.* FROM employee as e left join hotel_employee as he on e.id=he.employee_id
+  WHERE he.hotel_id = #{hotel_id} AND  e.working= 1 AND e.role_id = 6
+  </select>
+
+  <select id="GetEmloyee" resultType="com.aaroom.beans.Employee" parameterType="java.lang.Integer">
+  SELECT e.* FROM employee as e left join hotel_employee as he on e.id=he.employee_id
+  WHERE he.hotel_id = #{hotel_id} AND e.role_id = 6
+  </select>
+
+  <select id="getHotelIdByEmpId" parameterType="Integer" resultType="com.aaroom.beans.HotelEmployee">
+    	SELECT
+	      *
+        FROM
+	      hotel_employee he
+        WHERE
+	      he.employee_id = #{employee_id}
+  </select>
+
+  <select id="getHotelIdsByEmpId" parameterType="Integer" resultType="com.aaroom.beans.HotelEmployee">
+        SELECT
+	      *
+        FROM
+	      hotel_employee he
+        WHERE
+	      he.employee_id = #{employee_id}
+  </select>
+</mapper>

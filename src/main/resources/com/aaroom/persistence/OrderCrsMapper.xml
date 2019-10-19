@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaroom.persistence.OrderCrsMapper">
+    <select id="getOrderList" resultType="com.aaroom.model.OrderView">
+        SELECT ao.channel_order_no,ao.channel_name,ao.hotel_code,ao.hotel_name,ml.level_name member_level,
+        m.name member_name, m.phone_num ,ao.room_type_name,ao.room_num,ao.price_total,ao.order_time,
+        ao.begin_time,ao.end_time,ao.arrival_time,ao.status,ao.pay_status,ao.address,ao.room_night
+        FROM aa_order ao
+        LEFT JOIN member m on ao.member_id = m.id
+        LEFT JOIN member_level ml ON m.card_level_id = ml.level_num
+        <where>
+            1=1
+            <if test="beginTime != null and beginTime != ''">
+                <![CDATA[ and DATE_FORMAT(ao.begin_time,'%Y-%m-%d') >= DATE_FORMAT(#{beginTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[ and DATE_FORMAT(ao.begin_time,'%Y-%m-%d') <= DATE_FORMAT(#{endTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="channel_name != null and channel_name !=''">
+                and channel_name = #{channel_name}
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status}
+            </if>
+            <if test="pay_status != null and pay_status !=''">
+                and pay_status = #{pay_status}
+            </if>
+            <if test="param != null and param !=''">
+                and ao.order_no like concat( '%',#{param} ,'%')
+                or m.phone_num like concat( '%',#{param} ,'%')
+                or m.name like concat( '%',#{param} ,'%')
+                or ao.hotel_code like concat( '%',#{param} ,'%')
+            </if>
+        </where>
+        order by ao.id desc
+    </select>
+    <select id="getOrderCount" resultType="com.aaroom.beans.OrderCount">
+        SELECT count(ao.id) OrderSum,sum(ao.room_night) roomNight,sum(ao.price_total) roomPrice
+        FROM aa_order ao
+        LEFT JOIN member m on ao.member_id = m.id
+        LEFT JOIN member_level ml ON m.card_level_id = ml.level_num
+        <where>
+            1=1
+            <if test="beginTime != null and beginTime != ''">
+                <![CDATA[ and DATE_FORMAT(ao.begin_time,'%Y-%m-%d') >= DATE_FORMAT(#{beginTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="endTime != null and endTime != ''">
+                <![CDATA[ and DATE_FORMAT(ao.begin_time,'%Y-%m-%d') <= DATE_FORMAT(#{endTime},'%Y-%m-%d')]]>
+            </if>
+            <if test="channel_name != null and channel_name !=''">
+                and channel_name = #{channel_name}
+            </if>
+            <if test="status != null and status !=''">
+                and status = #{status}
+            </if>
+            <if test="pay_status != null and pay_status !=''">
+                and pay_status = #{pay_status}
+            </if>
+            <if test="param != null and param !=''">
+                and ao.order_no like concat( '%',#{param} ,'%')
+                or m.phone_num like concat( '%',#{param} ,'%')
+                or m.name like concat( '%',#{param} ,'%')
+                or ao.hotel_code like concat( '%',#{param} ,'%')
+            </if>
+        </where>
+    </select>
+    <select id="getMemberIdByChannelOrderNo" resultType="com.aaroom.model.MemberView" parameterType="string">
+        SELECT m.card_num member_card_num, ml.level_name member_level_name,m.card_level_id levelNum
+        from aa_order ao
+        LEFT JOIN member m on ao.member_id = m.id
+        LEFT JOIN member_level ml ON m.card_level_id = ml.level_num
+        where ao.channel_order_no = #{channel_order_no}
+    </select>
+    <select id="getOrderPayStatusByChannelOrderNo" parameterType="string" resultType="integer">
+        select pay_status from aa_order
+        where channel_order_no = #{channel_order_no};
+    </select>
+    <select id="getPrePayOrderInfo" parameterType="string" resultType="com.aaroom.model.OrderParam">
+        SELECT channel_order_no,arrival_time arrival,contact_name ,hotel_code,contact_phone,customer_name, end_time `end` , address, remark ,
+        price_total,room_num,room_type_code,room_type_name,begin_time start ,invoce_id invoiceId,member_id memberId,price_code priceCode,hotel_name,pay_status
+        from aa_order
+        where channel_order_no = #{channel_order_no}
+    </select>
+    <select id="getOrderCrsInfo"  parameterType="string"  resultType="com.aaroom.model.OrderCrsView" >
+        SELECT channel_order_no,arrival_time arrival,contact_name ,hotel_code,contact_phone,customer_name, end_time `end`, address,
+        price_total,room_num,room_type_code,room_type_name,begin_time start ,member_id memberId,hotel_name,status book_status_desc,remark,
+        order_time,channel_name
+        from aa_order
+        where channel_order_no = #{channel_order_no}
+    </select>
+    <select id="getPriceListByChannelOrderNo" parameterType="string" resultType="com.aaroom.model.Price">
+        select  * from price_order
+        where  channel_order_no = #{channel_order_no}
+    </select>
+</mapper>

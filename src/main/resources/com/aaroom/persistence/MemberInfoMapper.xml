@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaroom.wechat.persistence.MemberInfoMapper">
+
+    <sql id="MEMBER_LEVEL_COLUMN_LIST">
+        id id, level_name levelName, level_num levelNum, up_level upLevel, down_level downLevel, discount_price discountPrice, sale_price salePrice, integral_times integralTimes, promote_jy promoteJy,
+        integral_promote integralPromote, invate_promote invatePromote, meanwhile_iptimize_num meanwhileIptimizeNum, pre_retain preRetain, delay delay, integral_exchange integralExchange, birth_integral birthIntegral,
+        create_time create_time, update_time update_time, creater_id creater_id, updater_id updater_id, is_active is_active
+    </sql>
+
+    <select id="getMemberEquity" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.MemberLevel">
+        SELECT
+        <include refid="MEMBER_LEVEL_COLUMN_LIST"/>
+        FROM member_level l
+        INNER JOIN
+        (SELECT m.card_level_id FROM member m WHERE m.id = #{memberId}) mm
+        WHERE mm.card_level_id = l.level_num
+    </select>
+
+    <sql id="INTEGRAL_COLUMN_LIST">
+        id id, member_id memberId, integral_budget integralBudget, causes causes, status status, hotel_name hotelName, relate_order relateOrder,
+        creation_time creationTime, integral_all integralAll, remark remark, type type
+    </sql>
+
+    <select id="getIntegralAll" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.Integral">
+        SELECT
+        <include refid="INTEGRAL_COLUMN_LIST"/>
+        FROM integral WHERE member_id = #{memberId} ORDER BY creation_time DESC
+        LIMIT 1
+    </select>
+
+    <update id="updateMemberLevel" parameterType="java.lang.String">
+        UPDATE member SET card_level_id = #{vipType} WHERE open_id = #{openId}
+    </update>
+
+    <insert id="insertIntegralLog" parameterType="com.aaroom.wechat.bean.Integral">
+        INSERT INTO integral(id, member_id, integral_budget, causes, status, hotel_name, relate_order, creation_time, integral_all, remark, type)
+        VALUES(#{i.id}, #{i.memberId}, #{i.integralBudget}, #{i.causes}, #{i.status}, #{i.hotelName}, #{i.relateOrder}, #{i.creationTime}, #{i.integralAll}, #{i.remark}, #{i.type})
+    </insert>
+
+    <sql id="MEMBER_COLUMN_LIST">
+        id id, reg_hotel_id regHotelId, phone_num phoneNum, name name, sex sex, birthday birthday, email email, card_num cardNum, card_level_id cardLevelId,
+        card_status cardStatus, reg_date regDate, certificate_type certificateType, certificate_num certificateNum, effective_date effectiveDate,
+        expiry_date expriyDate, open_id openId, create_time create_time, update_time update_time, creater_id creater_id, updater_id updater_id, is_active is_active
+    </sql>
+
+    <select id="getMemberByOpenId" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.Member">
+        SELECT
+        <include refid="MEMBER_COLUMN_LIST"/>
+        FROM member WHERE open_id = #{openid}
+    </select>
+
+    <select id="getMemberById" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.Member">
+        SELECT
+        <include refid="MEMBER_COLUMN_LIST"/>
+        FROM member WHERE id = #{memberId}
+    </select>
+
+    <insert id="saveMember" parameterType="com.aaroom.wechat.bean.Member">
+        INSERT INTO member(id, reg_hotel_id, phone_num, name, sex, birthday, email, card_num, card_level_id, card_status, open_mode, certificate_type, certificate_num,
+        effective_date, expiry_date, open_id)
+        VALUES(#{m.id}, #{m.regHotelId}, #{m.phoneNum}, #{m.name}, #{m.sex}, #{m.birthday}, #{m.email}, #{m.cardNum}, #{m.cardLevelId}, #{m.cardStatus},
+         #{m.openMode}, #{m.certificateType}, #{m.certificateNum}, #{m.effectiveDate}, #{m.expiryDate}, #{m.openId})
+    </insert>
+
+    <select id="getMemberInfo" parameterType="java.lang.String" resultType="com.aaroom.wechat.bean.model.MemberInfoView">
+        SELECT m.id id, m.card_num cardNum, ml.level_name cardLevel, ml.level_num levelNum, m.name name, m.birthday birthday, m.phone_num phoneNum, m.certificate_num certificateNum, m.email email, ml.discount_price discountPrice, m.give_type giveType
+        FROM member m
+        INNER JOIN member_level ml ON m.card_level_id = ml.level_num
+        WHERE m.id = #{memberId}
+    </select>
+
+    <update id="updateMemberInfo" parameterType="com.aaroom.wechat.bean.Member">
+        UPDATE member SET name = #{m.name}, birthday = #{m.birthday}, certificate_num = #{m.certificateNum}, email = #{m.email}
+        WHERE id = #{m.id}
+    </update>
+
+    <update id="updateMemberCityAndProvince">
+        UPDATE member m
+        SET
+          m.province = #{province},
+          m.city = #{city}
+        WHERE
+	      id = #{id}
+    </update>
+
+    <update id="insertHotelInfo" parameterType="java.lang.String">
+        UPDATE member SET reg_hotel_id = #{smHotelCode}, hotel_name = #{hotelName}, hotel_owern = #{bdName} WHERE id = #{memberId}
+    </update>
+
+    <update id="updateBuyVipInfo" parameterType="com.aaroom.wechat.bean.Member">
+        UPDATE member SET promote_date = #{m.promoteDate}, promote_price = #{m.promotePrice} WHERE id = #{m.id}
+    </update>
+
+    <update id="updateMemberGiveType">
+        UPDATE member SET give_type = #{i}  WHERE id = #{memberId}
+    </update>
+</mapper>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../import/adminlte/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../import/adminlte/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="../../import/style.css">
+    <style>
+        div>.items:last-child{vertical-align:text-bottom;margin-bottom:16px;min-width:8rem;}
+        .table{display:inline-block;width:auto;border-left:1px solid #E5E5E5;border-top:1px solid #E5E5E5;}
+        .table tr th{background:#F7F7F7;}
+        .table tr th,.table tr td{border-right:1px solid #E5E5E5;padding:8px 1.5rem;min-width:125px;}
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 上导航 -->
+    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    超级管理员：AA
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">个人资料</span>
+                    <span class="dropdown-item dropdown-header">修改密码</span>
+                    <span class="dropdown-item dropdown-header">退出</span>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <a href="../hotel/hotellist.html" class="brand-link">
+            <img src="../../import/img/logo.png" style="height:30px">
+        </a>
+        <!-- 左导航 -->
+        <div class="sidebar">
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"></ul>
+            </nav>
+        </div>
+    </aside>
+    <!--页面content-->
+    <div class="content-wrapper">
+        <section class="content"><!--订单详情-->
+            <div class="condition row" style="display:inline-block">
+                <span class="col-6">预定单详情</span><span class="getbtn" data-id="reside">查看入住单</span><span class="getbtn" data-id="refund">查看退款单</span>
+            </div>
+            <div class="card">
+                <div class="card-body" id="reservation"><!--预定单详情reservation-->
+                    <p><span class="items">预定单号：</span><span>YD03771190213111651415</span></p>
+                    <p><span class="items">订单状态：</span><span>已入住</span></p>
+                    <p><span class="items">酒店名称：</span><span>AA精选甘肃兰州城关区火车站店</span></p>
+                    <p><span class="items">客源类型：</span><span>AA09876756</span></p>
+                    <p><span class="items">会员卡号：</span><span>AA09876756</span></p>
+                    <p><span class="items">入住客人：</span><span>赵乾坤</span></p>
+                    <p><span class="items">手机号码：</span><span>17562888899</span></p>
+                    <p><span class="items">最后修改时间：</span><span>2019-12-13 12:33:31</span></p>
+                    <div><span class="items" style="vertical-align:top;">预定房型明细：</span>
+                        <table class="table">
+                            <thead><tr><th>房型</th><th>间数</th><th>合计</th></tr></thead>
+                            <tbody><tr><td>商务大床房</td><td>1</td><td>¥1</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div><span class="items" style="vertical-align:top;">支付押金明细：</span>
+                        <table class="table">
+                            <thead><tr><th>支付方式</th><th>收/支</th><th>金额</th><th>操作时间</th></tr></thead>
+                            <tbody><tr><td>网上支付</td><td>1</td><td>¥100</td><td>2019-12-13 12:33:31</td></tr></tbody>
+                        </table>
+                    </div>
+                    <p><span class="items">最晚到店时间：</span><span>2019-12-13 12:33:31</span></p>
+                    <p><span class="items">担保方式：</span><span>无担保</span></p>
+                    <p><span class="items">支付押金：</span><span>¥100</span></p>
+                    <p><span class="items">联系人：</span><span>陈xx</span></p>
+                    <p><span class="items">操作员：</span><span>api</span></p>
+                    <p><span class="items">操作时间：</span><span>2019-12-13 12:33:31</span></p>
+                    <p><span class="items">备注：</span><span>美团快订预付订单，已支付金额100元，无需再次收费</span></p>
+                </div>
+                <div class="card-body" id="reside"><!--入住单详情reside-->
+                    <p><span class="items">入住单号：</span><span>YD03771190213111651415</span></p>
+                    <p><span class="items">订单状态：</span><span>已转入住</span></p>
+                    <p><span class="items">酒店名称：</span><span>AA精选甘肃兰州城关区火车站店</span></p>
+                    <p><span class="items">入住客人：</span><span>赵乾坤</span></p>
+                    <p><span class="items">入住人数：</span><span>1</span></p>
+                    <p><span class="items">证件类型：</span><span>身份证</span></p>
+                    <p><span class="items">证件号码：</span><span>622723199878678978</span></p>
+                    <p><span class="items">手机号：</span><span>17562888899</span></p>
+                    <p><span class="items">客人类型：</span><span>AA会员</span></p>
+                    <p><span class="items">会员等级：</span><span>A会员</span></p>
+                    <p><span class="items">会员卡号：</span><span>AA09876756</span></p>
+                    <p><span class="items">消耗积分：</span><span>2000</span></p>
+                    <p><span class="items">预定来源：</span><span>门店</span></p>
+                    <p><span class="items">入离日期：</span><span>2019-12-13至2019-12-15</span></p>
+                    <p><span class="items">入住天数：</span><span>1</span></p>
+                    <p><span class="items">房间类型：</span><span>全天房</span></p>
+                    <p><span class="items">房型名称：</span><span>高级大床房</span></p>
+                    <p><span class="items">房型号码：</span><span>8205</span></p>
+                    <div><span class="items" style="vertical-align:top;">房价明细：</span>
+                        <table class="table">
+                            <thead><tr><th>日期</th><th>房型</th><th>间数</th><th>单价</th><th>合计</th></tr></thead>
+                            <tbody>
+                            <tr><td>2019-12-13</td><td>高级大床房</td><td>1</td><td>¥109</td><td>¥109</td></tr>
+                            <tr><td>2019-12-14</td><td>高级大床房</td><td>1</td><td>¥109</td><td>¥109</td></tr>
+                            <tr><td>2019-12-15</td><td>高级大床房</td><td>1</td><td>¥109</td><td>¥129</td></tr>
+                            </tbody>
+                        </table>
+                        <span class="items">房价总计：¥347</span>
+                    </div>
+                    <div><span class="items" style="vertical-align:top;">支付押金明细：</span>
+                        <table class="table">
+                            <thead><tr><th>日期</th><th>结账类型</th><th>金额</th><th>操作员</th><th>操作时间</th></tr></thead>
+                            <tbody>
+                            <tr><td>2019-12-13</td><td>房款</td><td class="rise">+¥347</td><td>胡xx</td><td>12:33:31</td></tr>
+                            <tr><td>2019-12-13</td><td>押金</td><td class="fall">-¥100</td><td>胡xx</td><td>12:33:31</td></tr>
+                            <tr><td>2019-12-13</td><td>积分抵扣</td><td class="fall">-¥20</td><td>胡xx</td><td>12:33:31</td></tr>
+                            </tbody>
+                        </table>
+                        <span class="items">结账总计：¥227</span>
+                    </div>
+                    <p><span class="items">备注：</span><span>美团快订预付订单，已支付金额100元，无需再次收费</span></p>
+                </div>
+                <div class="card-body" id="refund"><!--退款单详情refund-->
+                    <p><span class="items">退款单号：</span><span>YD03771190213111651415</span></p>
+                    <p><span class="items">状态：</span><span>待退款</span></p>
+                    <p><span class="items">客人姓名：</span><span>赵乾坤</span></p>
+                    <p><span class="items">确认人：</span><span>哈哈哈</span></p>
+                    <p><span class="items">订单金额：</span><span>¥109</span></p>
+                    <p><span class="items">退款金额：</span><span>¥99</span></p>
+                    <p><span class="items">支付来源：</span><span>支付宝</span></p>
+                    <p><span class="items">退款原因：</span><span>美团快订预付订单，已支付金额100元，无需再次收费</span></p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+<div class="warn">
+    <div></div>
+</div>
+<script src="../../import/adminlte/js/jquery.min.js"></script>
+<script src="../../import/adminlte/js/bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/jquery.dataTables.min.js"></script>
+<script src="../../import/adminlte/js/dataTables.bootstrap.min.js"></script>
+<script src="../../import/adminlte/js/adminlte.min.js"></script>
+<script src="../../import/script.js"></script>
+<script>
+    var pageId=sessionStorage.getItem('pageId');//页面Id
+    $(document).ready(function(){
+        pagequest(pageId);// 页面事件
+    });
+    $('.condition').on("click","span.getbtn",function(){//点击表头：查看xxx
+        pagequest($(this).attr('data-id'));// 页面事件
+    });
+    function pagequest(Id,$span){
+        if(Id=='reservation'){
+            $span='<span class="col-6">预定单详情</span><span class="getbtn" data-id="reside">查看入住单</span><span class="getbtn" data-id="refund">查看退款单</span>';
+        }
+        if(Id=='reside'){
+            $span='<span class="col-6">入住单详情</span><span class="getbtn" data-id="reservation">查看预定单</span><span class="getbtn" data-id="refund">查看退款单</span>';
+        }
+        if(Id=='refund'){
+            $span='<span class="col-6">退款单详情</span><span class="getbtn" data-id="reservation">查看预定单</span><span class="getbtn" data-id="reside">查看入住单</span>';
+        }
+        $('.condition').html($span);
+        $('#'+Id).show();
+        $('#'+Id).siblings().hide();
+    }
+</script>
+</body>
+</html>
